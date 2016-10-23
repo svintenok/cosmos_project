@@ -15,8 +15,7 @@
         <input type="text" name="country" placeholder="страна" <#if country??> value="${country}"</#if>/>
 
         <input type="submit" value="Регистрация"/>
-        <#if err??><#if err=="existing_login"><p>Данный логин уже существует</p>
-            <#elseif err=="null_login_or_password"><p>Заполните обязательные поля</p></#if></#if>
+        <#if err??><#if err=="existing_login"><p>Данный логин уже существует</p></#if></#if>
     </form>
 </div>
 </#macro>

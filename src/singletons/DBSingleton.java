@@ -3,10 +3,11 @@ package singletons;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DBSingleton {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/CosmosProjectDb";
+    private static final String URL = "jdbc:postgresql://localhost:5432/CosmosProjectDb?charSet=utf-8";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String DRIVER = "org.postgresql.Driver";
@@ -18,7 +19,12 @@ public class DBSingleton {
 
             try {
                 Class.forName(DRIVER);
-                conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                Properties properties=new Properties();
+                properties.setProperty("user",USERNAME);
+                properties.setProperty("password", PASSWORD);
+                properties.setProperty("useUnicode", "true");
+                properties.setProperty("characterEncoding", "UTF-8");
+                conn = DriverManager.getConnection(URL, properties);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -28,5 +34,4 @@ public class DBSingleton {
         }
         return conn;
     }
-
 }

@@ -17,6 +17,10 @@ public class Helper {
                               HttpServletRequest request,
                               String template,
                               HashMap<String, Object> root) throws IOException {
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; Charset=utf-8");
+
         Template tmpl = ConfigSingleton.getConfig(
                 request.getServletContext()
         ).getTemplate(template);
