@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Тур</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+
+    <style>
+
+        .ff{
+            border: 2px inset rgba(46, 26, 26, 1);
+            border-radius: 5px 5px 5px 5px;
+            background: rgba(255, 245, 245, 1);
+        }
+        .gg{
+            font-size: 30px;
+        }
+
+        .hh{
+            font-size: 21px;
+        }
+
+        h5{
+            font-size: 20px;
+            color: rgba(255,255,255,1);
+            font-style: normal;
+            font-family: "Dotum";
+        }
+        h5:hover{
+            color: rgba(158, 152, 152, 1);
+            text-shadow: 0 0 10px rgba(255,255,255,1);
+        }
+
+        html,
+        body {
+            height: 100%;
+            background:rgba(245, 245, 245, 1);
+            padding: 10px;
+            font-family: 'Dotum';
+        }
+        header {
+            padding: 20px 0;
+        }
+
+        footer {
+            position: absolute;
+            width: 100%;
+            background: #7e7e7e;
+            color: #dbdbdb;
+            font-size: 11px;
+        }
+
+        #footer {
+            max-width: 960px;
+            margin: auto;
+            padding: 10px 0;
+            height: 90px;
+        }
+        #footer-logo {
+            float: right;
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: right;
+        }
+
+        #reviewStars-input input:checked ~ label, #reviewStars-input label, #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+            background: url('http://positivecrash.com/wp-content/uploads/ico-s71a7fdede6.png') no-repeat;
+        }
+
+        #reviewStars-input {
+
+            overflow: hidden;
+            *zoom: 1;
+
+            position: relative;
+            float: left;
+        }
+
+        #reviewStars-input input {
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            opacity: 0;
+
+            width: 43px;
+            height: 40px;
+
+            position: absolute;
+            top: 0;
+            z-index: 0;
+        }
+
+        #reviewStars-input input:checked ~ label {
+            background-position: 0 -40px;
+            height: 40px;
+            width: 43px;
+        }
+
+        #reviewStars-input label {
+            background-position: 0 0;
+            height: 40px;
+            width: 43px;
+            float: right;
+            cursor: pointer;
+            margin-right: 10px;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+            background-position: 0 -40px;
+            height: 40px;
+            width: 43px;
+        }
+
+        #reviewStars-input #star-0 {
+            left: 0px;
+        }
+        #reviewStars-input #star-1 {
+            left: 53px;
+        }
+        #reviewStars-input #star-2 {
+            left: 106px;
+        }
+        #reviewStars-input #star-3 {
+            left: 159px;
+        }
+        #reviewStars-input #star-4 {
+            left: 212px;
+        }
+        #reviewStars-input #star-5 {
+            left: 265px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><img src="logo.jpg" style="height: 81px; width: 223px; margin-right: 40px"></li>
+                    <li><a href="profile.html"><h5>Профиль</h5></a></li>
+                    <li><br><h5>|</h5></li>
+                    <li><a href="#"><h5>Туры</h5></a></li>
+                    <li><br><h5>|</h5></li>
+                    <li><a href="News.html"><h5>Новости</h5></a></li>
+                    <li><br><h5>|</h5></li>
+                    <li><a href="forum.html"><h5>Форум</h5></a></li>
+                    <li><br><h5>|</h5></li>
+                    <li><a href="about.html"><h5>О нас</h5></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><h5>Выход/Вход</h5></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="row">
+
+            <div class="col-md-3" style="padding-top: 60px">
+                <button type="button" class="btn btn-primary" style="margin-top: 30px;"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span><a href="editingtour.html" style="color: white; font-size: 20px">Редактировать</a></button>
+            </div>
+
+            <div class="col-md-3" style="padding-top: 60px">
+                <button type="button" class="btn btn-primary" style="margin-top: 30px;"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span><a href="Newtour.html" style="color: white; font-size: 20px">Создать тур</a></button>
+            </div>
+
+        </div>
+
+        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 60px; text-align: center">
+            <p><h1>Путешествие на Марс</h1></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <p style="font-size: 20px">Испытайте это невереятное путешествие на планету Марс! Рискните побывать первым на кратере G145M! Вас ждет комфортный перелет на нашей лучшей ракете 250GTO и незабываемый отдых. SpaceX в понедельник, 30 декабря заявила о том, что уже набрано 1058 добровольцев, желающих отправиться в космос, в путешествие на Красную Планету Оганизация, расположенная в США, желает приступить к отправлению групп по четыре человека на Марс в 2023 году.<p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <img src="space1.jpg" width="500" height="300" class = "ff">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 40px">
+                <p style="font-size: 20px">Расчёты по экспедиции с облётом Красной планеты, которые спустя 12 лет после полёта Гагарина предложил руководству Михаил Бурдаев, тогда - кандидат в космонавты, вовсе не предполагали такой жестокой необходимости. Рассказы о советском космонавте-камикадзе - были не более чем слухами, основанными на недоразумении. А вот сегодня о «смертниках», похоже, заговорили всерьёз. С сообщением такого содержания выступил недавно Journal of Cosmology. За то, чтобы поглядеть на марсианский Олимп, человеку придётся заплатить самую высокую цену - жизнь. Так всерьёз полагают американские космологи Дирк Шульце-Макуш и Пол Дэвис, авторы статьи «Широко шагая: полёт на Марс в один конец».</p>
+            </div>
+        </div>
+
+        <div class="col-md-12"  style="margin-bottom: 40px">
+             <div class="col-md-4">
+                <p class="gg" style="text-align: center">Дата вылета: 01.01.2023</p>
+            </div>
+            <div class="col-md-3">
+                <p class="gg" style="text-align: center;">Мест осталось: 14 из 20</p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-default btn-lg">Забронировать</button>
+            </div>
+        </div>
+
+        <div class="col-md-12"  style="margin-bottom: 40px">
+            <div class="col-md-6">
+                <div class="row">
+                    <p class="col-md-6 hh">Оценка пользоватлей:</p>
+                    <div class="col-md-5">
+                        <div class="progress ff">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
+                                3,35 из 5
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div id="reviewStars-input">
+                    <input id="star-4" type="radio" name="reviewStars"/>
+                    <label title="gorgeous" for="star-4"></label>
+
+                    <input id="star-3" type="radio" name="reviewStars"/>
+                    <label title="good" for="star-3"></label>
+
+                    <input id="star-2" type="radio" name="reviewStars"/>
+                    <label title="regular" for="star-2"></label>
+
+                    <input id="star-1" type="radio" name="reviewStars"/>
+                    <label title="poor" for="star-1"></label>
+
+                    <input id="star-0" type="radio" name="reviewStars"/>
+                    <label title="bad" for="star-0"></label>
+                </div>
+
+                <button type="button" class="btn btn-success">Оценить</button>
+                <div class="col-md-12" style="margin-top: 20px">
+                    <p class="hh">Написать отзыв</p>
+                    <textarea name="recall" id="recall" required="" placeholder="Все, что думаете" class="form-control input-contrast comment-form-textarea field" style="max-height: 233px; height: 100px;"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <ul class ="list-group">
+                <li class ="list-group-item">
+                    <h>Отзыв, оценка</h>
+                </li>
+                <li class ="list-group-item">
+                    <h>Отзыв, оценка</h>
+                </li>
+                <li class ="list-group-item">
+                    <h>Отзыв, оценка</h>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 20px; margin-top: 20px">
+            <button type="button"  class="btn btn-danger hh"><span class="glyphicon glyphicon-trash" style="margin-right: 7px"></span>Удалить</button>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <div id="footer">
+        <div id="footer-logo">Copyright © 2016 Cosmos project creation</div>
+    </div>
+</footer>
+
+</body>
+
+</html>
