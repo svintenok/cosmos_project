@@ -11,14 +11,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
-
+/**
+ * Author: Svintenok Kate
+ * Date: 30.10.2016
+ * Group: 11-501
+ * Task:
+ */
 public class Helper {
     public static void render(HttpServletResponse response,
                               HttpServletRequest request,
                               String template,
                               HashMap<String, Object> root) throws IOException {
 
-        response.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("utf-8");
         response.setContentType("text/html; Charset=utf-8");
 
         Template tmpl = ConfigSingleton.getConfig(

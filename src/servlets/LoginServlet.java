@@ -15,7 +15,12 @@ import java.util.HashMap;
 import static helpers.Helper.getHash;
 import static helpers.Helper.render;
 
-
+/**
+ * Author: Svintenok Kate
+ * Date: 30.10.2016
+ * Group: 11-501
+ * Task:
+ */
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,13 +49,16 @@ public class LoginServlet extends HttpServlet {
                     cookie.setMaxAge(24 * 60 * 60);
                     response.addCookie(cookie);
                 }
-                System.out.println(rs.getString("name"));
+
+                if(rs.getBoolean("is_admin"))
+                    session.setAttribute("is_admin", "true");
 
                 session.setAttribute("current_user", login);
                 response.sendRedirect("/news");
             }
             else {
                 response.sendRedirect("/login?err=wrong_password_or_login&login=" + login);
+
             }
 
         } catch (SQLException e) {
