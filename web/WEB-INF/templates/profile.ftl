@@ -7,7 +7,7 @@
 
     <div class="col-md-12" style="margin-top: 40px; text-align: center; margin-bottom: 20px" >
         <div class="col-md-5">
-            <h3>Здравствуйте, имя_пользователя!</h3>
+            <h3>Логин</h3>
         </div>
     </div>
 
@@ -18,15 +18,13 @@
             <ul style="margin-top: 10px; margin-bottom: 40px">
                 <li class="list-group-item"><p>Имя, Фамилия</p></li>
                 <li class="list-group-item"><p>Логин</p></li>
-                <li class="list-group-item"><p>Маил</p></li>
+                <li class="list-group-item"><p>Email</p></li>
                 <li class="list-group-item"><p>Страна</p></li>
-                <li class="list-group-item"><p>Возраст</p></li>
                 <li class="list-group-item"><p>Количество путешествий</p></li>
-                <li class="list-group-item" style="margin-top: 20px">О себе</li>
             </ul>
             <button type="button" class="btn" style="margin-left: 41px; margin-bottom: 30px">
                 <span class="glyphicon glyphicon-cog" style="margin-right: 5px"></span>
-                <a href="profilesetting.html">Настройки</a>
+                <a href="settings.html">Настройки</a>
             </button>
         </div>
 
@@ -34,18 +32,21 @@
 
         <div class="col-md-7" style="margin-top: 10px">
             <ul>
-                <p class="kk">История Моих Путешествий</p>
+                <p class="kk">История путешествий</p>
                 <li class="list-group-item"><a href="#">Тур</a></li>
                 <li class="list-group-item"><a href="#">Тур</a></li>
                 <li class="list-group-item"><a href="#">Тур</a></li>
             </ul>
-            <button type="button" class="btn btn-primary" style="margin-top: 30px; margin-left: 41px;"><span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span><a href="reservationses.html" style="color: white">Мои брони</a></button>
-
+            <button type="button" class="btn btn-primary" style="margin-top: 30px; margin-left: 41px;">
+                <span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>
+                <a href="reservationses.html" style="color: white">Мои бронирования</a></button>
 
         </div>
 
 
     </div>
+</div>
+
 </#macro>
 
 

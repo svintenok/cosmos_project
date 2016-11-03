@@ -3,7 +3,13 @@ package singletons;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import javax.servlet.ServletContext;
-import java.util.Locale;
+
+/**
+ * Author: Svintenok Kate
+ * Date: 30.10.2016
+ * Group: 11-501
+ * Task: semester project
+ */
 
 public class ConfigSingleton {
     private static Configuration cfg = null;

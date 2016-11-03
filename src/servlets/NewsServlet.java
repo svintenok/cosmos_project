@@ -21,7 +21,7 @@ import static helpers.Helper.render;
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 @WebServlet(name = "NewsServlet")
 public class NewsServlet extends HttpServlet {
@@ -74,7 +74,7 @@ public class NewsServlet extends HttpServlet {
 
                 if (rs.next()) {
                     News news = new News(
-                        rs.getString("id"),
+                        rs.getInt("id"),
                         rs.getString("title"),
                         rs.getString("short_description"),
                         rs.getString("text"),
@@ -90,7 +90,7 @@ public class NewsServlet extends HttpServlet {
                 rs = psmt.executeQuery();
                 while (rs.next()) {
                     Comment comment = new Comment(
-                            rs.getString("id"),
+                            rs.getInt("id"),
                             rs.getString("login"),
                             rs.getString("text"),
                             rs.getTimestamp("date"));
@@ -108,7 +108,7 @@ public class NewsServlet extends HttpServlet {
 
                 while (rs.next()) {
                     News news = new News(
-                            rs.getString("id"),
+                            rs.getInt("id"),
                             rs.getString("title"),
                             rs.getString("short_description"),
                             rs.getString("text"),

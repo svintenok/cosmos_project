@@ -19,7 +19,7 @@ import static helpers.Helper.render;
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
         String login = request.getParameter("login").toLowerCase();
         String password = getHash(request.getParameter("password"));
         String remember = request.getParameter("remember");
-
         try {
             Connection con = DBSingleton.getConnection();
             PreparedStatement psmt = con.prepareStatement("select * from users where login=? and password=?");

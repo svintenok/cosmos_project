@@ -1,44 +1,36 @@
 package models;
 
-
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Author: Svintenok Kate
- * Date: ${DATE}
+ * Date: 03.11.2016
  * Group: 11-501
  * Task:
  */
-public class Comment {
+public class DepartureDate {
     private int id;
-    private int userId;
-    private String text;
-    public Timestamp date;
+    private int tourId;
+    private Timestamp date;
 
 
-    public Comment(int id, int userId, String text, Timestamp date) {
+    public DepartureDate(int id, int tour_id, Timestamp date) {
         this.id = id;
-        this.userId = userId;
-        this.text = text;
+        this.tourId = tour_id;
         this.date = date;
+    }
+
+    public int getTourId() {
+        return tourId;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
     public String getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return date.toLocalDateTime().format(formatter);
     }
-
 }

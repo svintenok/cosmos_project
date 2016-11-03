@@ -5,6 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Author: Svintenok Kate
+ * Date: 30.10.2016
+ * Group: 11-501
+ * Task: semester project
+ */
+
 public class DBSingleton {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/CosmosProjectDb?charSet=utf-8?characterEncoding=utf-8";

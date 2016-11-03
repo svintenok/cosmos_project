@@ -11,14 +11,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class News {
 
-    public String id;
+    public long id;
     public String title;
     public String description;
     public String text;
     public Timestamp date;
 
 
-    public News(String id, String title, String description, String text, Timestamp date) {
+    public News(long id, String title, String description, String text, Timestamp date) {
         this.id = id;
         this.title = title;
 
@@ -27,7 +27,7 @@ public class News {
         this.description = description;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 

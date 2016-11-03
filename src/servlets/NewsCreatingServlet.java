@@ -19,7 +19,7 @@ import static helpers.Helper.render;
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 @WebServlet(name = "NewsCreatingServlet")
 public class NewsCreatingServlet extends HttpServlet {

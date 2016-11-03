@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 @WebServlet(name = "LogoutServlet")
 public class LogoutServlet extends HttpServlet {

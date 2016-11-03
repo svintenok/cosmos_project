@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static helpers.Helper.render;
+
 /**
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 @WebServlet(name = "ProfileServlet")
 public class ProfileServlet extends HttpServlet {
@@ -20,6 +22,6 @@ public class ProfileServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        render(response, request, "profile.ftl", null);
     }
 }
