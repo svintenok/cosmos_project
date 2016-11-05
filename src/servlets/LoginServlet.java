@@ -1,5 +1,8 @@
 package servlets;
 
+import models.Token;
+import models.User;
+import services.UserServiceImpl;
 import singletons.DBSingleton;
 
 import javax.servlet.ServletException;
@@ -10,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 
 import static helpers.Helper.getHash;
@@ -28,40 +32,27 @@ public class LoginServlet extends HttpServlet {
         String login = request.getParameter("login").toLowerCase();
         String password = getHash(request.getParameter("password"));
         String remember = request.getParameter("remember");
-        try {
-            Connection con = DBSingleton.getConnection();
-            PreparedStatement psmt = con.prepareStatement("select * from users where login=? and password=?");
-            psmt.setString(1, login);
-            psmt.setString(2, password);
 
-            ResultSet rs = psmt.executeQuery();
-            if (rs.next()) {
-                if (remember != null) {
-                    String token = getHash(login);
+        User user = new UserServiceImpl().getUser(login, password);
+        if (user != null) {
+            if (remember != null) {
+                String tokenString = getHash(new Date().toString());
 
-                    psmt = con.prepareStatement("insert into tokens(login, token) values(?,?)");
-                    psmt.setString(1, login);
-                    psmt.setString(2, token);
-                    psmt.executeUpdate();
+                Token token = new Token();
+                token.setToken(tokenString);
+                token.setUser_id(user.getId());
 
-                    Cookie cookie = new Cookie("user", token);
-                    cookie.setMaxAge(24 * 60 * 60);
-                    response.addCookie(cookie);
-                }
-
-                if(rs.getBoolean("is_admin"))
-                    session.setAttribute("is_admin", "true");
-
-                session.setAttribute("current_user", login);
-                response.sendRedirect("/news");
-            }
-            else {
-                response.sendRedirect("/login?err=wrong_password_or_login&login=" + login);
-
+                Cookie cookie = new Cookie("user", tokenString);
+                cookie.setMaxAge(24 * 60 * 60);
+                response.addCookie(cookie);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            session.setAttribute("current_user", login);
+            response.sendRedirect("/news");
+        }
+        else {
+            response.sendRedirect("/login?err=wrong_password_or_login&login=" + login);
+
         }
 
     }

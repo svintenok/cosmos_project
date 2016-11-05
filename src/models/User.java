@@ -9,21 +9,34 @@ package models;
 public class User {
     private int id;
     private String login;
-    private String name;
+    private String password;
     private String email;
+    private String name;
     private String country;
     private boolean photo;
     private int roleId;
 
-    public User(int id, String login, String name, String email, String country, boolean photo, int role_id) {
+    public User(int id, String login, String password, String email, String name, String country, boolean photo, int roleId) {
         this.id = id;
         this.login = login;
-        this.name = name;
+        this.password = password;
         this.email = email;
+        this.name = name;
         this.country = country;
         this.photo = photo;
-        this.roleId = role_id;
+        this.roleId = roleId;
     }
+
+    public User(String login, String password, String email, String name, String country, boolean photo) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.country = country;
+        this.photo = photo;
+    }
+
+    public User() {}
 
     public int getId() {
         return id;
@@ -31,6 +44,10 @@ public class User {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getName() {
@@ -45,11 +62,44 @@ public class User {
         return country;
     }
 
-    public boolean isPhoto() {
+    public boolean getPhoto() {
         return photo;
     }
 
     public int getRoleId() {
         return roleId;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setPhoto(boolean photo) {
+        this.photo = photo;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 }

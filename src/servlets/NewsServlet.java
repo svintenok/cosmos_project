@@ -56,6 +56,7 @@ public class NewsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*
         HashMap<String, Object> root = new HashMap<>();
         String login = (String) request.getSession().getAttribute("current_user");
         String is_admin = (String) request.getSession().getAttribute("is_admin");
@@ -123,5 +124,6 @@ public class NewsServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        */
     }
 }

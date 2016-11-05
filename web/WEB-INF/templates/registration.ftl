@@ -14,7 +14,7 @@
     <div class="col-md-6 col-xs-10 col-sm-8">
 
 
-        <form action="/registration" id="f1" method="POST" >
+        <form action="/registration" id="f1" method="POST" enctype="multipart/form-data">
             <h3>Регистрация</h3>
             <h3>Имя</h3>
             <input type="text" name="name" id="name" class="form-control" placeholder="Ваше имя" style="color: black" <#if name??> value="${name}"</#if>/>

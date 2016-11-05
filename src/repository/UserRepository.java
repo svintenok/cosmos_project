@@ -18,4 +18,5 @@ public interface UserRepository {
 
     List<User> getUserList(int limit, int offset);
     User getUserById(int id);
+    User getUserByLogin(String login);
 }

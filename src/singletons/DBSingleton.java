@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class DBSingleton {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/CosmosProjectDb?charSet=utf-8?characterEncoding=utf-8";
+    private static final String URL = "jdbc:postgresql://localhost:5432/CosmosProject";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "postgres";
     private static final String DRIVER = "org.postgresql.Driver";

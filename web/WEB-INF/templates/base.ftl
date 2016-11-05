@@ -25,7 +25,7 @@
         <div class="container">
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><img src="logo.jpg" style="height: 81px; width: 223px; margin-right: 40px"></li>
+                    <li><img src="data/logo.jpg" style="height: 81px; width: 223px; margin-right: 40px;"/></li>
                 <#if login??>
                     <li><a href="profile.html"><h5>Профиль</h5></a></li>
                     <li><br><h5>|</h5></li>
