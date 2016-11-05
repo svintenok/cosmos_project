@@ -15,5 +15,5 @@ public interface CommentRepository {
     void removeComment(int id);
     void updateComment(Comment comment);
 
-    List<Comment> getCommentsListByNews(int newsId, int limit, int offset);
+    List<Comment> getCommentsListByNews(int newsId);
 }

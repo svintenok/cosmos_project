@@ -55,6 +55,29 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserById(int id) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("select * from \"user\" where id=?");
+            psmt.setInt(1, id);
+
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                User user = new User(
+                        rs.getInt("id"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("country"),
+                        rs.getBoolean("photo"),
+                        rs.getInt("role_id")
+                );
+                return user;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -76,7 +99,6 @@ public class UserRepositoryImpl implements UserRepository {
                         rs.getBoolean("photo"),
                         rs.getInt("role_id")
                 );
-                user.setLogin(login);
                 return user;
             }
 

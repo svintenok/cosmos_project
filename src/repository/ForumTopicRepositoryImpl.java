@@ -1,7 +1,9 @@
 package repository;
 
 import models.ForumTopic;
+import singletons.DBSingleton;
 
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -11,6 +13,8 @@ import java.util.List;
  * Task: semester project
  */
 public class ForumTopicRepositoryImpl implements ForumTopicRepository {
+    private Connection con = DBSingleton.getConnection();
+
     @Override
     public void addForumTopic(ForumTopic forumTopic) {
 

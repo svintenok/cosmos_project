@@ -1,8 +1,10 @@
 package services;
 
 import models.Token;
+import models.User;
 import repository.TokenRepository;
 import repository.TokenRepositoryImpl;
+import repository.UserRepositoryImpl;
 
 /**
  * Author: Svintenok Kate
@@ -13,6 +15,12 @@ import repository.TokenRepositoryImpl;
 public class TokenServiceImpl implements TokenService {
     private TokenRepository tokenRepository = new TokenRepositoryImpl();
 
+
+    @Override
+    public void removeToken(String user_login) {
+        User user = new UserRepositoryImpl().getUserByLogin(user_login);
+        tokenRepository.removeToken(user.getId());
+    }
 
     @Override
     public void addToken(Token token) {

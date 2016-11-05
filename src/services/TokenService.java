@@ -10,6 +10,6 @@ import models.Token;
  */
 public interface TokenService {
 
+    void removeToken(String user_login);
     void addToken(Token token);
-
 }

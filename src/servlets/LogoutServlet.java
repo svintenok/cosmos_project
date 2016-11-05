@@ -1,5 +1,8 @@
 package servlets;
 
+import models.Token;
+import services.TokenService;
+import services.TokenServiceImpl;
 import singletons.DBSingleton;
 
 import javax.servlet.ServletException;
@@ -28,18 +31,10 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = (String) request.getSession().getAttribute("current_user");
 
-        try {
-            Connection con = DBSingleton.getConnection();
-            PreparedStatement psmt = con.prepareStatement("delete from tokens where login=?");
-            psmt.setString(1, login);
-            psmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        TokenService tokenService = new TokenServiceImpl();
+        tokenService.removeToken(login);
 
         request.getSession().removeAttribute("current_user");
-        request.getSession().removeAttribute("is_admin");
         Cookie cookie = new Cookie("user", null);
         cookie.setMaxAge(0);
         response.addCookie(cookie);

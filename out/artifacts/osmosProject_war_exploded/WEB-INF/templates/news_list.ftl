@@ -8,12 +8,6 @@
 
         <div class="row">
 
-        <#if login??><#if is_admin??>
-            <div style="padding-top: 60px">
-                <button type="button" class="btn btn-primary" style="margin-top: 30px;"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span><a href="news_creating" style="color: white; font-size: 20px">Добавить новость</a></button>
-            </div>
-        </#if></#if>
-
 
             <div style="padding-top: 40px; margin-bottom: 100px">
                 <ul class ="list-group">
@@ -34,7 +28,7 @@
                                 </#if>
                             </div>
                             <div class="col-md-5">
-                                <img src="photo\news_photo\${news.id}.jpg" width="100%">
+                                <img src="data\news_photo\${news.id}.jpg" width="100%">
                             </div>
                         </div>
                     </li>

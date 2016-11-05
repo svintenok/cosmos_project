@@ -1,4 +1,4 @@
-package repository;
+package services;
 
 import models.News;
 
@@ -6,16 +6,15 @@ import java.util.List;
 
 /**
  * Author: Svintenok Kate
- * Date: 03.11.2016
+ * Date: 05.11.2016
  * Group: 11-501
  * Task: semester project
  */
+public interface NewsService {
 
-public interface NewsRepository {
     void addNews(News news);
-    void removeNews(int id);
-    void updateNews(News news);
 
-    List<News> getNewsList();
     News getNewsById(int id);
+    List<News> getNewsList();
+
 }

@@ -2,6 +2,8 @@ package servlets;
 
 import models.Comment;
 import models.News;
+import models.User;
+import services.*;
 import singletons.DBSingleton;
 
 import javax.servlet.ServletException;
@@ -32,98 +34,45 @@ public class NewsServlet extends HttpServlet {
         if (request.getParameter("id") != null) {
 
             String login = ((String) request.getSession().getAttribute("current_user")).toLowerCase();
-            String comment = request.getParameter("comment");
+            String text = request.getParameter("comment");
             Integer news_id = new Integer(request.getParameter("id"));
 
-            try {
-                Connection con = DBSingleton.getConnection();
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select id from users where login='" + login + "'");
-                if (rs.next()) {
-                    PreparedStatement psmt = con.prepareStatement("INSERT into comments(news_id, user_id, \"text\", \"date\") values(?, ?, ?, 'now')");
-                    psmt.setInt(1, news_id);
-                    psmt.setInt(2, rs.getInt("id"));
-                    psmt.setString(3, comment);
-                    psmt.executeUpdate();
-                }
+            User user = new UserServiceImpl().getUser(login);
+            Comment comment = new Comment(user.getId(), news_id, text);
+            CommentService commentService = new CommentServiceImpl();
+            commentService.addComment(comment);
 
-                response.sendRedirect("/news?id=" + news_id);
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            response.sendRedirect("/news?id=" + news_id);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*
+
         HashMap<String, Object> root = new HashMap<>();
         String login = (String) request.getSession().getAttribute("current_user");
-        String is_admin = (String) request.getSession().getAttribute("is_admin");
         root.put("login", login);
-        root.put("is_admin", is_admin);
 
-        try {
+        NewsService newsService= new NewsServiceImpl();
 
-            Connection con = DBSingleton.getConnection();
 
-            if (request.getParameter("id") != null){
-                Integer id = new Integer(request.getParameter("id"));
-                PreparedStatement psmt = con.prepareStatement("select * from news where id=?");
-                psmt.setInt(1, id);
-                ResultSet rs = psmt.executeQuery();
+        Connection con = DBSingleton.getConnection();
 
-                if (rs.next()) {
-                    News news = new News(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getString("short_description"),
-                        rs.getString("text"),
-                        rs.getTimestamp("date"));
-                    root.put("news", news);
-                }
+        if (request.getParameter("id") != null){
 
-                psmt = con.prepareStatement("select * from comments " +
-                        "join (select id, login from users) senders on comments.user_id = senders.id " +
-                        "where news_id=?");
-                List<Comment> comments = new ArrayList<>();
-                psmt.setInt(1, id);
-                rs = psmt.executeQuery();
-                while (rs.next()) {
-                    Comment comment = new Comment(
-                            rs.getInt("id"),
-                            rs.getString("login"),
-                            rs.getString("text"),
-                            rs.getTimestamp("date"));
-                    comments.add(comment);
-                }
+            Integer id = new Integer(request.getParameter("id"));
+            System.out.println(id);
+            System.out.println(newsService.getNewsById(id));
+            root.put("news", newsService.getNewsById(id));
 
-                root.put("comments", comments);
-                render(response, request, "news.ftl", root);
-            }
-
-            else {
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select * from news ORDER BY \"date\"");
-                List<News> news_list = new ArrayList<>();
-
-                while (rs.next()) {
-                    News news = new News(
-                            rs.getInt("id"),
-                            rs.getString("title"),
-                            rs.getString("short_description"),
-                            rs.getString("text"),
-                            rs.getTimestamp("date"));
-                    news_list.add(news);
-                }
-
-                root.put("news_list", news_list);
-                render(response, request, "news_list.ftl", root);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            root.put("comments", new CommentServiceImpl().getCommentList(id));
+            render(response, request, "news.ftl", root);
         }
-        */
+
+        else {
+
+            root.put("news_list", newsService.getNewsList());
+            render(response, request, "news_list.ftl", root);
+        }
+
     }
 }

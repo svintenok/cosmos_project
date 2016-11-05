@@ -11,7 +11,7 @@ import models.Token;
  */
 public interface TokenRepository {
     void addToken(Token token);
-    void removeToken(int id);
+    void removeToken(int user_id);
 
     Token getTokenByToken(String token);
 }

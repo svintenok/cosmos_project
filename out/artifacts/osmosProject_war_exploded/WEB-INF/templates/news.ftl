@@ -9,7 +9,7 @@
         <div class="row" style="padding-top: 20px">
             <div class="col-md-12" style="padding-top: 20px; margin-bottom: 40px">
                 <p><h1>${news.title}</h1></p>
-                <p style="font-size: 20px"><img src="$photo/news_photo/{news.id}.jpg" width="35%" style="float: right; margin: 20px;">${news.text}</p>
+                <p style="font-size: 20px"><img src="data/news_photo/${news.id}.jpg" width="45%" style="float: right; margin: 20px;">${news.text}</p>
             </div>
 
         </div>
@@ -38,7 +38,7 @@
             <ul class ="list-group">
             <#list comments as comment>
                 <li class ="list-group-item">
-                    <p><b> ${comment.sender}:</b></p>
+                    <p><b> ${comment.user.login}:</b></p>
                     <h>${comment.text}</h>
                     <p style="color: #737373" align="right">${comment.date}</p>
                 </li>

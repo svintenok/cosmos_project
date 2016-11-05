@@ -1,6 +1,9 @@
 package repository;
 
 import models.About;
+import singletons.DBSingleton;
+
+import java.sql.Connection;
 
 /**
  * Author: Svintenok Kate
@@ -9,6 +12,8 @@ import models.About;
  * Task: semester project
  */
 public class AboutRepositoryImpl implements AboutRepository {
+    private Connection con = DBSingleton.getConnection();
+
     @Override
     public void updateAbout(About about) {
 

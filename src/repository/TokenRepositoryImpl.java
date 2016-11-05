@@ -1,12 +1,10 @@
 package repository;
 
 import models.Token;
-import models.User;
 import singletons.DBSingleton;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,7 +14,6 @@ import java.sql.SQLException;
  * Task: semester project
  */
 public class TokenRepositoryImpl implements TokenRepository {
-
     private Connection con = DBSingleton.getConnection();
 
     @Override
@@ -31,8 +28,15 @@ public class TokenRepositoryImpl implements TokenRepository {
     }
 
     @Override
-    public void removeToken(int id) {
+    public void removeToken(int user_id) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("delete from tokens where user_id=?");
+            psmt.setInt(1, user_id);
+            psmt.executeUpdate();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

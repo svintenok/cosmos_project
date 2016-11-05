@@ -13,15 +13,23 @@ import java.time.format.DateTimeFormatter;
 public class Comment {
     private int id;
     private int userId;
+    private int newsId;
     private String text;
-    public Timestamp date;
+    private Timestamp date;
+    private User user;
 
-
-    public Comment(int id, int userId, String text, Timestamp date) {
+    public Comment(int id, int newsId, String text, Timestamp date, User user) {
         this.id = id;
-        this.userId = userId;
+        this.newsId = newsId;
         this.text = text;
         this.date = date;
+        this.user = user;
+    }
+
+    public Comment(int userId, int newsId, String text) {
+        this.userId = userId;
+        this.newsId = newsId;
+        this.text = text;
     }
 
     public int getId() {
@@ -30,6 +38,10 @@ public class Comment {
 
     public int getUserId() {
         return userId;
+    }
+
+    public int getNewsId() {
+        return newsId;
     }
 
     public String getText() {
@@ -41,4 +53,7 @@ public class Comment {
         return date.toLocalDateTime().format(formatter);
     }
 
+    public User getUser() {
+        return user;
+    }
 }
