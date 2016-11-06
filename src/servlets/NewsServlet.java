@@ -60,8 +60,6 @@ public class NewsServlet extends HttpServlet {
         if (request.getParameter("id") != null){
 
             Integer id = new Integer(request.getParameter("id"));
-            System.out.println(id);
-            System.out.println(newsService.getNewsById(id));
             root.put("news", newsService.getNewsById(id));
 
             root.put("comments", new CommentServiceImpl().getCommentList(id));

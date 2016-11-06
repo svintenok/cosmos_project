@@ -1,6 +1,8 @@
 package services;
 
+import models.Role;
 import models.User;
+import repository.RoleRepositoryImpl;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;
 
@@ -23,7 +25,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int id) {
-        return null;
+        User user = userRepository.getUserById(id);
+        if (user != null) {
+            Role role = new RoleRepositoryImpl().getRoleById(user.getId());
+            user.setRole(role);
+        }
+        return user;
     }
 
     @Override
@@ -36,7 +43,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String login) {
-        return userRepository.getUserByLogin(login);
+        User user = userRepository.getUserByLogin(login);
+        if (user != null) {
+            Role role = new RoleRepositoryImpl().getRoleById(user.getId());
+            user.setRole(role);
+        }
+        return user;
     }
 
 

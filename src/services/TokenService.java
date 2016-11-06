@@ -12,4 +12,5 @@ public interface TokenService {
 
     void removeToken(String user_login);
     void addToken(Token token);
+    Token getToken(String tokenSting);
 }

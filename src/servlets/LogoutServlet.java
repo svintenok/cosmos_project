@@ -3,6 +3,7 @@ package servlets;
 import models.Token;
 import services.TokenService;
 import services.TokenServiceImpl;
+import services.UserService;
 import singletons.DBSingleton;
 
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
  */
 @WebServlet(name = "LogoutServlet")
 public class LogoutServlet extends HttpServlet {
+    TokenService tokenService = new TokenServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

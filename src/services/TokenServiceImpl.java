@@ -26,4 +26,11 @@ public class TokenServiceImpl implements TokenService {
     public void addToken(Token token) {
         tokenRepository.addToken(token);
     }
+
+    @Override
+    public Token getToken(String tokenSting) {
+        return tokenRepository.getTokenByTokenString(tokenSting);
+    }
+
+
 }

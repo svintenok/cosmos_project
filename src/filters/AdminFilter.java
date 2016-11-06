@@ -1,5 +1,8 @@
 package filters;
 
+import services.UserService;
+import services.UserServiceImpl;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -13,14 +16,15 @@ import java.io.IOException;
  * Group: 11-501
  * Task: semester project
  */
-@WebFilter(filterName = "filters.AuthFilter")
+@WebFilter(filterName = "filters.CookieFilter")
 public class AdminFilter implements javax.servlet.Filter {
+    UserService userService = new UserServiceImpl();
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        if((request.getSession().getAttribute("current_user") == null) && (request.getSession().getAttribute("is_admin").equals(true))) {
-
+        String login = (String) request.getSession().getAttribute("current_user");
+        if( login != null && userService.getUser(login).getRole().getRole().equals("admin")) {
             chain.doFilter(request, response);
         }
         else {

@@ -1,5 +1,12 @@
 package filters;
 
+import models.Token;
+import models.User;
+import repository.TokenRepository;
+import services.TokenService;
+import services.TokenServiceImpl;
+import services.UserService;
+import services.UserServiceImpl;
 import singletons.DBSingleton;
 
 import javax.servlet.*;
@@ -21,8 +28,10 @@ import java.sql.SQLException;
  * Group: 11-501
  * Task: semester project
  */
-@WebFilter(filterName = "filters.AuthFilter")
-public class AuthFilter implements javax.servlet.Filter {
+@WebFilter(filterName = "filters.CookieFilter")
+public class CookieFilter implements javax.servlet.Filter {
+    TokenService tokenService = new TokenServiceImpl();
+    UserService userService = new UserServiceImpl();
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
@@ -31,27 +40,14 @@ public class AuthFilter implements javax.servlet.Filter {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("user")) {
+                    Token token = tokenService.getToken(cookie.getValue());
 
-                    try {
-                        Connection con = DBSingleton.getConnection();
-                        PreparedStatement psmt =  con.prepareStatement(
-                                "select * from (select * from tokens where token= ? ) tokens " +
-                                        "join users on tokens.login=user.login");
-                        psmt.setString(1, cookie.getValue());
-                        ResultSet rs = psmt.executeQuery();
-                        if (rs.next()) {
-                            HttpSession session = request.getSession();
-                            session.setAttribute("current_user", rs.getString("login"));
-                            if(rs.getBoolean("is_admin"))
-                                session.setAttribute("admin", "true");
-                        }
-
-                        break;
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                    if (token != null) {
+                        User user = userService.getUser(token.getUser_id());
+                        HttpSession session = request.getSession();
+                        session.setAttribute("current_user", user.getLogin());
                     }
-
+                    break;
                 }
             }
         }

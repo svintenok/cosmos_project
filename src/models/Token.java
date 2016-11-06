@@ -19,6 +19,11 @@ public class Token {
 
     public Token() {}
 
+    public Token(int user_id, String token) {
+        this.user_id = user_id;
+        this.token = token;
+    }
+
     public int getId() {
         return id;
     }

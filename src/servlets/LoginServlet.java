@@ -2,6 +2,9 @@ package servlets;
 
 import models.Token;
 import models.User;
+import services.TokenService;
+import services.TokenServiceImpl;
+import services.UserService;
 import services.UserServiceImpl;
 import singletons.DBSingleton;
 
@@ -27,20 +30,24 @@ import static helpers.Helper.render;
  */
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
+    TokenService tokenService = new TokenServiceImpl();
+    UserService userService = new UserServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String login = request.getParameter("login").toLowerCase();
         String password = getHash(request.getParameter("password"));
         String remember = request.getParameter("remember");
 
-        User user = new UserServiceImpl().getUser(login, password);
+        User user = userService.getUser(login, password);
+        System.out.println( remember);
         if (user != null) {
             if (remember != null) {
                 String tokenString = getHash(new Date().toString());
+                System.out.println(tokenString);
 
-                Token token = new Token();
-                token.setToken(tokenString);
-                token.setUser_id(user.getId());
+                Token token = new Token(user.getId(), tokenString);
+                tokenService.addToken(token);
 
                 Cookie cookie = new Cookie("user", tokenString);
                 cookie.setMaxAge(24 * 60 * 60);

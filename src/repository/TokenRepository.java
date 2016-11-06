@@ -13,5 +13,5 @@ public interface TokenRepository {
     void addToken(Token token);
     void removeToken(int user_id);
 
-    Token getTokenByToken(String token);
+    Token getTokenByTokenString(String token);
 }

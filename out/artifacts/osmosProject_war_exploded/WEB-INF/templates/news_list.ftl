@@ -6,6 +6,11 @@
 
     <div class="container">
 
+        <ul class="pager">
+            <li class="previous"><a href="#">&larr; Предыдущая</a></li>
+            <li class="next"><a href="#">Следующая &rarr;</a></li>
+        </ul>
+
         <div class="row">
 
 
