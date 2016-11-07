@@ -3,6 +3,7 @@ package models;
 import org.postgresql.util.PGInterval;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Author: Svintenok Kate
@@ -12,28 +13,31 @@ import java.sql.Timestamp;
  */
 
 public class Tour {
-    private String tour;
+    private int id;
     private String title;
     private String place;
     private String rocket;
     private String description;
-    private Timestamp departureDate;
+    private int departureDateId;
     private PGInterval interval;
     private int seatsNumber;
+    private int cost;
+    private DepartureDate departureDate;
 
-    public Tour(String tour, String title, String place, String rocket, String description, Timestamp departure_date, PGInterval interval, int seats_number) {
-        this.tour = tour;
+    public Tour(int id, String title, String place, String rocket, String description, int departureDateId, Object interval, int seatsNumber, int cost) {
+        this.id = id;
         this.title = title;
         this.place = place;
         this.rocket = rocket;
         this.description = description;
-        this.departureDate = departure_date;
-        this.interval = interval;
-        this.seatsNumber = seats_number;
+        this.departureDateId = departureDateId;
+        this.interval = (PGInterval) interval;
+        this.seatsNumber = seatsNumber;
+        this.cost= cost;
     }
 
-    public String getTour() {
-        return tour;
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -52,19 +56,24 @@ public class Tour {
         return description;
     }
 
-    public Timestamp getDepartureDate() {
-        return departureDate;
-    }
+    public int getDepartureDateId() { return departureDateId; }
 
-    public int getDate() {
-        return interval.getMonths();
-    }
     public PGInterval getInterval() {
         return interval;
     }
 
     public int getSeatsNumber() {
         return seatsNumber;
+    }
+
+    public int getCost() { return cost; }
+
+    public DepartureDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(DepartureDate departureDate) {
+        this.departureDate = departureDate;
     }
 }
 

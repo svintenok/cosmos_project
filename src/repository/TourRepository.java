@@ -16,7 +16,7 @@ public interface TourRepository {
     void removeTour(int id);
     void updateTour(Tour  tour);
 
-    List<Tour> getToursList(int limit, int offset);
+    List<Tour> getToursList();
     Tour getTourById(int id);
 
 }

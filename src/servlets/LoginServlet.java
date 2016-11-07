@@ -40,7 +40,6 @@ public class LoginServlet extends HttpServlet {
         String remember = request.getParameter("remember");
 
         User user = userService.getUser(login, password);
-        System.out.println( remember);
         if (user != null) {
             if (remember != null) {
                 String tokenString = getHash(new Date().toString());
@@ -49,7 +48,7 @@ public class LoginServlet extends HttpServlet {
                 Token token = new Token(user.getId(), tokenString);
                 tokenService.addToken(token);
 
-                Cookie cookie = new Cookie("user", tokenString);
+                Cookie cookie = new Cookie("current_user", tokenString);
                 cookie.setMaxAge(24 * 60 * 60);
                 response.addCookie(cookie);
             }

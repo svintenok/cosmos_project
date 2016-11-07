@@ -15,7 +15,7 @@ public interface BookingRepository {
     void removeBooking(Booking id);
     void updateBooking(Booking booking);
 
-    List<Booking> getBookingListByUserByDate(int userId, boolean actual, int limit, int offset);
-    List<Booking> getBookingListByTourByDate(int tourId, boolean actual, int limit, int offset);
-    Booking getBookingById(int id);
-}
+    List<Booking> getBookingListByUserAndActual(int userId, boolean actual);
+    List<Booking> getBookingListByDepartureDate(int departureDate);
+        Booking getBookingById(int id);
+        }

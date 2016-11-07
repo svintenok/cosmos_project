@@ -5,27 +5,28 @@
 
 <div class="container">
 
-    <div class="col-md-12" style="margin-top: 40px; text-align: center; margin-bottom: 20px" >
-        <div class="col-md-5">
-            <h3>Логин</h3>
+    <div class="col-md-12" style="margin-top: 40px; margin-bottom: 20px" >
+        <div class="col-md-5"  style="margin-left: 12px;">
+            <h2>${user.login}</h2>
         </div>
     </div>
 
     <div class="row" style="margin-top: 80px">
 
         <div class="col-md-4">
-            <img src="add_user.png" width="317" height="317" style="margin-bottom: 20px; margin-left: 41px">
+            <img src="data/users_photo/${user.login}.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
             <ul style="margin-top: 10px; margin-bottom: 40px">
-                <li class="list-group-item"><p>Имя, Фамилия</p></li>
-                <li class="list-group-item"><p>Логин</p></li>
-                <li class="list-group-item"><p>Email</p></li>
-                <li class="list-group-item"><p>Страна</p></li>
-                <li class="list-group-item"><p>Количество путешествий</p></li>
+                <#if user.name??><li class="list-group-item"><p><b>Имя: </b>${user.name}</p></li></#if>
+                <li class="list-group-item"><p><b>Почта: </b>${user.email}</p></li>
+                <#if user.country??><li class="list-group-item"><p><b>Страна: </b>${user.country}</p></li></#if>
+                <li class="list-group-item"><p><b>Путешествий: </b> ${travels_number}</p></li>
             </ul>
+        <#if current_user??><#if current_user.login == user.login>
             <button type="button" class="btn" style="margin-left: 41px; margin-bottom: 30px">
                 <span class="glyphicon glyphicon-cog" style="margin-right: 5px"></span>
                 <a href="settings.html">Настройки</a>
             </button>
+        </#if></#if>
         </div>
 
         <div class="col-md-1"></div>
@@ -33,14 +34,24 @@
         <div class="col-md-7" style="margin-top: 10px">
             <ul>
                 <p class="kk">История путешествий</p>
-                <li class="list-group-item"><a href="#">Тур</a></li>
-                <li class="list-group-item"><a href="#">Тур</a></li>
-                <li class="list-group-item"><a href="#">Тур</a></li>
+                <#list travels as travel>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a href="#">${travel.departureDate.tour.title}</a>
+                            </div>
+                            <div class="col-md-4">
+                                <p align="right">${travel.departureDate.date}</p>
+                            </div>
+                        </div>
+                    </li>
+                </#list>
             </ul>
+    <#if current_user??><#if current_user.login == user.login>
             <button type="button" class="btn btn-primary" style="margin-top: 30px; margin-left: 41px;">
                 <span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>
                 <a href="reservationses.html" style="color: white">Мои бронирования</a></button>
-
+    </#if></#if>
         </div>
 
 

@@ -26,11 +26,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><img src="data/logo.jpg" style="height: 81px; width: 223px; margin-right: 40px;"/></li>
-                <#if login??>
-                    <li><a href="profile.html"><h5>Профиль</h5></a></li>
+                <#if current_user??>
+                    <li><a href="/profile?id=${current_user.id}"><h5>Профиль</h5></a></li>
                     <li><br><h5>|</h5></li>
                 </#if>
-                    <li><a href="tours.html"><h5>Туры</h5></a></li>
+                    <li><a href="/tours"><h5>Туры</h5></a></li>
                     <li><br><h5>|</h5></li>
                     <li><a href="/news"><h5>Новости</h5></a></li>
                     <li><br><h5>|</h5></li>
@@ -39,7 +39,7 @@
                     <li><a href="about.html"><h5>О нас</h5></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                <#if login??>
+                <#if current_user??>
                     <li><a href="/logout"><h5>Выход</h5></a></li>
                 <#else>
                     <li><a href="/login"><h5>Вход</h5></a></li>

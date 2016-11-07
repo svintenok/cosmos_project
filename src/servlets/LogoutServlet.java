@@ -37,7 +37,7 @@ public class LogoutServlet extends HttpServlet {
         tokenService.removeToken(login);
 
         request.getSession().removeAttribute("current_user");
-        Cookie cookie = new Cookie("user", null);
+        Cookie cookie = new Cookie("current_user", null);
         cookie.setMaxAge(0);
         response.addCookie(cookie);
 

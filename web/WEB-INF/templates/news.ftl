@@ -22,10 +22,10 @@
 
                 <div class="col-md-6">
                     <textarea name="comment" id="comment" required=""
-                            <#if login??>placeholder="Ваш комментарий"
+                            <#if current_user??>placeholder="Ваш комментарий"
                             <#else>placeholder="Войдите, чтобы оставить комментарий"</#if>
                              class="form-control input-contrast comment-form-textarea field" style="max-height: 233px; height: 100px;"
-                             <#if !login??>disabled</#if>></textarea>
+                             <#if !current_user??>disabled</#if>></textarea>
                 </div>
 
                 <div class="col-md-2">

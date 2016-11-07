@@ -27,6 +27,10 @@ import static helpers.Helper.render;
  */
 @WebServlet(name = "NewsServlet")
 public class NewsServlet extends HttpServlet {
+    UserService userService = new UserServiceImpl();
+    CommentService commentService = new CommentServiceImpl();
+    NewsService newsService= new NewsServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("utf-8");
@@ -37,9 +41,8 @@ public class NewsServlet extends HttpServlet {
             String text = request.getParameter("comment");
             Integer news_id = new Integer(request.getParameter("id"));
 
-            User user = new UserServiceImpl().getUser(login);
+            User user = userService.getUser(login);
             Comment comment = new Comment(user.getId(), news_id, text);
-            CommentService commentService = new CommentServiceImpl();
             commentService.addComment(comment);
 
             response.sendRedirect("/news?id=" + news_id);
@@ -50,20 +53,21 @@ public class NewsServlet extends HttpServlet {
 
         HashMap<String, Object> root = new HashMap<>();
         String login = (String) request.getSession().getAttribute("current_user");
-        root.put("login", login);
+        root.put("current_user", userService.getUser(login));
 
-        NewsService newsService= new NewsServiceImpl();
-
-
-        Connection con = DBSingleton.getConnection();
 
         if (request.getParameter("id") != null){
 
             Integer id = new Integer(request.getParameter("id"));
-            root.put("news", newsService.getNewsById(id));
-
-            root.put("comments", new CommentServiceImpl().getCommentList(id));
-            render(response, request, "news.ftl", root);
+            News news = newsService.getNewsById(id);
+            if (news != null) {
+                root.put("news", news);
+                root.put("comments", new CommentServiceImpl().getCommentList(id));
+                render(response, request, "news.ftl", root);
+            }
+            else {
+                response.sendError(404);
+            }
         }
 
         else {

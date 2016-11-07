@@ -8,12 +8,8 @@
 
     <div class="row">
 
-
-
-        <div class="row" style="padding-top: 40px; padding-left: 20px">
-            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span><a href="\tour_сreating" style="color: white; font-size: 20px">Создать тур</a></button>
-        </div>
-
+    <div class="row">
+    <div class="col-md-8">
 
         <form class="navbar-form" role="search" style="padding-top: 20px">
             <div class="input-group" style="width: 300px;">
@@ -33,17 +29,52 @@
                 <option>По цене</option>
             </select>
 
+
         </form>
+
+    </div>
+
+    <div class="col-md-4" style="float: right">
+
+        <ul class="pager">
+            <li ><a href="#" style="font-size: 20px;">&larr; Предыдущая</a></li>
+            <li ><a href="#" style="font-size: 20px;">Следующая &rarr;</a></li>
+        </ul>
+
+    </div>
+    </div>
 
         <div style="padding-top: 20px">
             <ul class ="list-group">
-                <li class ="list-group-item"><a href="#">Тур</a></li>
-                <li class ="list-group-item"><a href="#">Тур</a></li>
-                <li class ="list-group-item"><a href="#">Тур</a></li>
-                <li class ="list-group-item"><a href="#">Тур</a></li>
-                <li class ="list-group-item"><a href="#">Тур</a></li>
-                <li class ="list-group-item"><a href="#">Тур</a></li>
-                <li class ="list-group-item"><a href="#">Тур</a></li>
+            <#list tours as tour>
+                <li class ="list-group-item">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <a href="\tours?=${tour.id}">${tour.title}</a>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 style="color: black;"><b>Место: </b>${tour.place}</h5>
+                                    <h5 style="color: black;"><b>Ракета: </b>${tour.rocket}</h5>
+                                    <h5 style="color: black;"><b>Дата вылета: </b>${tour.departureDate.date}</h5>
+                                    <h5 style="color: black;"><b>Стоимость: </b>${tour.cost}</h5>
+                                    <h5 style="color: black;"><b>Мест осталось: </b>13 из ${tour.seatsNumber}</h5>
+                                    <h5 style="color: black;"><b>Оценка пользоватeлей: </b></h5>
+                                    <div class="progress ff col-md-6">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
+                                            3,35 из 5
+                                        </div>
+                                    </div>
+
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="data\tours_photo\${tour.id}.jpg" width="100%">
+                        </div>
+                    </div>
+                </li>
+            </#list>
             </ul>
         </div>
 

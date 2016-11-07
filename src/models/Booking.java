@@ -10,6 +10,7 @@ public class Booking {
     private int id;
     private int userId;
     private int departureDateId;
+    private DepartureDate departureDate;
 
 
     public Booking(int id, int user_id, int departure_date_id) {
@@ -31,8 +32,11 @@ public class Booking {
         return departureDateId;
     }
 
+    public DepartureDate getDepartureDate() {
+        return departureDate;
+    }
 
-
-
-
+    public void setDepartureDate(DepartureDate departureDate) {
+        this.departureDate = departureDate;
+    }
 }

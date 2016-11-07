@@ -4,6 +4,9 @@ import models.DepartureDate;
 import singletons.DBSingleton;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -32,6 +35,26 @@ public class DepartureDateRepositoryImpl implements DepartureDateRepository {
 
     @Override
     public List<DepartureDate> getDepartureDatesListByTour(int tourId, int limit, int offset) {
+        return null;
+    }
+
+    @Override
+    public DepartureDate getDepartureDateById(int id) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("select * from departure_date where id=?");
+            psmt.setInt(1, id);
+            ResultSet rs = psmt.executeQuery();
+
+            if (rs.next()) {
+                DepartureDate departureDate = new DepartureDate(
+                        rs.getInt("id"),
+                        rs.getInt("tour_id"),
+                        rs.getTimestamp("date"));
+                return departureDate;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

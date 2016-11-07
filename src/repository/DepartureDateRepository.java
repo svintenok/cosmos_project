@@ -16,4 +16,5 @@ public interface DepartureDateRepository {
     void updateDepartureDate(DepartureDate departureDate);
 
     List<DepartureDate> getDepartureDatesListByTour(int tourId, int limit, int offset);
+    DepartureDate getDepartureDateById(int id);
 }

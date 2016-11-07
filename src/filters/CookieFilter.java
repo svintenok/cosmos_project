@@ -39,7 +39,7 @@ public class CookieFilter implements javax.servlet.Filter {
         if(request.getSession().getAttribute("current_user") == null) {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
+                if (cookie.getName().equals("current_user")) {
                     Token token = tokenService.getToken(cookie.getValue());
 
                     if (token != null) {
