@@ -13,5 +13,5 @@ import java.util.List;
 public interface TourService {
 
     Tour getTourById(int id);
-    List<Tour> getToursList();
+    List<Tour> getToursList(String sorting, boolean reverse, String search);
 }

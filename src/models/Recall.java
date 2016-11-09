@@ -1,5 +1,9 @@
 package models;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Author: Svintenok Kate
  * Date: 07.11.2016
@@ -12,13 +16,15 @@ public class Recall {
     private String text;
     private int userId;
     private int departureDataId;
+    private Timestamp date;
 
-    public Recall(int id, int estimate, String text, int userId, int departureDataId) {
+    public Recall(int id, int estimate, String text, int userId, int departureDataId, Timestamp date) {
         this.id = id;
         this.estimate = estimate;
         this.text = text;
         this.userId = userId;
         this.departureDataId = departureDataId;
+        this.date = date;
     }
 
     public int getId() {
@@ -39,5 +45,10 @@ public class Recall {
 
     public int getDepartureDataId() {
         return departureDataId;
+    }
+
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.toLocalDateTime().format(formatter);
     }
 }

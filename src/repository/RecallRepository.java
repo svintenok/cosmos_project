@@ -16,6 +16,7 @@ public interface RecallRepository {
     void updateRecall(Recall recall);
 
     List<Recall> getRecallsList();
-    List<Recall> getRecallsByTour(int tour_id);
+    List<Recall> getRecallsByTour(int tourId);
+    int getRatingByTour(int tourId);
     Recall getRecallById(int id);
 }

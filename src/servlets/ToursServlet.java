@@ -51,8 +51,18 @@ public class ToursServlet extends HttpServlet {
         }
 
         else {
-
-            root.put("tours", tourService.getToursList());
+            String sorting = request.getParameter("sorting");
+            String backOrder = request.getParameter("back_order");
+            String search = request.getParameter("search");
+            root.put("sorting", sorting);
+            root.put("back_order", backOrder);
+            root.put("search", search);
+            if (sorting == null)
+                sorting = "date";
+            if (backOrder != null)
+                root.put("tours", tourService.getToursList(sorting, true, search));
+            else
+                root.put("tours", tourService.getToursList(sorting, false, search));
             render(response, request, "tours.ftl", root);
         }
     }

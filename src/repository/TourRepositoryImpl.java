@@ -32,11 +32,26 @@ public class TourRepositoryImpl implements TourRepository {
     }
 
     @Override
-    public List<Tour> getToursList() {
+    public List<Tour> getToursList(String sorting, boolean reverse, String search) {
 
+        PreparedStatement psmt = null;
         try {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from tour ORDER BY \"departure\"");
+            String SQL = "select * from tour";
+
+            if (search != null) {
+                SQL = SQL + " where title like ? or place like ?";
+                SQL = setOrder(SQL, sorting, reverse);
+                psmt = con.prepareStatement(SQL);
+                psmt.setString(1, "%" + search + "%");
+                psmt.setString(2, "%" + search + "%");;
+            }
+            else {
+                SQL = setOrder(SQL, sorting, reverse);
+                psmt = con.prepareStatement(SQL);
+
+            }
+
+            ResultSet rs = psmt.executeQuery();
             List<Tour> tours = new ArrayList<>();
 
             while (rs.next()) {
@@ -84,5 +99,22 @@ public class TourRepositoryImpl implements TourRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String setOrder(String SQL, String sorting, boolean reverse){
+        SQL = SQL + " ORDER BY ";
+
+        if (sorting.equals("cost"))
+            SQL = SQL + "cost";
+        else if (sorting.equals("rating"))
+            SQL = SQL + "(select avg(estimate) as rating from recall \n" +
+                    "join departure_date on departure_date.id=recall.departure_date_id where tour_id=tour.id)";
+        else
+            SQL = SQL + "(select date from departure_date where departure_date.id=tour.departure_date_id)";
+
+        if (reverse)
+            SQL = SQL + " desc";
+
+        return SQL;
     }
 }

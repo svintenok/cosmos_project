@@ -24,6 +24,9 @@ public class Tour {
     private int cost;
     private DepartureDate departureDate;
 
+    private int bookingCount;
+    private int rating;
+
     public Tour(int id, String title, String place, String rocket, String description, int departureDateId, Object interval, int seatsNumber, int cost) {
         this.id = id;
         this.title = title;
@@ -74,6 +77,22 @@ public class Tour {
 
     public void setDepartureDate(DepartureDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public int getBookingCount() {
+        return bookingCount;
+    }
+
+    public void setBookingCount(int bookingCount) {
+        this.bookingCount = bookingCount;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
 

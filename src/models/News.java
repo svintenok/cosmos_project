@@ -42,7 +42,7 @@ public class News {
     public String getDescription() { return description; }
 
     public String getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return date.toLocalDateTime().format(formatter);
     }
 

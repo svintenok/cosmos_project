@@ -9,28 +9,49 @@
     <div class="row">
 
     <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
 
-        <form class="navbar-form" role="search" style="padding-top: 20px">
+        <form action="/tours" method="GET" class="navbar-form" style="padding-top: 20px">
             <div class="input-group" style="width: 300px;">
                 <input type="text" autocomplete="off" class="form-control" placeholder="Search" name="search" id="search-input">
                     <span class="input-group-btn">
-                        <button class="btn" id="srchbtn" type="btn-default">
+                        <button class="btn btn-default" id="srchbtn" type="submit">
                             <i class="fa fa-search" aria-hidden="true">
                                 <span class="glyphicon glyphicon-search"></span>
                             </i>
                         </button>
                     </span>
             </div>
-
-            <select class="form-control">
-                <option>По дате</option>
-                <option>По имени</option>
-                <option>По цене</option>
-            </select>
-
-
         </form>
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="dropdown" style="margin-top: 27px">
+            <div class="btn-group" role="group">
+
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Сортировать
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <li><a style="font-size: 18px" href="/tours?<#if search??>search=${search}&</#if>sorting=date">По дате вылета</a></li>
+                <li><a style="font-size: 18px" href="/tours?<#if search??>search=${search}&</#if>sorting=rating">По рейтингу</a></li>
+                <li><a style="font-size: 18px" href="/tours?<#if search??>search=${search}&</#if>sorting=cost">По цене</a></li>
+            </ul>
+
+            <#if back_order??>
+                <a href="tours<#if sorting??>?<#if search??>search=${search}&</#if>sorting=${sorting}<#else><#if search??>?search=${search}</#if></#if>" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                </a>
+            <#else>
+                <a href="tours?<#if search??>search=${search}&</#if><#if sorting??>sorting=${sorting}&</#if>back_order=true" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                </a>
+            </#if>
+
+            </div>
+        </div>
 
     </div>
 
@@ -58,13 +79,15 @@
                                     <h5 style="color: black;"><b>Ракета: </b>${tour.rocket}</h5>
                                     <h5 style="color: black;"><b>Дата вылета: </b>${tour.departureDate.date}</h5>
                                     <h5 style="color: black;"><b>Стоимость: </b>${tour.cost}</h5>
-                                    <h5 style="color: black;"><b>Мест осталось: </b>13 из ${tour.seatsNumber}</h5>
+                                    <h5 style="color: black;"><b>Мест осталось: </b>${tour.seatsNumber - tour.bookingCount} из ${tour.seatsNumber}</h5>
                                     <h5 style="color: black;"><b>Оценка пользоватeлей: </b></h5>
+                                 <#if tour.rating??>
                                     <div class="progress ff col-md-6">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
-                                            3,35 из 5
+                                            ${tour.rating} из 5
                                         </div>
                                     </div>
+                                 </#if>
 
                                  </div>
                              </div>

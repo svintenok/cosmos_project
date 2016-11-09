@@ -61,6 +61,6 @@
 </body>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
+<script src="static/bootstrap/js/bootstrap.js"></script>
 
 </html>
