@@ -27,6 +27,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void addBooking(int user_id, int tour_id) {
+
         Tour tour = tourRepository.getTourById(tour_id);
         Booking booking = new Booking(user_id, tour.getDepartureDateId());
         bookingRepository.addBooking(booking);
@@ -36,14 +37,10 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getTravelsListByUser(int userId) {
 
         List<Booking> bookings = bookingRepository.getBookingListByUserAndActual(userId, false);
-
-        for ( Booking booking : bookings){
-            DepartureDate departureDate = departureDateRepository.getDepartureDateById(booking.getDepartureDateId());
-            Tour tour = tourRepository.getTourById(departureDate.getTourId());
-            departureDate.setTour(tour);
-            booking.setDepartureDate(departureDate);
+        setBookingAdditionalInfo(bookings);
+        for ( Booking booking : bookings)
             booking.setRecall(recallRepository.getRecallByUserAndDepartureDate(userId, booking.getDepartureDateId()));
-        }
+
         return bookings;
     }
 
@@ -55,6 +52,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingListByTour(int tour_id) {
+
         Tour tour = tourRepository.getTourById(tour_id);
         return bookingRepository.getBookingListByDepartureDate(tour.getDepartureDateId());
     }
@@ -65,9 +63,26 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<Booking> getBookingListByUser(int userId) {
+
+        List<Booking> bookings = bookingRepository.getBookingListByUserAndActual(userId, true);
+        setBookingAdditionalInfo(bookings);
+        return bookings;
+    }
+
+    @Override
     public Booking getBoookingByUserAndTour(int userId, int tourId) {
         Tour tour = tourRepository.getTourById(tourId);
         return bookingRepository.getBookingByUserAndDepartureDate(userId, tour.getDepartureDateId());
+    }
+
+    private void setBookingAdditionalInfo(List<Booking> bookings){
+        for ( Booking booking : bookings){
+            DepartureDate departureDate = departureDateRepository.getDepartureDateById(booking.getDepartureDateId());
+            Tour tour = tourRepository.getTourById(departureDate.getTourId());
+            departureDate.setTour(tour);
+            booking.setDepartureDate(departureDate);
+        }
     }
 
 }

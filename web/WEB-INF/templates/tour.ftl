@@ -37,7 +37,11 @@
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-4">
+                <#if user_booking??>
+                <button class="btn btn-default btn-lg" data-toggle="modal"  data-target="#BookingModal">Отменить бронирование</button>
+                <#else>
                 <button class="btn btn-default btn-lg" data-toggle="modal"  data-target="#BookingModal">Забронировать</button>
+                </#if>
             </div>
      </div>
 
@@ -47,7 +51,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Бронирование</h4>
+                    <h4 class="modal-title"><#if user_booking??>Отмена бронирования<#else>Бронирование</#if></h4>
                 </div>
                 <div class="modal-body">
                     <#if current_user??>

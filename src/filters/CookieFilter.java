@@ -28,7 +28,7 @@ import java.sql.SQLException;
  * Group: 11-501
  * Task: semester project
  */
-@WebFilter(filterName = "filters.CookieFilter")
+
 public class CookieFilter implements javax.servlet.Filter {
     TokenService tokenService = new TokenServiceImpl();
     UserService userService = new UserServiceImpl();

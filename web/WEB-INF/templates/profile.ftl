@@ -39,7 +39,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="#">${travel.departureDate.tour.title}</a>
+                                <a href="/tours?=id=${travel.departureDate.tourId}">${travel.departureDate.tour.title}</a>
                             </div>
                             <div class="col-md-3">
                                 <#if !travel.recall??>
@@ -115,10 +115,10 @@
             </ul>
             </#if>
             <#if current_user??><#if current_user.login == user.login>
-            <button type="button" class="btn btn-primary" style="margin-top: 30px; margin-left: 41px;">
-                <span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>
-                <a href="reservationses.html" style="color: white">Мои бронирования</a></button>
+            <a href="/bookings" class="btn btn-primary btn-lg" style="margin-top: 30px; margin-left: 41px; color:white;">
+                <span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>Мои бронирования</a>
             </#if></#if>
+
         </div>
 
 

@@ -14,9 +14,13 @@ public interface BookingService {
 
     void removeBooking(Booking booking);
     void addBooking(int userId, int tourId);
+    Booking getBoookingByUserAndTour(int userId, int tourId);
+
     List<Booking> getTravelsListByUser(int userId);
     int getTravelsCountByUser(int userId);
+
     List<Booking> getBookingListByTour(int tourId);
     int getBookingCountByTour(int tourId);
-    Booking getBoookingByUserAndTour(int userId, int tourId);
+
+    List<Booking> getBookingListByUser(int userId);
 }

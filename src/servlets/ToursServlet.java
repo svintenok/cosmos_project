@@ -36,7 +36,7 @@ public class ToursServlet extends HttpServlet {
             bookingService.addBooking(user.getId(), tourId);
         else
             bookingService.removeBooking(booking);
-        response.sendRedirect("/booking");
+        response.sendRedirect("/bookings");
 
     }
 

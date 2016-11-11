@@ -16,7 +16,7 @@ import java.io.IOException;
  * Group: 11-501
  * Task: semester project
  */
-@WebFilter(filterName = "filters.CookieFilter")
+
 public class AdminFilter implements javax.servlet.Filter {
     UserService userService = new UserServiceImpl();
 
