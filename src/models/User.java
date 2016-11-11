@@ -19,7 +19,7 @@ public class User {
 
     public User(int id, String login, String password, String email, String name, String country, boolean photo, int roleId) {
         this.id = id;
-        this.login = login;
+        this.login = login.toLowerCase();
         this.password = password;
         this.email = email;
         this.name = name;
@@ -29,7 +29,7 @@ public class User {
     }
 
     public User(String login, String password, String email, String name, String country, boolean photo) {
-        this.login = login;
+        this.login = login.toLowerCase();
         this.password = password;
         this.email = email;
         this.name = name;
@@ -84,7 +84,7 @@ public class User {
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.login = login.toLowerCase();
     }
 
     public void setPassword(String password) {

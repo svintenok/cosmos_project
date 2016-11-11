@@ -10,7 +10,9 @@ public class Booking {
     private int id;
     private int userId;
     private int departureDateId;
+
     private DepartureDate departureDate;
+    private Recall recall;
 
 
     public Booking(int id, int user_id, int departure_date_id) {
@@ -19,6 +21,10 @@ public class Booking {
         this.departureDateId = departure_date_id;
     }
 
+    public Booking(int userId, int departureDateId) {
+        this.userId = userId;
+        this.departureDateId = departureDateId;
+    }
 
     public int getUserId() {
         return userId;
@@ -38,5 +44,13 @@ public class Booking {
 
     public void setDepartureDate(DepartureDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public Recall getRecall() {
+        return recall;
+    }
+
+    public void setRecall(Recall recall) {
+        this.recall = recall;
     }
 }

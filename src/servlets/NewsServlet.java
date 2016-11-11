@@ -53,7 +53,8 @@ public class NewsServlet extends HttpServlet {
 
         HashMap<String, Object> root = new HashMap<>();
         String login = (String) request.getSession().getAttribute("current_user");
-        root.put("current_user", userService.getUser(login));
+        if (login != null)
+            root.put("current_user", userService.getUser(login));
 
 
         if (request.getParameter("id") != null){

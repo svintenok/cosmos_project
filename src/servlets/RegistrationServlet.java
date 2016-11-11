@@ -39,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
         String country = request.getParameter("country");
         Part filePart = request.getPart("profile_photo");
 
-        File file = new File("D:/repositories/cosmos_project/web/data/users_photo/" + login + ".jpg");
+        File file = new File("D:/repositories/cosmos_project_files/users_photo/" + login + ".jpg");
         file.createNewFile();
         FileOutputStream out = new FileOutputStream(file);
         InputStream filecontent = filePart.getInputStream();

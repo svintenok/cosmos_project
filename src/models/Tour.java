@@ -4,6 +4,7 @@ import org.postgresql.util.PGInterval;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Author: Svintenok Kate
@@ -22,10 +23,11 @@ public class Tour {
     private PGInterval interval;
     private int seatsNumber;
     private int cost;
-    private DepartureDate departureDate;
 
+    private DepartureDate departureDate;
     private int bookingCount;
-    private int rating;
+    private double rating;
+    private List<Recall> recallList;
 
     public Tour(int id, String title, String place, String rocket, String description, int departureDateId, Object interval, int seatsNumber, int cost) {
         this.id = id;
@@ -87,12 +89,20 @@ public class Tour {
         this.bookingCount = bookingCount;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public List<Recall> getRecallList() {
+        return recallList;
+    }
+
+    public void setRecallList(List<Recall> recallList) {
+        this.recallList = recallList;
     }
 }
 

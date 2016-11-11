@@ -1,10 +1,9 @@
 package servlets;
 
+import models.Booking;
 import models.Tour;
-import services.TourService;
-import services.TourServiceImpl;
-import services.UserService;
-import services.UserServiceImpl;
+import models.User;
+import services.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,15 +25,28 @@ import static helpers.Helper.render;
 public class ToursServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
     TourService tourService = new TourServiceImpl();
+    BookingService bookingService = new BookingServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String login =  (String) request.getSession().getAttribute("current_user");
+        User user = userService.getUser(login);
+        Integer tourId = new Integer(request.getParameter("tour"));
+        Booking booking = bookingService.getBoookingByUserAndTour(user.getId(), tourId);
+        if (booking == null)
+            bookingService.addBooking(user.getId(), tourId);
+        else
+            bookingService.removeBooking(booking);
+        response.sendRedirect("/booking");
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> root = new HashMap<>();
         String login = (String) request.getSession().getAttribute("current_user");
-        root.put("current_user", userService.getUser(login));
+        User user = null;
+        if (login != null)
+            user = userService.getUser(login);
+            root.put("current_user", user);
 
 
         if (request.getParameter("id") != null){
@@ -42,6 +54,9 @@ public class ToursServlet extends HttpServlet {
             Integer id = new Integer(request.getParameter("id"));
             Tour tour = tourService.getTourById(id);
             if (tour != null) {
+                if(user != null)
+                    root.put("user_booking", bookingService.getBoookingByUserAndTour(user.getId(), id));
+
                 root.put("tour", tour);
                 render(response, request, "tour.ftl", root);
             }

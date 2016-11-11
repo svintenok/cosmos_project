@@ -71,7 +71,7 @@
                 <li class ="list-group-item">
                     <div class="row">
                         <div class="col-md-9">
-                            <a href="\tours?=${tour.id}">${tour.title}</a>
+                            <a href="\tours?id=${tour.id}">${tour.title}</a>
                             <hr/>
                             <div class="row">
                                 <div class="col-md-12">
@@ -80,7 +80,7 @@
                                     <h5 style="color: black;"><b>Дата вылета: </b>${tour.departureDate.date}</h5>
                                     <h5 style="color: black;"><b>Стоимость: </b>${tour.cost}</h5>
                                     <h5 style="color: black;"><b>Мест осталось: </b>${tour.seatsNumber - tour.bookingCount} из ${tour.seatsNumber}</h5>
-                                    <h5 style="color: black;"><b>Оценка пользоватeлей: </b></h5>
+                                    <h5 style="color: black;"><b>Рейтинг: </b></h5>
                                  <#if tour.rating??>
                                     <div class="progress ff col-md-6">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
@@ -93,7 +93,7 @@
                              </div>
                         </div>
                         <div class="col-md-3">
-                            <img src="data\tours_photo\${tour.id}.jpg" width="100%">
+                            <img src="http://localhost:8080/files/tours_photo/${tour.id}.jpg" width="100%">
                         </div>
                     </div>
                 </li>

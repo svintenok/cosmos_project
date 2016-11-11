@@ -17,18 +17,32 @@ public class BookingServiceImpl implements BookingService {
     BookingRepository bookingRepository = new BookingRepositoryImpl();
     DepartureDateRepository departureDateRepository = new DepartureDateRepositoryImpl();
     TourRepository tourRepository = new TourRepositoryImpl();
+    RecallRepository recallRepository = new RecallRepositoryImpl();
 
 
     @Override
-    public List<Booking> getTravelsListByUser(int user_id) {
+    public void removeBooking(Booking booking) {
+        bookingRepository.removeBooking(booking);
+    }
 
-        List<Booking> bookings = bookingRepository.getBookingListByUserAndActual(user_id, false);
+    @Override
+    public void addBooking(int user_id, int tour_id) {
+        Tour tour = tourRepository.getTourById(tour_id);
+        Booking booking = new Booking(user_id, tour.getDepartureDateId());
+        bookingRepository.addBooking(booking);
+    }
+
+    @Override
+    public List<Booking> getTravelsListByUser(int userId) {
+
+        List<Booking> bookings = bookingRepository.getBookingListByUserAndActual(userId, false);
 
         for ( Booking booking : bookings){
             DepartureDate departureDate = departureDateRepository.getDepartureDateById(booking.getDepartureDateId());
             Tour tour = tourRepository.getTourById(departureDate.getTourId());
             departureDate.setTour(tour);
             booking.setDepartureDate(departureDate);
+            booking.setRecall(recallRepository.getRecallByUserAndDepartureDate(userId, booking.getDepartureDateId()));
         }
         return bookings;
     }
@@ -48,6 +62,12 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public int getBookingCountByTour(int tour_id) {
         return getBookingListByTour(tour_id).size();
+    }
+
+    @Override
+    public Booking getBoookingByUserAndTour(int userId, int tourId) {
+        Tour tour = tourRepository.getTourById(tourId);
+        return bookingRepository.getBookingByUserAndDepartureDate(userId, tour.getDepartureDateId());
     }
 
 }

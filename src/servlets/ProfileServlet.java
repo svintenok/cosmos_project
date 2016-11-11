@@ -1,12 +1,11 @@
 package servlets;
 
 import models.Booking;
+import models.Recall;
 import models.User;
-import services.BookingService;
-import services.BookingServiceImpl;
-import services.UserService;
-import services.UserServiceImpl;
+import services.*;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,15 +27,30 @@ import static helpers.Helper.render;
 public class ProfileServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
     BookingService bookingService = new BookingServiceImpl();
+    RecallService recallService = new RecallServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+
+        String login = (String) request.getSession().getAttribute("current_user");
+        User user = userService.getUser(login);
+
+        Recall recall = new Recall(
+                new Integer(request.getParameter("estimate")),
+                request.getParameter("recall"),
+                user.getId(),
+                new Integer(request.getParameter("departure_date")));
+
+        recallService.addRecall(recall);
+        response.sendRedirect("/profile?id=" + user.getId());
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> root = new HashMap<>();
         String login = (String) request.getSession().getAttribute("current_user");
-        root.put("current_user", userService.getUser(login));
+        if (login != null)
+            root.put("current_user", userService.getUser(login));
 
         if (request.getParameter("id") != null){
 

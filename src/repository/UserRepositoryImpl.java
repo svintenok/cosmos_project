@@ -85,7 +85,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User getUserByLogin(String login) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from \"user\" where login=?");
-            psmt.setString(1, login);
+            psmt.setString(1, login.toLowerCase());
 
             ResultSet rs = psmt.executeQuery();
             if (rs.next()) {

@@ -33,7 +33,7 @@
                                 </#if>
                             </div>
                             <div class="col-md-5">
-                                <img src="data\news_photo\${news.id}.jpg" width="100%">
+                                <img src="http://localhost:8080/files/news_photo/${news.id}.jpg" width="100%">
                             </div>
                         </div>
                     </li>

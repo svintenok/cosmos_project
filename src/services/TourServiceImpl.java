@@ -18,12 +18,14 @@ public class TourServiceImpl implements TourService{
     DepartureDateRepository departureDateRepository = new DepartureDateRepositoryImpl();
     RecallRepository recallRepository = new RecallRepositoryImpl();
     BookingService bookingService = new BookingServiceImpl();
+    RecallService recallService = new RecallServiceImpl();
 
 
     @Override
     public Tour getTourById(int id) {
         Tour tour = tourRepository.getTourById(id);
-        tour.setDepartureDate(departureDateRepository.getDepartureDateById(tour.getDepartureDateId()));
+        setTourAdditionalInfo(tour);
+        tour.setRecallList(recallService.getRecallListByTour(id));
         return tour;
     }
 
@@ -31,12 +33,16 @@ public class TourServiceImpl implements TourService{
     public List<Tour> getToursList(String sorting, boolean reverse, String search) {
         List<Tour> tours = tourRepository.getToursList(sorting, reverse, search);
         for (Tour tour : tours){
-            tour.setDepartureDate(departureDateRepository.getDepartureDateById(tour.getDepartureDateId()));
-            tour.setBookingCount(bookingService.getBookingCountByTour(tour.getId()));
-            int rating = recallRepository.getRatingByTour(tour.getId());
-            if (rating != -1)
-            tour.setRating(rating);
+            setTourAdditionalInfo(tour);
         }
         return tours;
+    }
+
+    private void setTourAdditionalInfo(Tour tour){
+        tour.setDepartureDate(departureDateRepository.getDepartureDateById(tour.getDepartureDateId()));
+        tour.setBookingCount(bookingService.getBookingCountByTour(tour.getId()));
+        double rating = recallRepository.getRatingByTour(tour.getId());
+        if (rating != -1)
+            tour.setRating(rating);
     }
 }

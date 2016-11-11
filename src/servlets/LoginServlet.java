@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             if (remember != null) {
                 String tokenString = getHash(new Date().toString());
-                System.out.println(tokenString);
 
                 Token token = new Token(user.getId(), tokenString);
                 tokenService.addToken(token);
@@ -54,7 +53,7 @@ public class LoginServlet extends HttpServlet {
             }
 
             session.setAttribute("current_user", login);
-            response.sendRedirect("/news");
+            response.sendRedirect("/profile?id=" + user.getId());
         }
         else {
             response.sendRedirect("/login?err=wrong_password_or_login&login=" + login);

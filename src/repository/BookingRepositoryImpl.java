@@ -18,12 +18,30 @@ public class BookingRepositoryImpl implements  BookingRepository {
 
     @Override
     public void addBooking(Booking booking) {
+        try {
 
+            PreparedStatement psmt = con.prepareStatement("INSERT into booking(user_id, departure_date_id) values(?, ?)");
+            psmt.setInt(1, booking.getUserId());
+            psmt.setInt(2, booking.getDepartureDateId());
+            psmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void removeBooking(Booking id) {
+    public void removeBooking(Booking booking) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("delete from booking where id=?");
 
+            psmt.setInt(1, booking.getId());
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -89,6 +107,30 @@ public class BookingRepositoryImpl implements  BookingRepository {
 
     @Override
     public Booking getBookingById(int id) {
+        return null;
+    }
+
+    @Override
+    public Booking getBookingByUserAndDepartureDate(int userId, int departureDateId) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("select * from booking where user_id=? and departure_date_id=?");
+
+            psmt.setInt(1, userId);
+            psmt.setInt(2, departureDateId);
+            ResultSet rs = psmt.executeQuery();
+
+            if (rs.next()) {
+                Booking booking = new Booking(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getInt("departure_date_id"));
+                return  booking;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

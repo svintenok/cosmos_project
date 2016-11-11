@@ -18,7 +18,18 @@ public class RecallRepositoryImpl implements RecallRepository {
 
     @Override
     public void addRecall(Recall recall) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("insert into recall (estimate, \"text\", user_id, departure_date_id, \"date\") values(?,?,?,?,'now')");
+            psmt.setInt(1, recall.getEstimate());
+            psmt.setString(2, recall.getText());
+            psmt.setInt(3, recall.getUserId());
+            psmt.setInt(4, recall.getDepartureDataId());
 
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -37,7 +48,7 @@ public class RecallRepositoryImpl implements RecallRepository {
     }
 
     @Override
-    public List<Recall> getRecallsByTour(int tourId) {
+    public List<Recall> getRecallListByTour(int tourId) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from recall " +
                     "join departure_date on departure_date.id=recall.departure_date_id where tour_id=?");
@@ -66,17 +77,16 @@ public class RecallRepositoryImpl implements RecallRepository {
     }
 
     @Override
-    public int getRatingByTour(int tourId) {
+    public double getRatingByTour(int tourId) {
         try {
             PreparedStatement psmt = con.prepareStatement("select avg(estimate) as rating from recall " +
                     "join departure_date on departure_date.id=recall.departure_date_id where tour_id=?");
 
             psmt.setInt(1, tourId);
             ResultSet rs = psmt.executeQuery();
-            List<Recall> recalls = new ArrayList<>();
 
             if (rs.next()) {
-                return rs.getInt("rating");
+                return rs.getDouble("rating");
             }
 
         } catch (SQLException e) {
@@ -88,6 +98,32 @@ public class RecallRepositoryImpl implements RecallRepository {
 
     @Override
     public Recall getRecallById(int id) {
+        return null;
+    }
+
+    @Override
+    public Recall getRecallByUserAndDepartureDate(int userId, int departureDateId) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("select * from recall where user_id=? and departure_date_id=?");
+
+            psmt.setInt(1, userId);
+            psmt.setInt(2, departureDateId);
+            ResultSet rs = psmt.executeQuery();
+
+            if (rs.next()) {
+                Recall recall = new Recall(
+                        rs.getInt("id"),
+                        rs.getInt("estimate"),
+                        rs.getString("text"),
+                        rs.getInt("user_id"),
+                        rs.getInt("departure_date_id"),
+                        rs.getTimestamp("date"));
+                return recall;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

@@ -18,6 +18,8 @@ public class Recall {
     private int departureDataId;
     private Timestamp date;
 
+    private User user;
+
     public Recall(int id, int estimate, String text, int userId, int departureDataId, Timestamp date) {
         this.id = id;
         this.estimate = estimate;
@@ -25,6 +27,13 @@ public class Recall {
         this.userId = userId;
         this.departureDataId = departureDataId;
         this.date = date;
+    }
+
+    public Recall(int estimate, String text, int userId, int departureDataId) {
+        this.estimate = estimate;
+        this.text = text;
+        this.userId = userId;
+        this.departureDataId = departureDataId;
     }
 
     public int getId() {
@@ -48,7 +57,15 @@ public class Recall {
     }
 
     public String getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return date.toLocalDateTime().format(formatter);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
