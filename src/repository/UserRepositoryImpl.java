@@ -93,8 +93,8 @@ public class UserRepositoryImpl implements UserRepository {
                         rs.getInt("id"),
                         rs.getString("login"),
                         rs.getString("password"),
-                        rs.getString("name"),
                         rs.getString("email"),
+                        rs.getString("name"),
                         rs.getString("country"),
                         rs.getBoolean("photo"),
                         rs.getInt("role_id")

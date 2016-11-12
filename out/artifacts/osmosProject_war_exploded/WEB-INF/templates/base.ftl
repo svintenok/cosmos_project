@@ -34,9 +34,9 @@
                     <li><br><h5>|</h5></li>
                     <li><a href="/news"><h5>Новости</h5></a></li>
                     <li><br><h5>|</h5></li>
-                    <li><a href="forum.html"><h5>Форум</h5></a></li>
+                    <li><a href="/forum"><h5>Форум</h5></a></li>
                     <li><br><h5>|</h5></li>
-                    <li><a href="about.html"><h5>О нас</h5></a></li>
+                    <li><a href="/about"><h5>О нас</h5></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                 <#if current_user??>

@@ -2,6 +2,7 @@ package services;
 
 import models.Role;
 import models.User;
+import repository.RoleRepository;
 import repository.RoleRepositoryImpl;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
  */
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository = new UserRepositoryImpl();
+    private RoleRepository roleRepository = new RoleRepositoryImpl();
 
 
     @Override
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public User getUser(int id) {
         User user = userRepository.getUserById(id);
         if (user != null) {
-            Role role = new RoleRepositoryImpl().getRoleById(user.getId());
+            Role role = roleRepository.getRoleById(user.getRoleId());
             user.setRole(role);
         }
         return user;
@@ -45,7 +47,7 @@ public class UserServiceImpl implements UserService {
     public User getUser(String login) {
         User user = userRepository.getUserByLogin(login);
         if (user != null) {
-            Role role = new RoleRepositoryImpl().getRoleById(user.getId());
+            Role role = roleRepository.getRoleById(user.getRoleId());
             user.setRole(role);
         }
         return user;

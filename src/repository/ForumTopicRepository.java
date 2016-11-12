@@ -15,6 +15,7 @@ public interface ForumTopicRepository {
     void removeForumTopic(int id);
     void updateForumTopic(ForumTopic forumTopic);
 
-    List<ForumTopic> getForumTopicsListByBlock(boolean isTechnical, int limit, int offset);
+    List<ForumTopic> getForumTopicsListByBlock(boolean isTechnical);
     ForumTopic getForumTopicById(int id);
+    ForumTopic getForumTopicByName(String name);
 }

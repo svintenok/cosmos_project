@@ -14,6 +14,8 @@ public interface TopicMessageRepository {
     void removeTopicMessage(int id);
     void updateTopicMessage(TopicMessage topicMessage);
 
-    List<TopicMessage> getTopicMessagesListByTopic(int topicId, int limit, int offset);
+    List<TopicMessage> getTopicMessagesListByTopic(int topicId);
     TopicMessage getTopicMessageById(int id);
+    int getMessagesCountByTopic(int topicId);
+    TopicMessage getLastTopicMessage(int topicId);
 }

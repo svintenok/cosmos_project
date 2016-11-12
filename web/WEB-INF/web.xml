@@ -107,7 +107,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ProfileSetting</servlet-name>
-        <url-pattern>/setting</url-pattern>
+        <url-pattern>/settings</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -157,6 +157,10 @@
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/bookings</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/settings</url-pattern>
     </filter-mapping>
 
 </web-app>

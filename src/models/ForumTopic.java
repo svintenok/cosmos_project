@@ -2,6 +2,7 @@ package models;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Author: Svintenok Kate
@@ -16,6 +17,10 @@ public class ForumTopic {
     private boolean isTechnical;
     private Timestamp date;
 
+    private int messagesCount;
+    private TopicMessage lastMessage;
+    private List<TopicMessage> topicMessages;
+
     public ForumTopic(int id, String name, int user_id, boolean is_tehnical, Timestamp date) {
         this.id = id;
         this.name = name;
@@ -24,6 +29,10 @@ public class ForumTopic {
         this.date = date;
     }
 
+    public ForumTopic(String name, int userId) {
+        this.name = name;
+        this.userId = userId;
+    }
 
     public boolean is_tehnical() {
         return isTechnical;
@@ -42,7 +51,35 @@ public class ForumTopic {
     }
 
     public String getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         return date.toLocalDateTime().format(formatter);
+    }
+
+    public void setTechnical(boolean technical) {
+        isTechnical = technical;
+    }
+
+    public int getMessagesCount() {
+        return messagesCount;
+    }
+
+    public void setMessagesCount(int messagesCount) {
+        this.messagesCount = messagesCount;
+    }
+
+    public TopicMessage getLastMessage() {
+        return lastMessage;
+    }
+
+    public void setLastMessage(TopicMessage lastMessage) {
+        this.lastMessage = lastMessage;
+    }
+
+    public List<TopicMessage> getTopicMessages() {
+        return topicMessages;
+    }
+
+    public void setTopicMessages(List<TopicMessage> topicMessages) {
+        this.topicMessages = topicMessages;
     }
 }

@@ -15,6 +15,7 @@ public class User {
     private String country;
     private boolean photo;
     private int roleId;
+
     private Role role;
 
     public User(int id, String login, String password, String email, String name, String country, boolean photo, int roleId) {
