@@ -18,5 +18,5 @@ public interface TourRepository {
 
     List<Tour> getToursList(String sorting, boolean reverse, String search);
     Tour getTourById(int id);
-
+    void updateTours();
 }

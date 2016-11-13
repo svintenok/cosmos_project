@@ -1,6 +1,7 @@
 package repository;
 
 import models.Tour;
+import org.postgresql.util.PGInterval;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -94,11 +95,42 @@ public class TourRepositoryImpl implements TourRepository {
                         rs.getInt("seats_number"),
                         rs.getInt("cost"));
                 return tour;
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void updateTours() {
+        try {
+            PreparedStatement psmt = con.prepareStatement("select * from tour " +
+                    "join departure_date on departure_date_id=departure_date.id where departure_date.date <'now'");
+            ResultSet rs = psmt.executeQuery();
+            while (rs.next()) {
+                int tourId = rs.getInt("id");
+                psmt = con.prepareStatement("insert into departure_date(tour_id, \"date\") " +
+                        "values(?, (select \"time_interval\" + \"date\" from tour " +
+                        "join departure_date on departure_date_id=departure_date.id where tour_id=?)) returning id");
+                psmt.setInt(1, tourId);
+                psmt.setInt(2, tourId);
+                psmt.execute();
+                ResultSet resultId = psmt.getResultSet();
+                psmt = con.prepareStatement("update tour set departure_date_id=? where id=?");
+                if (resultId.next()) {
+                    System.out.println();
+                    psmt.setInt(1, resultId.getInt("id"));
+                    psmt.setInt(2, tourId);
+                    psmt.executeUpdate();
+                }
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private String setOrder(String SQL, String sorting, boolean reverse){

@@ -3,6 +3,7 @@ package services;
 import models.DepartureDate;
 import models.Recall;
 import models.Tour;
+import models.UpdateDate;
 import repository.*;
 
 import java.util.List;
@@ -19,10 +20,12 @@ public class TourServiceImpl implements TourService{
     RecallRepository recallRepository = new RecallRepositoryImpl();
     BookingService bookingService = new BookingServiceImpl();
     RecallService recallService = new RecallServiceImpl();
+    UpdateDateRepository updateDateRepository = new UpdateDateRepositoryImpl();
 
 
     @Override
     public Tour getTourById(int id) {
+        updateTours();
         Tour tour = tourRepository.getTourById(id);
         setTourAdditionalInfo(tour);
         tour.setRecallList(recallService.getRecallListByTour(id));
@@ -31,11 +34,19 @@ public class TourServiceImpl implements TourService{
 
     @Override
     public List<Tour> getToursList(String sorting, boolean reverse, String search) {
+        updateTours();
         List<Tour> tours = tourRepository.getToursList(sorting, reverse, search);
         for (Tour tour : tours){
             setTourAdditionalInfo(tour);
         }
         return tours;
+    }
+
+    private void updateTours() {
+        if (!updateDateRepository.isUpdate()){
+            tourRepository.updateTours();
+            updateDateRepository.updateUpdateDate();
+        }
     }
 
     private void setTourAdditionalInfo(Tour tour){
