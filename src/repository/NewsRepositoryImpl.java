@@ -17,8 +17,25 @@ public class NewsRepositoryImpl implements NewsRepository {
     private Connection con = DBSingleton.getConnection();
 
     @Override
-    public void addNews(News news) {
+    public int addNews(News news) {
+        try {
+            Connection con = DBSingleton.getConnection();
 
+            PreparedStatement psmt = con.prepareStatement("insert into news(title, description, \"text\", \"date\") values(?,?,?,'now') returning id");
+            psmt.setString(1, news.getTitle());
+            psmt.setString(2, news.getDescription());
+            psmt.setString(3, news.getText());
+
+            psmt.execute();
+            ResultSet resultId = psmt.getResultSet();
+            if (resultId.next())
+                return resultId.getInt("id");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     @Override

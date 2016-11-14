@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface TourRepository {
 
-    void addTour(Tour tour);
+    int addTour(Tour tour, String date);
     void removeTour(int id);
     void updateTour(Tour  tour);
 

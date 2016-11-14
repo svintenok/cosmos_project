@@ -18,8 +18,44 @@ public class TourRepositoryImpl implements TourRepository {
     private Connection con = DBSingleton.getConnection();
 
     @Override
-    public void addTour(Tour tour) {
+    public int addTour(Tour tour, String date) {
+        try {
+            Connection con = DBSingleton.getConnection();
 
+            PreparedStatement psmt = con.prepareStatement(
+                    "insert into tour(title, place, rocket, description,  time_interval, seats_number, cost) " +
+                            "values(?,?,?,?,?,?,?) returning id");
+            psmt.setString(1, tour.getTitle());
+            psmt.setString(2, tour.getPlace());
+            psmt.setString(3, tour.getRocket());
+            psmt.setString(4, tour.getDescription());
+            psmt.setObject(5, tour.getInterval(), Types.OTHER);
+            psmt.setInt(6, tour.getSeatsNumber());
+            psmt.setInt(7, tour.getCost());
+
+            psmt.execute();
+            ResultSet resultId = psmt.getResultSet();
+            if (resultId.next()) {
+                int tourId = resultId.getInt("id");
+                psmt = con.prepareStatement(
+                        "insert into departure_date(tour_id, \"date\") values(?,  to_date(?, 'YYYY-MM-DD')) returning id");
+                psmt.setInt(1, tourId);
+                psmt.setObject(2, date);
+                psmt.execute();
+                resultId = psmt.getResultSet();
+                if (resultId.next()) {
+                    psmt = con.prepareStatement("update tour set departure_date_id=? where id=?");
+                    psmt.setInt(1, resultId.getInt("id"));
+                    psmt.setInt(2, tourId);
+                    psmt.executeUpdate();
+                }
+                return tourId;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     @Override

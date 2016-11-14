@@ -6,7 +6,11 @@ import singletons.ConfigSingleton;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -15,7 +19,7 @@ import java.util.HashMap;
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 public class Helper {
     public static void render(HttpServletResponse response,
@@ -56,6 +60,23 @@ public class Helper {
             e.printStackTrace();
         }
         return passwordHash;
+    }
+
+    public static void downloadPhoto(Part filePart, String fileName) throws IOException {
+        File file = new File("D:/repositories/cosmos_project_files/" + fileName + ".jpg");
+        file.createNewFile();
+        FileOutputStream out = new FileOutputStream(file);
+        InputStream filecontent = filePart.getInputStream();
+
+        int read = 0;
+        final byte[] bytes = new byte[1024];
+
+        while ((read = filecontent.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+
+        out.close();
+        filecontent.close();
     }
 
 }

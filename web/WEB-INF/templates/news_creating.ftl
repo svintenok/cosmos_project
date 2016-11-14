@@ -7,7 +7,7 @@
 
     <div class="row">
 
-        <form action="" id="f1" method="post" >
+        <form action="/news_creating" id="f1" method="post" enctype="multipart/form-data" >
 
 
             <h1 style="margin-top: 40px">Добавление новости</h1>
@@ -18,7 +18,7 @@
                     <h3>Название</h3>
                     <input type="text" name="title" id="name" required="" class="form-control"  value=""/>
                     <h3>Краткое описание</h3>
-                    <textarea name="description" id="about" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 233px; height: 160px;"></textarea>
+                    <textarea name="description" id="companyInfo" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 233px; height: 160px;"></textarea>
                 </div>
 
                 <div class="col-md-1"></div>
@@ -26,7 +26,7 @@
                 <div class="col-md-5">
 
                     <h3>Фотография</h3>
-                    <input type="file"  name="news_photo" id="file-field" class="image" />
+                    <input type="file" name="news_photo" id="file-field" class="image" />
                     <br>
                     <div id="photo_copy"></div>
 

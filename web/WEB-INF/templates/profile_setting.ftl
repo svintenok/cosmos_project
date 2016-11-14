@@ -13,23 +13,19 @@
     <div class="col-md-3 col-xs-1 col-sm-2" ></div>
     <div class="col-md-6 col-xs-10 col-sm-8">
 
-        <form action="" id="f1" method="post" >
-            <h3>Мой профиль</h3>
-            <h3>Изменить Имя</h3>
-            <input type="text" name="name" id="name" class="form-control" <#if current_user.name??>placeholder="${current_user.name}"</#if> style="color: black"/>
+        <form action="/settings" id="f1" method="post" enctype="multipart/form-data">
+            <h3 align="center">Мой профиль</h3>
+            <h3>Изменить имя</h3>
+            <input type="text" name="name" id="name" class="form-control" <#if current_user.name??>value="${current_user.name}"</#if> style="color: black"/>
             <h3>Изменить логин</h3>
-            <input type="text" name="login"  id="login" class="form-control" placeholder="${current_user.login}"  style="color: black"/>
-            <h3>Новый Пароль</h3>
-            <input type="password" name="password" id="password" class="form-control" style="color: black"/>
-            <h3>Подтвердите новый пароль</h3>
-            <input type="password" name="password_conf"  id="password_conf" class="form-control" style="color: black"/>
-            <h3>Изменить Mail</h3>
-            <input type="text" name="mail" id="mail" class="form-control" placeholder="${current_user.email}" style="color: black"/>
-            <h3>Изменить Страну</h3>
-            <input type="text" name="country" id="country" class="form-control" <#if current_user.country??>placeholder="${current_user.country}"</#if>  style="color: black"/>
+            <input type="text" name="login"  id="login" class="form-control" value="${current_user.login}"  style="color: black"/>
+            <h3>Изменить почту</h3>
+            <input type="text" name="email" id="mail" class="form-control" value="${current_user.email}" style="color: black"/>
+            <h3>Изменить страну</h3>
+            <input type="text" name="country" id="country" class="form-control" <#if current_user.country??>value="${current_user.country}"</#if>  style="color: black"/>
 
             <h3>Изменить фотографию</h3>
-            <input type="file"  name="my-pic" id="file-field" multiple="" class="image" style="color: black"/>
+            <input type="file" name="profile_photo" id="file-field" class="image" style="color: black"/>
             <br>
             <div id="photo_copy"></div>
 
@@ -55,10 +51,22 @@
                     reader.readAsDataURL(inputFile);
                 }
             </script>
-            <input type="submit" name="reg" id="reg" value="Сохранить" class="btn btn-primary custom-btn-primary" value=""/>
-            <br>
-            <p id="out"></p>
+            <button type="submit" name="reg" id="reg" class="btn btn-primary custom-btn-primary">Сохранить</button>
         </form>
+
+        <form action="/settings?password_change=true" id="f1" method="post" >
+        <h3 align="center">Изменение пароля</h3>
+            <h3>Cтарый пароль</h3>
+            <input type="password" name="old_password" id="password" class="form-control" style="color: black"/>
+            <h3>Новый пароль</h3>
+            <input type="password" name="new_password" id="password" class="form-control" style="color: black"/>
+            <h3>Подтвердите новый пароль</h3>
+            <input type="password" name="new_password_conf"  id="password_conf" class="form-control" style="color: black"/>
+
+            <button type="submit" name="reg" id="reg" class="btn btn-primary custom-btn-primary"/>Сохранить</button>
+        </form>
+
+        <p id="out"></p>
     </div>
     <div class="col-md-3 col-xs-1 col-sm-2"></div>
 </div>

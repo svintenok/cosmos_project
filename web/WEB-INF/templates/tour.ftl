@@ -30,12 +30,13 @@
      <div class="row"  style="margin-bottom: 40px">
 
             <div class="col-md-4">
-                <p class="gg" style="text-align: center">Дата вылета: ${tour.departureDate.date}</p>
+                <p class="gg" style="text-align: center">Дата вылета: <#if tour.departureDate??>${tour.departureDate.date}<#else>Рейс не планируется</#if></p>
             </div>
             <div class="col-md-3">
                 <p class="gg" style="text-align: center;">Мест осталось: ${tour.seatsNumber - tour.bookingCount} из ${tour.seatsNumber}</p>
             </div>
             <div class="col-md-1"></div>
+            <#if tour.departureDate??>
             <div class="col-md-4">
                 <#if user_booking??>
                 <button class="btn btn-default btn-lg" data-toggle="modal"  data-target="#BookingModal">Отменить бронирование</button>
@@ -43,8 +44,10 @@
                 <button class="btn btn-default btn-lg" data-toggle="modal"  data-target="#BookingModal">Забронировать</button>
                 </#if>
             </div>
+            </#if>
      </div>
 
+    <#if tour.departureDate??>
     <!-- Modal -->
     <div class="modal fade" id="BookingModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -76,8 +79,9 @@
             </div>
         </div>
     </div>
+    </#if>
 
-    <#if tour.rating??>
+    <#if tour.rating!=0>
     <div class="row">
         <div class="col-md-12"  style="margin-bottom: 40px">
             <div class="col-md-6">
@@ -85,7 +89,7 @@
                     <p class="col-md-6 hh">Оценка пользователей:</p>
                     <div class="col-md-5">
                         <div class="progress ff">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="${tour.rating}" aria-valuemin="0" aria-valuemax="5" style="width: ${tour.rating * 100 / 5}%;">
                                 ${tour.rating} из 5
                             </div>
                         </div>
@@ -95,6 +99,7 @@
         </div>
     </div>
     </#if>
+
 
     <div class="row">
         <div class="col-md-12">

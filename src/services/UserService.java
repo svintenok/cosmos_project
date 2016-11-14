@@ -13,8 +13,9 @@ import java.sql.SQLException;
  */
 public interface UserService {
 
-    void addUser(User user) throws SQLException;
-
+    void addUser(User user);
+    void updateUser(User user);
+    void updatePassword(int userId, String password);
     User getUser(int id);
     User getUser(String login, String password);
     User getUser(String login);

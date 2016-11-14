@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Author: Svintenok Kate
  * Date: 30.10.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 public class News {
 
@@ -21,10 +21,15 @@ public class News {
     public News(long id, String title, String description, String text, Timestamp date) {
         this.id = id;
         this.title = title;
-
         this.text = text;
         this.date = date;
         this.description = description;
+    }
+
+    public News(String title, String description, String text) {
+        this.title = title;
+        this.description = description;
+        this.text = text;
     }
 
     public long getId() {

@@ -8,7 +8,7 @@ import java.util.List;
  * Author: Svintenok Kate
  * Date: 03.11.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 public class ForumTopic {
     private int id;

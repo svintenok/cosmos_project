@@ -6,6 +6,7 @@ import models.Tour;
 import models.UpdateDate;
 import repository.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -22,6 +23,11 @@ public class TourServiceImpl implements TourService{
     RecallService recallService = new RecallServiceImpl();
     UpdateDateRepository updateDateRepository = new UpdateDateRepositoryImpl();
 
+
+    @Override
+    public int addTour(Tour tour, String date) {
+        return tourRepository.addTour(tour, date);
+    }
 
     @Override
     public Tour getTourById(int id) {

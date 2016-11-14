@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.sql.*;
 import java.util.HashMap;
 
+import static helpers.Helper.downloadPhoto;
 import static helpers.Helper.getHash;
 import static helpers.Helper.render;
 
@@ -28,44 +29,29 @@ import static helpers.Helper.render;
 @MultipartConfig
 @WebServlet(name = "RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
+    UserService userService = new UserServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("utf-8");
 
-        String login = request.getParameter("login").toLowerCase();
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String country = request.getParameter("country");
         Part filePart = request.getPart("profile_photo");
-
-        File file = new File("D:/repositories/cosmos_project_files/users_photo/" + login + ".jpg");
-        file.createNewFile();
-        FileOutputStream out = new FileOutputStream(file);
-        InputStream filecontent = filePart.getInputStream();
-
-        int read = 0;
-        final byte[] bytes = new byte[1024];
-
-        while ((read = filecontent.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
-        }
-
-        out.close();
-        filecontent.close();
-
-
-        UserService userService = new UserServiceImpl();
-
-        User user = new User(login, getHash(password), email, name, country, false);
-
+        boolean hasPhoto = false;
 
         if(userService.getUser(login) == null) {
-            try {
-                userService.addUser(user);
-            } catch (SQLException e) {
-                e.printStackTrace();
+
+            if (filePart != null) {
+
+                hasPhoto = true;
+                downloadPhoto(filePart, "users_photo/" + login);
             }
+
+            userService.addUser(new User(login, getHash(password), email, name, country, hasPhoto));
             response.sendRedirect("/login");
 
         }

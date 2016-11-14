@@ -64,7 +64,11 @@
                                 <p>Cообщений: ${topic.messagesCount}
                                     <#if topic.lastMessage??>
                                         , последнее сообщение: ${topic.lastMessage.date} от
-                                        <a href="/profile?id=${topic.lastMessage.userId}">${topic.lastMessage.user.login}</a>
+                                        <#if topic.lastMessage.user.role.role='admin'>
+                                            <a style="color:red;">администратор</a>
+                                        <#else>
+                                            <a href="/profile?id=${topic.lastMessage.userId}">${topic.lastMessage.user.login}</a>
+                                        </#if>
                                     </#if></p>
                             </div>
                         </div>
@@ -86,7 +90,11 @@
                                     <p>Cообщений: ${topic.messagesCount}
                                         <#if topic.lastMessage??>
                                             , последнее сообщение: ${topic.lastMessage.date} от
-                                            <a href="/profile?id=${topic.lastMessage.userId}">${topic.lastMessage.user.login}</a>
+                                            <#if topic.lastMessage.user.role.role='admin'>
+                                                <a style="color:red;">администратор</a>
+                                            <#else>
+                                                <a href="/profile?id=${topic.lastMessage.userId}">${topic.lastMessage.user.login}</a>
+                                            </#if>
                                         </#if></p>
                                 </div>
                             </div>

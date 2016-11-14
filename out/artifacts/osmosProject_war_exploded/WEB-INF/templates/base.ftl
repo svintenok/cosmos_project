@@ -12,7 +12,7 @@
 
     <@style/>
 
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="static/jquery/jquery-3.1.1.js"></script>
 
 </head>
 
@@ -60,7 +60,6 @@
 
 </body>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="static/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="static/bootstrap/js/bootstrap.js"></script>
 
 </html>

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface NewsService {
 
-    void addNews(News news);
+    int addNews(News news);
 
     News getNewsById(int id);
     List<News> getNewsList();

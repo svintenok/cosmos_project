@@ -37,7 +37,7 @@ public class NewsServlet extends HttpServlet {
 
         if (request.getParameter("id") != null) {
 
-            String login = ((String) request.getSession().getAttribute("current_user")).toLowerCase();
+            String login = (String) request.getSession().getAttribute("current_user");
             String text = request.getParameter("comment");
             Integer news_id = new Integer(request.getParameter("id"));
 

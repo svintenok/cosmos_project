@@ -1,5 +1,7 @@
 package servlets;
 
+import services.CompanyInfoService;
+import services.CompanyInfoServiceImpl;
 import services.UserService;
 import services.UserServiceImpl;
 
@@ -19,9 +21,10 @@ import static helpers.Helper.render;
  * Group: 11-501
  * Task: semester project
  */
-@WebServlet(name = "AboutServlet")
-public class AboutServlet extends HttpServlet {
+@WebServlet(name = "CompanyInfoServlet")
+public class CompanyInfoServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
+    CompanyInfoService companyInfoService = new CompanyInfoServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -33,6 +36,8 @@ public class AboutServlet extends HttpServlet {
         if (login != null)
             root.put("current_user", userService.getUser(login));
 
-        render(response, request, "about.ftl", root);
+        root.put("company_info", companyInfoService.getCompanyInfo());
+
+        render(response, request, "company_info.ftl", root);
     }
 }

@@ -32,9 +32,9 @@
         <div class="col-md-1"></div>
 
         <div class="col-md-7" style="margin-top: 10px">
-            <#if travels?has_content>
             <ul>
                 <p class="kk">История путешествий</p>
+                <#if travels?has_content>
                 <#list travels as travel>
                     <li class="list-group-item">
                         <div class="row">
@@ -112,8 +112,10 @@
                         </div>
                     </div>
                 </#list>
+                <#else>
+                    <p> Путешествий еще нет</p>
+                </#if>
             </ul>
-            </#if>
             <#if current_user??><#if current_user.login == user.login>
             <a href="/bookings" class="btn btn-primary btn-lg" style="margin-top: 30px; margin-left: 41px; color:white;">
                 <span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>Мои бронирования</a>

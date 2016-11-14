@@ -6,15 +6,30 @@
 
     <div class="container">
 
-        <ul class="pager">
-            <li class="previous" ><a href="#" style="font-size: 20px;">&larr; Предыдущая</a></li>
-            <li class="next"><a href="#" style="font-size: 20px;">Следующая &rarr;</a></li>
-        </ul>
+        <div class="row"  style="margin-top: 30px;">
+
+            <div class="col-md-8">
+            <#if current_user??><#if current_user.role.role = "admin">
+                <button type="button" class="btn btn-primary" style="margin-top: 15px;">
+                    <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>
+                    <a href="/news_creating" style="color: white; font-size: 20px">Добавить новость</a></button>
+            </#if></#if>
+            </div>
+
+            <div class="col-md-4">
+                <ul class="pager" style="float: right;">
+                    <li ><a href="#" style="font-size: 20px;">&larr; Предыдущая</a></li>
+                    <li ><a href="#" style="font-size: 20px;">Следующая &rarr;</a></li>
+                </ul>
+            </div>
+
+        </div>
+
 
         <div class="row">
 
 
-            <div style="padding-top: 40px; margin-bottom: 100px">
+            <div style="padding-top: 20px; margin-bottom: 100px">
                 <ul class ="list-group">
 
 
@@ -122,6 +137,7 @@
     a{
         font-size: 40px;
         color: black;
+        font-family: "Chiller";
     }
     a:hover{
         color:grey;

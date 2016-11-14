@@ -1,18 +1,24 @@
 package servlets;
 
+import models.News;
+import services.NewsService;
+import services.NewsServiceImpl;
 import singletons.DBSingleton;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import static helpers.Helper.downloadPhoto;
 import static helpers.Helper.render;
 
 /**
@@ -21,37 +27,28 @@ import static helpers.Helper.render;
  * Group: 11-501
  * Task: semester project
  */
+@MultipartConfig
 @WebServlet(name = "NewsCreatingServlet")
 public class NewsCreatingServlet extends HttpServlet {
+    NewsService newsService = new NewsServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("utf-8");
 
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String text = request.getParameter("text");
+        int id = newsService.addNews(new News(
+                    request.getParameter("title"),
+                    request.getParameter("description"),
+                    request.getParameter("text")));
 
-        try {
-            Connection con = DBSingleton.getConnection();
+        Part filePart = request.getPart("news_photo");
+        downloadPhoto(filePart, "news_photo/" + id);
 
-            PreparedStatement psmt = con.prepareStatement("insert into news(title, short_description, \"text\", \"date\") values(?,?,?,'now')");
-            psmt.setString(1, title);
-            psmt.setString(2, description);
-            psmt.setString(3, text);
-
-            psmt.executeUpdate();
-            response.sendRedirect("/news");
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        response.sendRedirect("/news?id=" + id);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HashMap<String, Object> root = new HashMap<>();
-        String login = (String) request.getSession().getAttribute("current_user");
-        root.put("login", login);
-        render(response, request, "news_creating.ftl", root);
+
+        render(response, request, "news_creating.ftl", null);
     }
 }

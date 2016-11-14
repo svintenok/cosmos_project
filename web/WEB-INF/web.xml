@@ -120,11 +120,20 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>About</servlet-name>
-        <servlet-class>servlets.AboutServlet</servlet-class>
+        <servlet-name>TourCreating</servlet-name>
+        <servlet-class>servlets.TourCreatingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>About</servlet-name>
+        <servlet-name>TourCreating</servlet-name>
+        <url-pattern>/tour_creating</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CompanyInfo</servlet-name>
+        <servlet-class>servlets.CompanyInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompanyInfo</servlet-name>
         <url-pattern>/about</url-pattern>
     </servlet-mapping>
 
@@ -163,4 +172,16 @@
         <url-pattern>/settings</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>filters.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/news_creating</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/tour_creating</url-pattern>
+    </filter-mapping>
 </web-app>

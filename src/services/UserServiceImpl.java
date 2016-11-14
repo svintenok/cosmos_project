@@ -21,8 +21,20 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void addUser(User user) throws SQLException {
+    public void addUser(User user) {
         userRepository.addUser(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+    }
+
+    @Override
+    public void updatePassword(int userId, String password) {
+        User user = userRepository.getUserById(userId);
+        user.setPassword(password);
+        userRepository.updateUser(user);
     }
 
     @Override

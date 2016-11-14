@@ -24,14 +24,14 @@ public class UserRepositoryImpl implements UserRepository {
     public void addUser(User user) {
         try {
             PreparedStatement psmt = con.prepareStatement("insert into \"user\"(login, password, email, \"name\", country, photo) values(?,?,?,?,?,?)");
-                psmt.setString(1, user.getLogin());
-                psmt.setString(2, user.getPassword());
-                psmt.setString(3, user.getEmail());
-                psmt.setString(4, user.getName());
-                psmt.setString(5, user.getCountry());
-                psmt.setBoolean(6, user.getPhoto());
+            psmt.setString(1, user.getLogin());
+            psmt.setString(2, user.getPassword());
+            psmt.setString(3, user.getEmail());
+            psmt.setString(4, user.getName());
+            psmt.setString(5, user.getCountry());
+            psmt.setBoolean(6, user.getPhoto());
 
-                psmt.executeUpdate();
+            psmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,6 +45,23 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void updateUser(User user) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("update \"user\" " +
+                    "set login=?, password=?, email=?, \"name\"=?, country=?, photo=? where id = ?");
+
+            psmt.setString(1, user.getLogin());
+            psmt.setString(2, user.getPassword());
+            psmt.setString(3, user.getEmail());
+            psmt.setString(4, user.getName());
+            psmt.setString(5, user.getCountry());
+            psmt.setBoolean(6, user.getPhoto());
+            psmt.setInt(7, user.getId());
+
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

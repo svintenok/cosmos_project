@@ -39,9 +39,11 @@ public class ForumServiceImpl implements ForumService {
         List<ForumTopic> forumTopics = forumTopicRepository.getForumTopicsListByBlock(isTechical);
         for (ForumTopic forumTopic : forumTopics){
             forumTopic.setMessagesCount(topicMessageRepository.getMessagesCountByTopic(forumTopic.getId()));
-            TopicMessage topicMessage = topicMessageRepository.getLastTopicMessage(forumTopic.getId());
-            topicMessage.setUser(userService.getUser(topicMessage.getUserId()));
-            forumTopic.setLastMessage(topicMessage);
+            TopicMessage lastTopicMessage = topicMessageRepository.getLastTopicMessage(forumTopic.getId());
+            if (lastTopicMessage != null) {
+                lastTopicMessage.setUser(userService.getUser(lastTopicMessage.getUserId()));
+                forumTopic.setLastMessage(lastTopicMessage);
+            }
         }
         return forumTopics;
     }

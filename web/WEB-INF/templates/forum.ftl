@@ -4,19 +4,29 @@
 <#macro content>
 <div class="container">
 
-    <div class="row">
+    <div class="row" style="padding-top: 40px">
+        <div class="col-md-6">
 
-        <div style="padding-top: 40px">
-            <h3 style="text-align: center">${topic.name}</h3>
+            <div>
+                <h3 style="text-align: center">${topic.name}</h3>
+            </div>
+            <br/>
         </div>
-        <br/>
+        <div class="col-md-6">
+            <ul class="pager" style="float: right;">
+                <li><a href="#" style="font-size: 18px; color: black">&larr; Предыдущая</a></li>
+                <li><a href="#" style="font-size: 18px; color: black">Следующая &rarr;</a></li>
+            </ul>
+        </div>
+    </div>
 
+    <div class="row">
         <div class="col-md-12">
             <ul class ="list-group">
                 <#list messages as message>
                 <li class ="list-group-item">
                     <#if message.user.role.role='admin'>
-                        <a style="font-size: 20px; font-color:red;">Администратор</a>
+                        <a style="font-size: 20px; color:red;">администратор</a>
                     <#else>
                         <a href="/profile?id=${message.userId}" style="font-size: 20px">${message.user.login}</a>
                     </#if>
@@ -27,7 +37,6 @@
                 </#list>
             </ul>
         </div>
-
     </div>
 
 

@@ -2,6 +2,7 @@ package models;
 
 import org.postgresql.util.PGInterval;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Author: Svintenok Kate
  * Date: 03.11.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 
 public class Tour {
@@ -39,6 +40,16 @@ public class Tour {
         this.interval = (PGInterval) interval;
         this.seatsNumber = seatsNumber;
         this.cost= cost;
+    }
+
+    public Tour(String title, String place, String rocket, String description, PGInterval interval, int seatsNumber, int cost) {
+        this.title = title;
+        this.place = place;
+        this.rocket = rocket;
+        this.description = description;
+        this.interval = interval;
+        this.seatsNumber = seatsNumber;
+        this.cost = cost;
     }
 
     public int getId() {

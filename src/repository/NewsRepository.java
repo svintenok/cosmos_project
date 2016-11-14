@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface NewsRepository {
-    void addNews(News news);
+    int addNews(News news);
     void removeNews(int id);
     void updateNews(News news);
 

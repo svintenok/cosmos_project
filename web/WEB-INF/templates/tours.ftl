@@ -6,6 +6,14 @@
 
 <div class="container">
 
+    <#if current_user??><#if current_user.role.role = "admin">
+        <div style="padding-top: 10px">
+            <button type="button" class="btn btn-primary" style="margin-top: 30px;">
+                <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>
+                <a href="/tour_creating" style="color: white; font-size: 20px">Добавить тур</a></button>
+        </div>
+    </#if></#if>
+
     <div class="row">
 
     <div class="row">
@@ -55,9 +63,9 @@
 
     </div>
 
-    <div class="col-md-4" style="float: right">
+    <div class="col-md-4">
 
-        <ul class="pager">
+        <ul class="pager" style="float: right;">
             <li ><a href="#" style="font-size: 20px;">&larr; Предыдущая</a></li>
             <li ><a href="#" style="font-size: 20px;">Следующая &rarr;</a></li>
         </ul>
@@ -68,6 +76,7 @@
         <div style="padding-top: 20px">
             <ul class ="list-group">
             <#list tours as tour>
+                <#if tour.departureDate??>
                 <li class ="list-group-item">
                     <div class="row">
                         <div class="col-md-9">
@@ -80,14 +89,16 @@
                                     <h5 style="color: black;"><b>Дата вылета: </b>${tour.departureDate.date}</h5>
                                     <h5 style="color: black;"><b>Стоимость: </b>${tour.cost}</h5>
                                     <h5 style="color: black;"><b>Мест осталось: </b>${tour.seatsNumber - tour.bookingCount} из ${tour.seatsNumber}</h5>
+                                <#if tour.rating != 0>
                                     <h5 style="color: black;"><b>Рейтинг: </b></h5>
-                                 <#if tour.rating??>
                                     <div class="progress ff col-md-6">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="${tour.rating}" aria-valuemin="0" aria-valuemax="5" style="width: ${tour.rating * 100 / 5}%;">
                                             ${tour.rating} из 5
                                         </div>
                                     </div>
-                                 </#if>
+                                <#else>
+                                    <h5 style="color: black;"><b>Рейтинг: </b> Тур еще никто не оценил</h5>
+                                </#if>
 
                                  </div>
                              </div>
@@ -97,6 +108,7 @@
                         </div>
                     </div>
                 </li>
+                </#if>
             </#list>
             </ul>
         </div>

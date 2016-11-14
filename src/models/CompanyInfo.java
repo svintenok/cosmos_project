@@ -4,33 +4,27 @@ package models;
  * Author: Svintenok Kate
  * Date: 03.11.2016
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
-public class About {
-    private int id;
+public class CompanyInfo {
     private String text;
-    private String phoneNumber;
+    private String phone;
     private String address;
     private String email;
 
-    public About(String text, String phone_number, String address, String email, int id) {
+    public CompanyInfo(String text, String phone, String address, String email) {
         this.text = text;
-        this.phoneNumber = phone_number;
+        this.phone = phone;
         this.address = address;
         this.email = email;
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getText() {
         return text;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
     public String getAddress() {

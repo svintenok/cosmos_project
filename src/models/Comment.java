@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Author: Svintenok Kate
  * Date: ${DATE}
  * Group: 11-501
- * Task:
+ * Task: semester project
  */
 public class Comment {
     private int id;

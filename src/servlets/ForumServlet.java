@@ -33,10 +33,10 @@ public class ForumServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         String login = ((String) request.getSession().getAttribute("current_user"));
-        Integer id = new Integer(request.getParameter("id"));
+        String topicId = request.getParameter("id");
 
-        if (request.getParameter("id") != null) {
-            String text = request.getParameter("text");
+        if (topicId != null) {
+            Integer id = new Integer(topicId);
             forumService.addTopicMessage(new TopicMessage(
                     id,
                     userService.getUser(login).getId(),
