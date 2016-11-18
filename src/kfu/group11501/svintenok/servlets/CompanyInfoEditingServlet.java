@@ -45,6 +45,6 @@ public class CompanyInfoEditingServlet extends HttpServlet {
         root.put("current_user", userService.getUser(login));
         root.put("company_info", companyInfoService.getCompanyInfo());
 
-        render(response, request, "company_info_editing.ftl", root);
+        render(response, request, "company_info_edit.ftl", root);
     }
 }
