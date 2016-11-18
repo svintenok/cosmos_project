@@ -9,9 +9,7 @@
         <div class="col-md-8 col-md-offset-2">
 
         <form action="/tour_creating" id="f1" method="post" enctype="multipart/form-data" >
-
-
-            <h1 style="margin-top: 40px">Добавление тура</h1>
+            
             <h3>Название</h3>
             <input type="text" name="title" required="" class="form-control"/>
             <h3>Место</h3>
@@ -23,7 +21,49 @@
             <h3>Дата вылета</h3>
             <input type="date" name="date" required="" class="form-control"/>
             <h3>Интервал</h3>
-            <input type="text" name="interval" required="" class="form-control"/>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="not-repeat" name="not-repeat" value="true"> не повторять рейс
+                </label>
+            </div>
+            <div class="row" style="margin: 20px;" id="interval">
+                <div class="col-md-4">
+                    <div class="form-group" >
+                        <label for="inputYears" class="col-md-4 control-label">Годы:</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="years_interval">
+                                <#list 0..20 as i>
+                                <option>${i}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputMonths" class="col-md-4 control-label">Месяцы:</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="months_interval">
+                                <#list 0..11 as i>
+                                    <option>${i}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#not-repeat').click(function(){
+                        if ($(this).is(":checked"))
+                            $("#interval").hide();
+                        else
+                            $("#interval").show();
+                    });
+                });
+            </script>
             <h3>Количество мест</h3>
             <input type="text" name="seats_number" required="" class="form-control"/>
 

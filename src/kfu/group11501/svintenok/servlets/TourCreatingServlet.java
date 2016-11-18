@@ -1,5 +1,6 @@
 package kfu.group11501.svintenok.servlets;
 
+import kfu.group11501.svintenok.models.Interval;
 import kfu.group11501.svintenok.models.Tour;
 import org.postgresql.util.PGInterval;
 import kfu.group11501.svintenok.services.TourService;
@@ -33,12 +34,12 @@ public class TourCreatingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 
-        PGInterval interval = null;
-        try {
-            interval = new PGInterval("0 years " + request.getParameter("interval") + " mons 0 days 0 hours 0 mins 0.00 secs");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Interval interval = null;
+
+        if (request.getParameter("not-repeat") == null)
+            interval = new Interval(new Integer(request.getParameter("years_interval")),
+                    new Integer(request.getParameter("months_interval")));
+
 
         int id = tourService.addTour(new Tour(
                 request.getParameter("title"),

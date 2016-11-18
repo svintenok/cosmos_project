@@ -1,8 +1,10 @@
 package kfu.group11501.svintenok.repositories.impl;
 
+import kfu.group11501.svintenok.models.Interval;
 import kfu.group11501.svintenok.models.Tour;
 import kfu.group11501.svintenok.repositories.TourRepository;
 import kfu.group11501.svintenok.singletons.DBSingleton;
+import org.postgresql.util.PGInterval;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class TourRepositoryImpl implements TourRepository {
     public int addTour(Tour tour, String date) {
         try {
             Connection con = DBSingleton.getConnection();
+            PGInterval interval = null;
+            if (tour.getInterval() != null)
+                interval = tour.getInterval().getInterval();
 
             PreparedStatement psmt = con.prepareStatement(
                     "insert into tour(title, place, rocket, description,  time_interval, seats_number, cost) " +
@@ -29,7 +34,7 @@ public class TourRepositoryImpl implements TourRepository {
             psmt.setString(2, tour.getPlace());
             psmt.setString(3, tour.getRocket());
             psmt.setString(4, tour.getDescription());
-            psmt.setObject(5, tour.getInterval(), Types.OTHER);
+            psmt.setObject(5, interval, Types.OTHER);
             psmt.setInt(6, tour.getSeatsNumber());
             psmt.setInt(7, tour.getCost());
 
@@ -94,6 +99,10 @@ public class TourRepositoryImpl implements TourRepository {
             List<Tour> tours = new ArrayList<>();
 
             while (rs.next()) {
+                Interval interval = null;
+                PGInterval pgInterval = (PGInterval) rs.getObject("time_interval");
+                if ( rs.getObject("time_interval") != null)
+                    interval = new Interval(pgInterval);
                 Tour tour = new Tour(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -101,7 +110,7 @@ public class TourRepositoryImpl implements TourRepository {
                         rs.getString("rocket"),
                         rs.getString("description"),
                         rs.getInt("departure_date_id"),
-                        rs.getObject("time_interval"),
+                        interval,
                         rs.getInt("seats_number"),
                         rs.getInt("cost"));
                 tours.add(tour);
@@ -122,6 +131,11 @@ public class TourRepositoryImpl implements TourRepository {
             ResultSet rs = psmt.executeQuery();
 
             if (rs.next()) {
+                Interval interval = null;
+                PGInterval pgInterval = (PGInterval) rs.getObject("time_interval");
+                if ( rs.getObject("time_interval") != null)
+                    interval = new Interval(pgInterval);
+
                 Tour tour = new Tour(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -129,7 +143,7 @@ public class TourRepositoryImpl implements TourRepository {
                         rs.getString("rocket"),
                         rs.getString("description"),
                         rs.getInt("departure_date_id"),
-                        rs.getObject("time_interval"),
+                        interval,
                         rs.getInt("seats_number"),
                         rs.getInt("cost"));
                 return tour;
@@ -158,7 +172,6 @@ public class TourRepositoryImpl implements TourRepository {
                 ResultSet resultId = psmt.getResultSet();
                 psmt = con.prepareStatement("update tour set departure_date_id=? where id=?");
                 if (resultId.next()) {
-                    System.out.println();
                     psmt.setInt(1, resultId.getInt("id"));
                     psmt.setInt(2, tourId);
                     psmt.executeUpdate();

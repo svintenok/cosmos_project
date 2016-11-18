@@ -1,7 +1,5 @@
 package kfu.group11501.svintenok.models;
 
-import org.postgresql.util.PGInterval;
-
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ public class Tour {
     private String rocket;
     private String description;
     private int departureDateId;
-    private PGInterval interval;
+    private Interval interval;
     private int seatsNumber;
     private int cost;
 
@@ -27,19 +25,19 @@ public class Tour {
     private double rating;
     private List<Recall> recallList;
 
-    public Tour(int id, String title, String place, String rocket, String description, int departureDateId, Object interval, int seatsNumber, int cost) {
+    public Tour(int id, String title, String place, String rocket, String description, int departureDateId, Interval interval, int seatsNumber, int cost) {
         this.id = id;
         this.title = title;
         this.place = place;
         this.rocket = rocket;
         this.description = description;
         this.departureDateId = departureDateId;
-        this.interval = (PGInterval) interval;
+        this.interval = interval;
         this.seatsNumber = seatsNumber;
         this.cost= cost;
     }
 
-    public Tour(String title, String place, String rocket, String description, PGInterval interval, int seatsNumber, int cost) {
+    public Tour(String title, String place, String rocket, String description, Interval interval, int seatsNumber, int cost) {
         this.title = title;
         this.place = place;
         this.rocket = rocket;
@@ -71,7 +69,7 @@ public class Tour {
 
     public int getDepartureDateId() { return departureDateId; }
 
-    public PGInterval getInterval() {
+    public Interval getInterval() {
         return interval;
     }
 

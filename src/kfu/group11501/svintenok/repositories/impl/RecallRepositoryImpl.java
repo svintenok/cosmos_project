@@ -52,7 +52,7 @@ public class RecallRepositoryImpl implements RecallRepository {
     public List<Recall> getRecallListByTour(int tourId) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from recall " +
-                    "join departure_date on departure_date.id=recall.departure_date_id where tour_id=? ORDER BY \"date\" desc");
+                    "join departure_date on departure_date.id=recall.departure_date_id where tour_id=? ORDER BY recall.\"date\" desc");
 
             psmt.setInt(1, tourId);
             ResultSet rs = psmt.executeQuery();

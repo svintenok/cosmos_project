@@ -15,6 +15,9 @@
             <h5 style="color: black;"><b>Место: </b>${tour.place}</h5>
             <h5 style="color: black;"><b>Ракета: </b>${tour.rocket}</h5>
             <h5 style="color: black;"><b>Стоимость: </b>${tour.cost}</h5>
+            <#if current_user??><#if current_user.role.role="admin"><#if tour.interval??>
+            <h5 style="color: black;"><b>Интервал: </b>${tour.interval}</h5>
+            </#if></#if></#if>
             <hr/>
 
             <p style="font-size: 20px">${tour.description}</p>
