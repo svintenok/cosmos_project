@@ -8,7 +8,7 @@
 
     <filter>
         <filter-name>CookieFilter</filter-name>
-        <filter-class>filters.CookieFilter</filter-class>
+        <filter-class>kfu.group11501.svintenok.filters.CookieFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CookieFilter</filter-name>
@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>ErrorHandler</servlet-name>
-        <servlet-class>servlets.ErrorHandler</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.ErrorHandler</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ErrorHandler</servlet-name>
@@ -30,7 +30,7 @@
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -40,7 +40,7 @@
 
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>servlets.LogoutServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -49,7 +49,7 @@
 
     <servlet>
         <servlet-name>Registration</servlet-name>
-        <servlet-class>servlets.RegistrationServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.RegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
@@ -58,7 +58,7 @@
 
     <servlet>
         <servlet-name>News</servlet-name>
-        <servlet-class>servlets.NewsServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.NewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>News</servlet-name>
@@ -67,7 +67,7 @@
 
     <servlet>
         <servlet-name>NewsCreating</servlet-name>
-        <servlet-class>servlets.NewsCreatingServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.NewsCreatingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewsCreating</servlet-name>
@@ -76,7 +76,7 @@
 
     <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>servlets.ProfileServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.ProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
@@ -85,7 +85,7 @@
 
     <servlet>
         <servlet-name>Bookings</servlet-name>
-        <servlet-class>servlets.BookingsServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.BookingsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Bookings</servlet-name>
@@ -94,7 +94,7 @@
 
     <servlet>
         <servlet-name>Forum</servlet-name>
-        <servlet-class>servlets.ForumServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.ForumServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Forum</servlet-name>
@@ -103,7 +103,7 @@
 
     <servlet>
         <servlet-name>ProfileSetting</servlet-name>
-        <servlet-class>servlets.ProfileSettingServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.ProfileSettingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProfileSetting</servlet-name>
@@ -112,7 +112,7 @@
 
     <servlet>
         <servlet-name>Tours</servlet-name>
-        <servlet-class>servlets.ToursServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.ToursServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Tours</servlet-name>
@@ -121,7 +121,7 @@
 
     <servlet>
         <servlet-name>TourCreating</servlet-name>
-        <servlet-class>servlets.TourCreatingServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.TourCreatingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TourCreating</servlet-name>
@@ -130,7 +130,7 @@
 
     <servlet>
         <servlet-name>CompanyInfo</servlet-name>
-        <servlet-class>servlets.CompanyInfoServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.CompanyInfoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CompanyInfo</servlet-name>
@@ -139,7 +139,7 @@
 
     <servlet>
         <servlet-name>Files</servlet-name>
-        <servlet-class>servlets.FileServlet</servlet-class>
+        <servlet-class>kfu.group11501.svintenok.servlets.FileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Files</servlet-name>
@@ -148,7 +148,7 @@
 
     <filter>
         <filter-name>UnauthFilter</filter-name>
-        <filter-class>filters.UnauthFilter</filter-class>
+        <filter-class>kfu.group11501.svintenok.filters.UnauthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>UnauthFilter</filter-name>
@@ -161,7 +161,7 @@
 
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>filters.AuthFilter</filter-class>
+        <filter-class>kfu.group11501.svintenok.filters.AuthFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
@@ -174,7 +174,7 @@
 
     <filter>
         <filter-name>AdminFilter</filter-name>
-        <filter-class>filters.AdminFilter</filter-class>
+        <filter-class>kfu.group11501.svintenok.filters.AdminFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
