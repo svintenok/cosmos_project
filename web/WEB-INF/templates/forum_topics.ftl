@@ -192,6 +192,7 @@
 
         a:hover{
             color:grey;
+            font-family: "Chiller";
         }
 
         h3{

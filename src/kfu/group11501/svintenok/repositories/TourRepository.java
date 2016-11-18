@@ -13,7 +13,6 @@ import java.util.List;
 public interface TourRepository {
 
     int addTour(Tour tour, String date);
-    void removeTour(int id);
     void updateTour(Tour  tour);
 
     List<Tour> getToursList(String sorting, boolean reverse, String search, int page, int limit);

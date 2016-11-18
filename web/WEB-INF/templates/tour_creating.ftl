@@ -8,18 +8,25 @@
 
         <div class="col-md-8 col-md-offset-2">
 
-        <form action="/tour_creating" id="f1" method="post" enctype="multipart/form-data" >
-            
+        <form <#if tour??>action="/tour_editing?id=${tour.id}"<#else>action="/tour_creating"</#if> id="f1" method="post" enctype="multipart/form-data" >
+            <#if tour??>
+                <h1 style="margin-top: 40px">Изменение тура</h1>
+            <#else>
+                <h1 style="margin-top: 40px">Добавление тура</h1>
+            </#if>
+
             <h3>Название</h3>
-            <input type="text" name="title" required="" class="form-control"/>
+            <input type="text" name="title" required="" class="form-control" <#if tour??>value="${tour.title}"</#if>/>
             <h3>Место</h3>
-            <input type="text" name="place" required="" class="form-control"/>
+            <input type="text" name="place" required="" class="form-control" <#if tour??>value="${tour.place}"</#if>/>
             <h3>Ракета</h3>
-            <input type="text" name="rocket" required="" class="form-control"/>
+            <input type="text" name="rocket" required="" class="form-control" <#if tour??>value="${tour.rocket}"</#if>/>
             <h3>Стоимость</h3>
-            <input type="text" name="cost" required="" class="form-control"/>
+            <input type="text" name="cost" required="" class="form-control" <#if tour??>value="${tour.cost}"</#if>/>
+            <#if !tour??>
             <h3>Дата вылета</h3>
             <input type="date" name="date" required="" class="form-control"/>
+            </#if>
             <h3>Интервал</h3>
 
             <div class="checkbox">
@@ -34,7 +41,7 @@
                         <div class="col-md-8">
                             <select class="form-control" name="years_interval">
                                 <#list 0..20 as i>
-                                <option>${i}</option>
+                                <option value="${i}" <#if tour??><#if tour.interval??><#if tour.interval.years=i> selected="selected" </#if></#if></#if>>${i}</option>
                                 </#list>
                             </select>
                         </div>
@@ -46,7 +53,7 @@
                         <div class="col-md-8">
                             <select class="form-control" name="months_interval">
                                 <#list 0..11 as i>
-                                    <option>${i}</option>
+                                    <option value="${i}" <#if tour??><#if tour.interval??><#if tour.interval.months=i> selected="selected" </#if></#if></#if>>${i}</option>
                                 </#list>
                             </select>
                         </div>
@@ -65,9 +72,13 @@
                 });
             </script>
             <h3>Количество мест</h3>
-            <input type="text" name="seats_number" required="" class="form-control"/>
+            <input type="text" name="seats_number" required="" class="form-control" <#if tour??>value="${tour.seatsNumber}"</#if>/>
 
-            <h3>Фотография</h3>
+            <#if tour??>
+                <h3>Изменить фотографию</h3>
+            <#else>
+                <h3>Фотография</h3>
+            </#if>
             <input type="file" name="tour_photo" id="file-field" class="image" />
             <br>
             <div id="photo_copy"></div>
@@ -98,13 +109,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3>Описание</h3>
-                    <textarea name="description" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 400px; height: 400px;"></textarea>
+                    <textarea name="description" required="" class="form-control input-contrast comment-form-textarea field" <#if tour??>value="${tour.description}"</#if> style="max-height: 400px; height: 400px;"><#if tour??>${tour.description}</#if></textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12" style="margin-bottom: 20px; margin-top: 20px;">
-                    <button type="submit"  class="btn gg">Создать</button>
+                    <#if tour??>
+                        <button type="submit"  class="btn gg">Сохранить изменения</button>
+                    <#else>
+                        <button type="submit"  class="btn gg">Создать</button>
+                    </#if>
                 </div>
             </div>
 

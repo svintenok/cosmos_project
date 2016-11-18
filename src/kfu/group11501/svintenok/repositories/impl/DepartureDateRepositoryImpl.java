@@ -16,21 +16,6 @@ public class DepartureDateRepositoryImpl implements DepartureDateRepository {
     private Connection con = DBSingleton.getConnection();
 
     @Override
-    public void addDepartureDate(DepartureDate departureDate) {
-
-    }
-
-    @Override
-    public void removeDepartureDate(int id) {
-
-    }
-
-    @Override
-    public void updateDepartureDate(DepartureDate departureDate) {
-
-    }
-
-    @Override
     public DepartureDate getDepartureDateById(int id) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from departure_date where id=?");

@@ -10,7 +10,10 @@ import kfu.group11501.svintenok.services.BookingService;
 import kfu.group11501.svintenok.services.RecallService;
 import kfu.group11501.svintenok.services.TourService;
 
+import javax.servlet.http.Part;
 import java.util.List;
+
+import static kfu.group11501.svintenok.helpers.Helper.downloadPhoto;
 
 /**
  * Author: Svintenok Kate
@@ -31,6 +34,14 @@ public class TourServiceImpl implements TourService {
     @Override
     public int addTour(Tour tour, String date) {
         return tourRepository.addTour(tour, date);
+    }
+
+    @Override
+    public void updateTour(Tour tour, Part tourPhoto) {
+        if (tourPhoto.getSize() !=  0)
+            downloadPhoto(tourPhoto, "tour_photo/" + tour.getId());
+
+        tourRepository.updateTour(tour);
     }
 
     @Override

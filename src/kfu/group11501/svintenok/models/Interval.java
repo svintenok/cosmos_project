@@ -30,6 +30,13 @@ public class Interval{
         return interval;
     }
 
+    public int getYears() {
+        return interval.getYears();
+    }
+    public int getMonths() {
+        return interval.getMonths();
+    }
+
     @Override
     public String toString() {
         String inter = "";
@@ -55,4 +62,5 @@ public class Interval{
         }
         return inter;
     }
+
 }

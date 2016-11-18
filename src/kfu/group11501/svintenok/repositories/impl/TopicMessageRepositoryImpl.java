@@ -49,10 +49,6 @@ public class TopicMessageRepositoryImpl implements TopicMessageRepository {
         }
     }
 
-    @Override
-    public void updateTopicMessage(TopicMessage topicMessage) {
-
-    }
 
     @Override
     public List<TopicMessage> getTopicMessagesListByTopic(int topicId, int page, int limit) {
@@ -77,11 +73,6 @@ public class TopicMessageRepositoryImpl implements TopicMessageRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
-
-    @Override
-    public TopicMessage getTopicMessageById(int id) {
         return null;
     }
 

@@ -49,10 +49,6 @@ public class ForumTopicRepositoryImpl implements ForumTopicRepository {
         }
     }
 
-    @Override
-    public void updateForumTopic(ForumTopic forumTopic) {
-
-    }
 
     @Override
     public List<ForumTopic> getForumTopicsListByBlock(boolean isTechnical) {

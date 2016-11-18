@@ -20,7 +20,21 @@ public class CompanyInfoRepositoryImpl implements CompanyInfoRepository {
 
     @Override
     public void updateCompanyInfo(CompanyInfo companyInfo) {
+        try {
+            PreparedStatement psmt = con.prepareStatement(
+                    "update company_info set \"text\"=?, phone=?, address=?, email=?");
 
+            psmt.setString(1, companyInfo.getText());
+            psmt.setString(2, companyInfo.getPhone());
+            psmt.setString(3, companyInfo.getAddress());
+            psmt.setString(4, companyInfo.getEmail());
+
+            psmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

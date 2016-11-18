@@ -9,5 +9,6 @@ import kfu.group11501.svintenok.models.CompanyInfo;
  * Task: semester project
  */
 public interface CompanyInfoService {
+    void updateCompanyInfo(CompanyInfo companyInfo);
     CompanyInfo getCompanyInfo();
 }

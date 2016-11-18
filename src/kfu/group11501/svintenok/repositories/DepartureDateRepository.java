@@ -9,9 +9,6 @@ import kfu.group11501.svintenok.models.DepartureDate;
  * Task: semester project
  */
 public interface DepartureDateRepository {
-    void addDepartureDate(DepartureDate departureDate);
-    void removeDepartureDate(int id);
-    void updateDepartureDate(DepartureDate departureDate);
 
     DepartureDate getDepartureDateById(int id);
 }

@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    <#if current_user??><#if current_user.role.role = "admin">
+    <#if current_user??><#if current_user.role.role="admin">
         <div style="padding-top: 10px">
             <button type="button" class="btn btn-primary" style="margin-top: 30px;">
                 <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>

@@ -4,8 +4,16 @@
 
 <div class="container">
 
+    <#if current_user??><#if current_user.role.role="admin">
     <div class="row">
-        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-align: center">
+        <div class="col-md-6">
+            <a href="/tour_editing?id=${tour.id}" class="btn btn-primary" style="margin-top: 40px; color: white; font-size: 20px"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>Редактировать</a>
+        </div>
+    </div>
+    </#if></#if>
+
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 30px; text-align: center">
             <p><h1>${tour.title}</h1></p>
         </div>
     </div>
@@ -142,6 +150,9 @@
         font-size: 21px;
     }
 
+    a{
+        font-family: "Chiller";
+    }
     h5{
         font-size: 20px;
         color: rgba(255,255,255,1);

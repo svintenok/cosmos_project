@@ -75,6 +75,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>NewsEditing</servlet-name>
+        <servlet-class>kfu.group11501.svintenok.servlets.NewsEditingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewsEditing</servlet-name>
+        <url-pattern>/news_editing</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Profile</servlet-name>
         <servlet-class>kfu.group11501.svintenok.servlets.ProfileServlet</servlet-class>
     </servlet>
@@ -129,12 +138,29 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>TourEditing</servlet-name>
+        <servlet-class>kfu.group11501.svintenok.servlets.TourEditingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TourEditing</servlet-name>
+        <url-pattern>/tour_editing</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>CompanyInfo</servlet-name>
         <servlet-class>kfu.group11501.svintenok.servlets.CompanyInfoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CompanyInfo</servlet-name>
         <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CompanyInfoEditing</servlet-name>
+        <servlet-class>kfu.group11501.svintenok.servlets.CompanyInfoEditingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompanyInfoEditing</servlet-name>
+        <url-pattern>/about_editing</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -183,5 +209,17 @@
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/tour_creating</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/news_editing</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/tour_editing</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/about_editing</url-pattern>
     </filter-mapping>
 </web-app>

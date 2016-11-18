@@ -7,7 +7,15 @@
     <div class="row">
         <div class="col-md-12">
 
-        <div class="row" style="padding-top: 20px">
+        <#if current_user??><#if current_user.role.role="admin">
+            <div class="row">
+                <div class="col-md-6" style="padding-top: 20px">
+                    <a href="/news_editing?id=${news.id}" class="btn btn-primary" style="margin-top: 30px; color: white; font-size: 20px"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>Редактировать</a>
+                </div>
+            </div>
+        </#if></#if>
+
+        <div class="row">
             <div class="col-md-12" style="padding-top: 20px; margin-bottom: 40px">
                 <p><h1>${news.title}</h1></p>
                 <p style="font-size: 20px"><img src="http://localhost:8080/files/news_photo/${news.id}.jpg" width="45%" style="float: right; margin: 20px;">${news.text}</p>
@@ -122,6 +130,9 @@
         color: #dbdbdb;
         margin-left: -20px;
         font-size: 11px;
+    }
+    a{
+        font-family: "Chiller";
     }
 
     #footer {

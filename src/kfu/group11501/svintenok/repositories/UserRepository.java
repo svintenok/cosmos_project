@@ -12,10 +12,8 @@ import java.util.List;
  */
 public interface UserRepository {
     int addUser(User user);
-    void removeUser(int id);
     void updateUser(User user);
 
-    List<User> getUserList(int limit, int offset);
     User getUserById(int id);
     User getUserByLogin(String login);
 }

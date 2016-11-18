@@ -22,7 +22,6 @@ public class TourRepositoryImpl implements TourRepository {
     @Override
     public int addTour(Tour tour, String date) {
         try {
-            Connection con = DBSingleton.getConnection();
             PGInterval interval = null;
             if (tour.getInterval() != null)
                 interval = tour.getInterval().getInterval();
@@ -64,13 +63,28 @@ public class TourRepositoryImpl implements TourRepository {
     }
 
     @Override
-    public void removeTour(int id) {
-
-    }
-
-    @Override
     public void updateTour(Tour tour) {
+        try {
+            PGInterval interval = null;
+            if (tour.getInterval() != null)
+                interval = tour.getInterval().getInterval();
 
+            PreparedStatement psmt = con.prepareStatement("update tour " +
+                    "set title=?, place=?, rocket=?, description=?, time_interval=?, seats_number=?, cost=? where id=?");
+            psmt.setString(1, tour.getTitle());
+            psmt.setString(2, tour.getPlace());
+            psmt.setString(3, tour.getRocket());
+            psmt.setString(4, tour.getDescription());
+            psmt.setObject(5, interval, Types.OTHER);
+            psmt.setInt(6, tour.getSeatsNumber());
+            psmt.setInt(7, tour.getCost());
+            psmt.setInt(8, tour.getId());
+
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -159,7 +173,8 @@ public class TourRepositoryImpl implements TourRepository {
     public void updateTours() {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from tour " +
-                    "join departure_date on departure_date_id=departure_date.id where departure_date.date <'now'");
+                    "join departure_date on departure_date_id=departure_date.id " +
+                    "where departure_date.date <'now' and \"time_interval\" notnull");
             ResultSet rs = psmt.executeQuery();
             while (rs.next()) {
                 int tourId = rs.getInt("id");

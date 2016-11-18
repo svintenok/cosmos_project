@@ -5,7 +5,10 @@ import kfu.group11501.svintenok.repositories.NewsRepository;
 import kfu.group11501.svintenok.repositories.impl.NewsRepositoryImpl;
 import kfu.group11501.svintenok.services.NewsService;
 
+import javax.servlet.http.Part;
 import java.util.List;
+
+import static kfu.group11501.svintenok.helpers.Helper.downloadPhoto;
 
 /**
  * Author: Svintenok Kate
@@ -20,6 +23,19 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public int addNews(News news) {
         return newsRepository.addNews(news);
+    }
+
+    @Override
+    public void removeNews(int id) {
+        newsRepository.removeNews(id);
+    }
+
+    @Override
+    public void updateNews(News news, Part news_photo) {
+        if (news_photo.getSize() !=  0)
+            downloadPhoto(news_photo, "news_photo/" + news.getId());
+
+        newsRepository.updateNews(news);
     }
 
     @Override

@@ -47,10 +47,6 @@ public class CommentRepositoryImpl implements CommentRepository {
         }
     }
 
-    @Override
-    public void updateComment(Comment comment) {
-
-    }
 
     @Override
     public List<Comment> getCommentsListByNews(int newsId) {

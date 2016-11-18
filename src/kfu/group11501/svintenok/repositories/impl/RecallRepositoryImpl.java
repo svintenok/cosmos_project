@@ -34,21 +34,6 @@ public class RecallRepositoryImpl implements RecallRepository {
     }
 
     @Override
-    public void removeRecall(int id) {
-
-    }
-
-    @Override
-    public void updateRecall(Recall recall) {
-
-    }
-
-    @Override
-    public List<Recall> getRecallsList() {
-        return null;
-    }
-
-    @Override
     public List<Recall> getRecallListByTour(int tourId) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from recall " +
@@ -96,11 +81,6 @@ public class RecallRepositoryImpl implements RecallRepository {
         return -1;
     }
 
-
-    @Override
-    public Recall getRecallById(int id) {
-        return null;
-    }
 
     @Override
     public Recall getRecallByUserAndDepartureDate(int userId, int departureDateId) {

@@ -13,7 +13,6 @@ import java.util.List;
 public interface CommentRepository {
     void addComment(Comment comment);
     void removeComment(int id);
-    void updateComment(Comment comment);
 
     List<Comment> getCommentsListByNews(int newsId);
 }

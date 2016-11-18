@@ -45,11 +45,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void removeUser(int id) {
-
-    }
-
-    @Override
     public void updateUser(User user) {
         try {
             PreparedStatement psmt = con.prepareStatement("update \"user\" " +
@@ -69,11 +64,6 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    public List<User> getUserList(int limit, int offset) {
-        return null;
     }
 
     @Override

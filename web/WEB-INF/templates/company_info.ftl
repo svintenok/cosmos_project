@@ -8,8 +8,15 @@
 
     <div class="row">
 
+        <#if current_user??><#if current_user.role.role="admin">
+            <div class="row">
+                <div class="col-md-6"">
+                    <a href="/about_editing" class="btn btn-primary" style="margin-top: 30px; color: white; font-size: 20px"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>Редактировать</a>
+                </div>
+            </div>
+        </#if></#if>
 
-        <div style="padding-top: 40px; margin-bottom: 100px">
+        <div style="padding-top: 20px; margin-bottom: 100px">
             <p class="h3">${company_info.text}</p>
             <hr/>
             <p class="h3">Контактные данные:<p>

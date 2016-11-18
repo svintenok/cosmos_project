@@ -15,6 +15,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     CompanyInfoRepository companyInfoRepository = new CompanyInfoRepositoryImpl();
 
     @Override
+    public void updateCompanyInfo(CompanyInfo companyInfo) {
+        companyInfoRepository.updateCompanyInfo(companyInfo);
+    }
+
+    @Override
     public CompanyInfo getCompanyInfo() {
         return companyInfoRepository.getCompanyInfo();
     }

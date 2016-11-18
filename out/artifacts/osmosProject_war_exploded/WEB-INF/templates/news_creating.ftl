@@ -7,25 +7,39 @@
 
     <div class="row">
 
-        <form action="/news_creating" id="f1" method="post" enctype="multipart/form-data" >
 
+        <#if news??>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6">
+                    <form action="/news_editing?id=${news.id}&delete=true" id="f1" method="post">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 30px; color: white; font-size: 18px;"><span class="glyphicon glyphicon-remove" style="margin-right: 7px"></span>Удалить новость</button>
+                    </form>
+                </div>
+            </div>
+        <h1 style="margin-top: 40px">Изменение новости</h1>
+        <#else>
+        <h1 style="margin-top: 40px">Добавление новости</h1>
+        </#if>
 
-            <h1 style="margin-top: 40px">Добавление новости</h1>
+        <form <#if news??>action="/news_editing?id=${news.id}"<#else>action="/news_creating"</#if> id="f1" method="post" enctype="multipart/form-data" >
 
             <div class="row">
 
                 <div class="col-md-6">
                     <h3>Название</h3>
-                    <input type="text" name="title" id="name" required="" class="form-control"  value=""/>
+                    <input type="text" name="title" id="name" required="" class="form-control" <#if news??>value="${news.title}"</#if>/>
                     <h3>Краткое описание</h3>
-                    <textarea name="description" id="companyInfo" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 233px; height: 160px;"></textarea>
+                    <textarea name="description" required="" class="form-control input-contrast comment-form-textarea field" <#if news??>value="${news.description}" </#if> style="max-height: 233px; height: 160px;">${news.description}</textarea>
                 </div>
 
                 <div class="col-md-1"></div>
 
                 <div class="col-md-5">
-
-                    <h3>Фотография</h3>
+                    <#if news??>
+                        <h3>Изменить фотографию</h3>
+                    <#else>
+                        <h3>Фотография</h3>
+                    </#if>
                     <input type="file" name="news_photo" id="file-field" class="image" />
                     <br>
                     <div id="photo_copy"></div>
@@ -62,14 +76,15 @@
 
                 <div class="col-md-12">
                     <h3>Текст</h3>
-                    <textarea name="text" id="aboutevery" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 400px; height: 400px;"></textarea>
+                    <textarea name="text" id="aboutevery" required="" class="form-control input-contrast comment-form-textarea field" <#if news??>value="${news.text}"</#if>style="max-height: 400px; height: 400px;">${news.text}</textarea>
                 </div>
 
             </div>
 
             <div class="row">
                 <div class="col-md-1" style="margin-bottom: 30px; margin-top: 40px">
-                    <input type="submit" name="reg" id="reg" value="Создать новость" class="btn btn-primary custom-btn-primary" value=""/>
+
+                    <input type="submit" name="reg" id="reg" <#if news??>value="Сохранить изменения"<#else>value="Создать новость" </#if>class="btn btn-primary custom-btn-primary"/>
                 </div>
             </div>
 
@@ -139,6 +154,7 @@
     padding:0;
 }
 
+
 .slider{
     width:600px;
     position:relative;
@@ -195,15 +211,6 @@
     transform:scale(1);
 }
 
-span{
-    width:500px;
-    position:absolute;
-    left:50px;
-    top:20px;
-    height:370px;
-    overflow:hidden;
-    transition:all 0.5s;
-}
 
 .preview{
     max-height: 300px;

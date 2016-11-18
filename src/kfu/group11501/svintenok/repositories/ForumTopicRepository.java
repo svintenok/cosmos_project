@@ -13,7 +13,6 @@ import java.util.List;
 public interface ForumTopicRepository {
     int addForumTopic(ForumTopic forumTopic);
     void removeForumTopic(int id);
-    void updateForumTopic(ForumTopic forumTopic);
 
     List<ForumTopic> getForumTopicsListByBlock(boolean isTechnical);
     ForumTopic getForumTopicById(int id);

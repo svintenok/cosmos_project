@@ -46,11 +46,6 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public void updateBooking(Booking booking) {
-
-    }
-
-    @Override
     public List<Booking> getBookingListByUserAndActual(int userId, boolean actual) {
         try {
             PreparedStatement psmt = null;
@@ -106,10 +101,6 @@ public class BookingRepositoryImpl implements BookingRepository {
         return null;
     }
 
-    @Override
-    public Booking getBookingById(int id) {
-        return null;
-    }
 
     @Override
     public Booking getBookingByUserAndDepartureDate(int userId, int departureDateId) {

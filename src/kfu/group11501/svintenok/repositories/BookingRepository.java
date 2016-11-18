@@ -13,8 +13,6 @@ import java.util.List;
 public interface BookingRepository {
     void addBooking(Booking booking);
     void removeBooking(Booking booking);
-    void updateBooking(Booking booking);
-    Booking getBookingById(int id);
 
     List<Booking> getBookingListByUserAndActual(int userId, boolean actual);
     List<Booking> getBookingListByDepartureDate(int departureDate);

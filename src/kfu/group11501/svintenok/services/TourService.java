@@ -2,6 +2,7 @@ package kfu.group11501.svintenok.services;
 
 import kfu.group11501.svintenok.models.Tour;
 
+import javax.servlet.http.Part;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
 public interface TourService {
 
     int addTour(Tour tour, String date);
+    void updateTour(Tour tour, Part tourPhoto);
     Tour getTourById(int id);
     List<Tour> getToursList(String sorting, boolean reverse, String search, int page);
 }

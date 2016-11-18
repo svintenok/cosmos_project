@@ -20,8 +20,6 @@ public class NewsRepositoryImpl implements NewsRepository {
     @Override
     public int addNews(News news) {
         try {
-            Connection con = DBSingleton.getConnection();
-
             PreparedStatement psmt = con.prepareStatement("insert into news(title, description, \"text\", \"date\") values(?,?,?,'now') returning id");
             psmt.setString(1, news.getTitle());
             psmt.setString(2, news.getDescription());
@@ -41,12 +39,32 @@ public class NewsRepositoryImpl implements NewsRepository {
 
     @Override
     public void removeNews(int id) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("delete from news cascade where id=?");
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void updateNews(News news) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("update news set title=?, description=?, \"text\"=? where id=?");
+            psmt.setString(1, news.getTitle());
+            psmt.setString(2, news.getDescription());
+            psmt.setString(3, news.getText());
+            psmt.setInt(4, news.getId());
 
+            psmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
