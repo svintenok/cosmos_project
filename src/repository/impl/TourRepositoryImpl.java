@@ -1,7 +1,8 @@
-package repository;
+package repository.impl;
 
 import models.Tour;
 import org.postgresql.util.PGInterval;
+import repository.TourRepository;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -69,21 +70,23 @@ public class TourRepositoryImpl implements TourRepository {
     }
 
     @Override
-    public List<Tour> getToursList(String sorting, boolean reverse, String search) {
+    public List<Tour> getToursList(String sorting, boolean reverse, String search, int page, int limit) {
 
         PreparedStatement psmt = null;
         try {
-            String SQL = "select * from tour";
+            String SQL = "select * from tour where departure_date_id notnull";
 
             if (search != null) {
-                SQL = SQL + " where title like ? or place like ?";
+                SQL = SQL + " and title like ? or place like ?";
                 SQL = setOrder(SQL, sorting, reverse);
+                SQL = SQL + " limit " + limit + " offset " + (page-1)*limit;
                 psmt = con.prepareStatement(SQL);
                 psmt.setString(1, "%" + search + "%");
                 psmt.setString(2, "%" + search + "%");;
             }
             else {
                 SQL = setOrder(SQL, sorting, reverse);
+                SQL = SQL + " limit " + limit + " offset " + (page-1)*limit;
                 psmt = con.prepareStatement(SQL);
 
             }

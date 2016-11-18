@@ -15,6 +15,6 @@ public interface NewsService {
     int addNews(News news);
 
     News getNewsById(int id);
-    List<News> getNewsList();
+    List<News> getNewsList(int page);
 
 }

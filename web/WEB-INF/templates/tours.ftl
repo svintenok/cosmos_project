@@ -21,7 +21,8 @@
 
         <form action="/tours" method="GET" class="navbar-form" style="padding-top: 20px">
             <div class="input-group" style="width: 300px;">
-                <input type="text" autocomplete="off" class="form-control" placeholder="Search" name="search" id="search-input">
+                <input type="hidden" class="form-control" name="page" value="1">
+                <input type="text"  class="form-control" placeholder="Search" name="search" id="search-input">
                     <span class="input-group-btn">
                         <button class="btn btn-default" id="srchbtn" type="submit">
                             <i class="fa fa-search" aria-hidden="true">
@@ -43,17 +44,17 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                <li><a style="font-size: 18px" href="/tours?<#if search??>search=${search}&</#if>sorting=date">По дате вылета</a></li>
-                <li><a style="font-size: 18px" href="/tours?<#if search??>search=${search}&</#if>sorting=rating">По рейтингу</a></li>
-                <li><a style="font-size: 18px" href="/tours?<#if search??>search=${search}&</#if>sorting=cost">По цене</a></li>
+                <li><a style="font-size: 18px" href="/tours?page=1<#if search??>&search=${search}</#if>&sorting=date">По дате вылета</a></li>
+                <li><a style="font-size: 18px" href="/tours?page=1<#if search??>&search=${search}</#if>&sorting=rating">По рейтингу</a></li>
+                <li><a style="font-size: 18px" href="/tours?page=1<#if search??>&search=${search}</#if>&sorting=cost">По цене</a></li>
             </ul>
 
             <#if back_order??>
-                <a href="tours<#if sorting??>?<#if search??>search=${search}&</#if>sorting=${sorting}<#else><#if search??>?search=${search}</#if></#if>" class="btn btn-default">
+                <a href="tours?page=1<#if search??>&search=${search}</#if><#if sorting??>&sorting=${sorting}</#if>" class="btn btn-default">
                     <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </a>
             <#else>
-                <a href="tours?<#if search??>search=${search}&</#if><#if sorting??>sorting=${sorting}&</#if>back_order=true" class="btn btn-default">
+                <a href="tours?page=1<#if search??>&search=${search}</#if><#if sorting??>&sorting=${sorting}</#if>&back_order=true" class="btn btn-default">
                     <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
                 </a>
             </#if>
@@ -66,8 +67,16 @@
     <div class="col-md-4">
 
         <ul class="pager" style="float: right;">
-            <li ><a href="#" style="font-size: 20px;">&larr; Предыдущая</a></li>
-            <li ><a href="#" style="font-size: 20px;">Следующая &rarr;</a></li>
+            <li <#if !page?? || page=1 >class="disabled" </#if> >
+                <a  <#if page?? && (page>1)>
+                        href="/tours?page=${page-1}<#if search??>$search=${search}</#if><#if sorting??>}&sorting=${sorting}</#if><#if back_order??>&back_order=true</#if>"
+                </#if>style="font-size: 20px;">&larr; Предыдущая</a>
+            </li>
+            <li <#if tours?size<limit >class="disabled" </#if> >
+                <a <#if (tours?size=limit) >
+                        href="/tours?page=${page + 1}<#if search??>$search=${search}</#if><#if sorting??>&sorting=${sorting}</#if><#if back_order??>&back_order=true</#if>"
+                </#if> style="font-size: 20px;">Следующая &rarr;</a>
+            </li>
         </ul>
 
     </div>
@@ -173,6 +182,7 @@
         width: 100%;
         background: #7e7e7e;
         color: #dbdbdb;
+        margin-left: -20px;
         font-size: 11px;
     }
 

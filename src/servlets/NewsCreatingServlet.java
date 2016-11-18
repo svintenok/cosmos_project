@@ -2,8 +2,7 @@ package servlets;
 
 import models.News;
 import services.NewsService;
-import services.NewsServiceImpl;
-import singletons.DBSingleton;
+import services.impl.NewsServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,10 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashMap;
 
 import static helpers.Helper.downloadPhoto;
 import static helpers.Helper.render;

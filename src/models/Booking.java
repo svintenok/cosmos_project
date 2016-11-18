@@ -38,6 +38,7 @@ public class Booking {
         return departureDateId;
     }
 
+
     public DepartureDate getDepartureDate() {
         return departureDate;
     }

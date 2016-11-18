@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.TopicMessage;
+import repository.TopicMessageRepository;
 import singletons.DBSingleton;
 
 import java.sql.Connection;
@@ -37,7 +38,15 @@ public class TopicMessageRepositoryImpl implements TopicMessageRepository {
 
     @Override
     public void removeTopicMessage(int id) {
+        try {
 
+            PreparedStatement psmt = con.prepareStatement("delete from message where id=?");
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,10 +55,10 @@ public class TopicMessageRepositoryImpl implements TopicMessageRepository {
     }
 
     @Override
-    public List<TopicMessage> getTopicMessagesListByTopic(int topicId) {
+    public List<TopicMessage> getTopicMessagesListByTopic(int topicId, int page, int limit) {
 
         try {
-            PreparedStatement psmt = con.prepareStatement("select * from message where forum_topic_id=? order by \"date\"");
+            PreparedStatement psmt = con.prepareStatement("select * from message where forum_topic_id=? order by \"date\" limit " + limit + " offset " + (page-1)*limit);
             psmt.setInt(1, topicId);
             ResultSet rs = psmt.executeQuery();
             List<TopicMessage> messages = new ArrayList<>();
@@ -116,4 +125,5 @@ public class TopicMessageRepositoryImpl implements TopicMessageRepository {
         }
         return null;
     }
+
 }

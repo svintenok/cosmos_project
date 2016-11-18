@@ -9,13 +9,28 @@
 <aside></aside>
 <section></section>
 
-<div class="row">
+<div class="row" style="margin-bottom: 30px;">
     <div class="col-md-3 col-xs-1 col-sm-2" ></div>
     <div class="col-md-6 col-xs-10 col-sm-8">
 
 
         <form action="/registration" id="f1" method="POST" enctype="multipart/form-data">
             <h3>Регистрация</h3>
+            <#if error??>
+            <div class="alert alert-danger">
+                <#if error='existing_login'>
+                <p>Данный логин уже существует!</p>
+                <#elseif error='wrong_login'>
+                <p>Некорректный логин! Логин должен состоять только из латинских букв, цифр и знака нижнего подчеркивания</p>
+                <#elseif error='wrong_email'>
+                <p>Некорректный e-mail!</p>
+                <#elseif error='wrong_password'>
+                <p>Некорректный пароль! Пароль должен состоять только из латинских букв, цифр и быть не короче шести символов</p>
+                <#elseif error='wrong_conf_password'>
+                <p>Пароли не совпадают!</p>
+                </#if>
+            </div>
+            </#if>
             <h3>Имя</h3>
             <input type="text" name="name" id="name" class="form-control" placeholder="Ваше имя" style="color: black" <#if name??> value="${name}"</#if>/>
             <h3>Логин&nbsp;*</h3>
@@ -24,9 +39,9 @@
             <p style="color: red; margin: 0px; padding: 0px;">Данный логин уже существует</p>
         </#if></#if>
             <h3>Пароль&nbsp;*</h3>
-            <input type="password" name="password" required="" id="password" class="form-control" placeholder="••••••••" style="color: black"/>
+            <input type="password" name="password" required="" id="password" class="form-control"  style="color: black"/>
             <h3>Подтвердите пароль&nbsp;*</h3>
-            <input type="password" name="password_conf" required="" id="password_conf" class="form-control" placeholder="••••••••" style="color: black"/>
+            <input type="password" name="password_conf" required="" id="password_conf" class="form-control" style="color: black"/>
             <h3>Mail&nbsp;*</h3>
             <input type="text" name="email" id="mail" required="" class="form-control" placeholder="Ваша электронная почта" style="color: black" <#if email??> value="${email}"</#if>/>
             <h3>Страна</h3>
@@ -67,7 +82,7 @@
             <p id="out"></p>
         </form>
     </div>
-    <div class="col-md-3 col-xs-1 col-sm-2"></div>
+
 </div>
 </div>
 </#macro>
@@ -107,6 +122,7 @@
         width: 100%;
         background: #7e7e7e;
         color: #dbdbdb;
+        margin-left: -20px;
         font-size: 11px;
     }
 
@@ -123,10 +139,6 @@
         text-align: right;
     }
 
-    p{
-        padding-top: 30px;
-        margin-top: 50px;
-    }
     #f1{
         margin-top: 80px;
     }

@@ -18,8 +18,12 @@
 
             <div class="col-md-4">
                 <ul class="pager" style="float: right;">
-                    <li ><a href="#" style="font-size: 20px;">&larr; Предыдущая</a></li>
-                    <li ><a href="#" style="font-size: 20px;">Следующая &rarr;</a></li>
+                    <li <#if (!page?? || page=1) >class="disabled" </#if> >
+                        <a  <#if page?? && (page>1)><a href="/news?page=${page - 1}"</#if> style="font-size: 20px;">&larr; Предыдущая</a>
+                    </li>
+                    <li <#if news_list?size<limit >class="disabled" </#if> >
+                        <a <#if (news_list?size=limit) > href="/news?page=${page + 1}"</#if> style="font-size: 20px;">Следующая &rarr;</a>
+                    </li>
                 </ul>
             </div>
 
@@ -117,6 +121,7 @@
         width: 100%;
         background: #7e7e7e;
         color: #dbdbdb;
+        margin-left: -20px;
         font-size: 11px;
     }
 

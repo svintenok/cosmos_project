@@ -2,11 +2,10 @@ package servlets;
 
 import models.ForumTopic;
 import models.TopicMessage;
-import models.User;
 import services.ForumService;
-import services.ForumServiceImpl;
+import services.impl.ForumServiceImpl;
 import services.UserService;
-import services.UserServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,27 +32,38 @@ public class ForumServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         String login = ((String) request.getSession().getAttribute("current_user"));
-        String topicId = request.getParameter("id");
 
-        if (topicId != null) {
-            Integer id = new Integer(topicId);
-            forumService.addTopicMessage(new TopicMessage(
-                    id,
-                    userService.getUser(login).getId(),
-                    request.getParameter("message")
-            ));
+        if (request.getParameter("id") != null) {
+            Integer topicId = new Integer(request.getParameter("id"));
 
-            response.sendRedirect("/forum?id=" + id);
+            if ( request.getParameter("messageId") != null){
+                Integer messageId = new Integer(request.getParameter("messageId"));
+                forumService.removeTopicMessage(messageId);
+            }
+            else {
+                forumService.addTopicMessage(new TopicMessage(
+                        topicId,
+                        userService.getUser(login).getId(),
+                        request.getParameter("message")
+                ));
+            }
+            response.sendRedirect("/forum?id=" + topicId +"&page=" + forumService.getForumTopic(topicId, 1).getPagesCount());
+        }
+        else if (request.getParameter("topicId") != null){
+            Integer topicId = new Integer(request.getParameter("topicId"));
+            forumService.removeForumTopic(topicId);
+            response.sendRedirect("/forum");
         }
         else {
             String name = request.getParameter("name");
+            System.out.println(name);
 
-            forumService.addForumTopic(new ForumTopic(
+            int id = forumService.addForumTopic(new ForumTopic(
                     name,
                     userService.getUser(login).getId()
             ));
 
-            response.sendRedirect("/forum?id=" + forumService.getForumTopic(name).getId());
+            response.sendRedirect("/forum?id=" + id + "&page=1");
         }
     }
 
@@ -66,8 +76,15 @@ public class ForumServlet extends HttpServlet {
 
         if (request.getParameter("id") != null){
             Integer id = new Integer(request.getParameter("id"));
-            root.put("topic", forumService.getForumTopic(id));
-            root.put("messages", forumService.getForumTopicMessages(id));
+            Integer page = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam == null || new Integer(pageParam) < 1)
+                response.sendRedirect("/forum?id=" + id + "&page=" + forumService.getForumTopic(id, 1).getPagesCount());
+            else
+                page = new Integer(pageParam);
+            root.put("page", page);
+            root.put("limit", ForumServiceImpl.getMessagesLimit());
+            root.put("topic", forumService.getForumTopic(id, page));
             render(response, request, "forum.ftl", root);
         }
 

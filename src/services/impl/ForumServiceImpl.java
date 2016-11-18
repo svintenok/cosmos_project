@@ -1,9 +1,13 @@
-package services;
+package services.impl;
 
 import models.ForumTopic;
 import models.TopicMessage;
 import models.User;
 import repository.*;
+import repository.impl.ForumTopicRepositoryImpl;
+import repository.impl.TopicMessageRepositoryImpl;
+import services.ForumService;
+import services.UserService;
 
 import java.util.List;
 
@@ -14,24 +18,35 @@ import java.util.List;
  * Task: semester project
  */
 public class ForumServiceImpl implements ForumService {
+    final static int messagesLimit = 12;
     ForumTopicRepository forumTopicRepository = new ForumTopicRepositoryImpl();
     TopicMessageRepository topicMessageRepository = new TopicMessageRepositoryImpl();
     UserService userService = new UserServiceImpl();
 
     @Override
-    public void addForumTopic(ForumTopic forumTopic) {
+    public int addForumTopic(ForumTopic forumTopic) {
         User user = userService.getUser(forumTopic.getUserId());
 
         if (user.getRole().getRole().equals("admin"))
             forumTopic.setTechnical(true);
         else
             forumTopic.setTechnical(false);
-        forumTopicRepository.addForumTopic(forumTopic);
+        return forumTopicRepository.addForumTopic(forumTopic);
     }
 
     @Override
     public void addTopicMessage(TopicMessage topicMessage) {
         topicMessageRepository.addTopicMessage(topicMessage);
+    }
+
+    @Override
+    public void removeTopicMessage(int id) {
+        topicMessageRepository.removeTopicMessage(id);
+    }
+
+    @Override
+    public void removeForumTopic(int id) {
+        forumTopicRepository.removeForumTopic(id);
     }
 
     @Override
@@ -49,23 +64,27 @@ public class ForumServiceImpl implements ForumService {
     }
 
     @Override
-    public ForumTopic getForumTopic(int id) {
+    public ForumTopic getForumTopic(int id, int page) {
         ForumTopic forumTopic = forumTopicRepository.getForumTopicById(id);
-        forumTopic.setTopicMessages(topicMessageRepository.getTopicMessagesListByTopic(id));
+        setTopicMessages(forumTopic, page);
+        int messagesCount = topicMessageRepository.getMessagesCountByTopic(id);
+        if(messagesCount > 0)
+            forumTopic.setPagesCount((int) Math.ceil((double)messagesCount/messagesLimit));
+        else
+            forumTopic.setPagesCount(1);
         return forumTopic;
     }
 
-    @Override
-    public ForumTopic getForumTopic(String name) {
-        return forumTopicRepository.getForumTopicByName(name);
-    }
 
-    @Override
-    public List<TopicMessage> getForumTopicMessages(int forumTopicId) {
-        List<TopicMessage> topicMessages = topicMessageRepository.getTopicMessagesListByTopic(forumTopicId);
+    private void setTopicMessages(ForumTopic forumTopic, int page) {
+        List<TopicMessage> topicMessages = topicMessageRepository.getTopicMessagesListByTopic(
+                forumTopic.getId(), page, messagesLimit);
         for(TopicMessage topicMessage : topicMessages)
             topicMessage.setUser(userService.getUser(topicMessage.getUserId()));
-        return  topicMessages;
+        forumTopic.setMessages(topicMessages);
     }
 
+    public static int getMessagesLimit() {
+        return messagesLimit;
+    }
 }

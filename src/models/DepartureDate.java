@@ -13,6 +13,7 @@ public class DepartureDate {
     private int id;
     private int tourId;
     private Timestamp date;
+
     private Tour tour;
 
 
@@ -34,6 +35,7 @@ public class DepartureDate {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return date.toLocalDateTime().format(formatter);
     }
+
 
     public Tour getTour() {
         return tour;

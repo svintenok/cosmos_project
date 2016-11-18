@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.Token;
+import repository.TokenRepository;
 import singletons.DBSingleton;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ public class TokenRepositoryImpl implements TokenRepository {
     public void addToken(Token token) {
         try {
             PreparedStatement psmt = con.prepareStatement("insert into token(user_id, token) values(?,?)");
-            psmt.setInt(1, token.getUser_id());
+            psmt.setInt(1, token.getUserId());
             psmt.setString(2, token.getToken());
             psmt.executeUpdate();
 
@@ -31,10 +32,10 @@ public class TokenRepositoryImpl implements TokenRepository {
     }
 
     @Override
-    public void removeToken(int user_id) {
+    public void removeToken(int userId) {
         try {
             PreparedStatement psmt = con.prepareStatement("delete from token where user_id=?");
-            psmt.setInt(1, user_id);
+            psmt.setInt(1, userId);
             psmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -2,7 +2,7 @@ package servlets;
 
 import models.User;
 import services.UserService;
-import services.UserServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
 import static helpers.Helper.downloadPhoto;
 import static helpers.Helper.getHash;
 import static helpers.Helper.render;
@@ -40,39 +39,54 @@ public class ProfileSettingServlet extends HttpServlet {
         User user = userService.getUser(login);
 
         if(request.getParameter("password_change") != null) {
+            Pattern passwordRegexp = Pattern.compile("[a-zA-Z0-9]{6,30}");
+
             String old_password = getHash(request.getParameter("old_password"));
-            if(user.getPassword().equals(old_password)) {
-                userService.updatePassword(user.getId(), getHash(request.getParameter("new_password")));
+            String password = request.getParameter("password");
+            String passwordConf = request.getParameter("password_conf");
+
+
+            String passwordError = null;
+            if(!user.getPassword().equals(old_password))
+                passwordError = "wrong_old_password";
+            else if(!passwordRegexp.matcher(password).matches())
+                passwordError = "wrong_password";
+            else if (!password.equals(passwordConf))
+                passwordError = "wrong_conf_password";
+
+            if (passwordError == null){
+                userService.updatePassword(user.getId(), getHash(password));
                 response.sendRedirect("/profile?id=" + user.getId());
             }
             else
-                response.sendRedirect("/profile_settings?err=wrong_password");
+                response.sendRedirect("/settings?password_error=" + passwordError);
         }
         else {
-            login = request.getParameter("login");
+            Pattern emailRegexp = Pattern.compile("[\\w-]+@[a-z0-9-]+\\.[a-z]{2,6}");
+
             String email = request.getParameter("email");
             String name = request.getParameter("name");
             String country = request.getParameter("country");
-            boolean hasPhoto = user.getPhoto();
+            Part photo = request.getPart("profile_photo");
 
-            if(login.equals(user.getLogin()) || userService.getUser(login) == null) {
+            String error = null;
 
-                Part filePart = request.getPart("profile_photo");
-                if (filePart != null) {
+            if (!emailRegexp.matcher(email).matches())
+                error = "wrong_email";
 
-                    hasPhoto = true;
-                    downloadPhoto(filePart, "users_photo/" + login);
-                }
 
-                userService.updateUser(new User(
-                        user.getId(), login, user.getPassword(), email, name, country, hasPhoto, user.getRoleId()));
+            if (error == null){
+                user = new User(user.getId(), user.getLogin(), user.getPassword(), email, name, country, user.getPhoto(), user.getRoleId());
+                userService.updateUser(user, photo);
+
                 response.sendRedirect("/profile?id=" + user.getId());
             }
             else {
                 response.encodeRedirectURL("utf-8");
-                response.sendRedirect("/profile_settings?err=existing_login&login=" + login + "&email=" + email +
-                        "&name=" + URLEncoder.encode(name, "utf-8")+ "&country=" + URLEncoder.encode(country, "utf-8"));
+                response.sendRedirect("/settings?error=" + error + "&login=" + login + "&email=" + email +
+                        "&name=" + URLEncoder.encode(name, "utf-8") + "&country=" + URLEncoder.encode(country, "utf-8"));
             }
+
         }
     }
 
@@ -81,6 +95,8 @@ public class ProfileSettingServlet extends HttpServlet {
 
         String login = (String) request.getSession().getAttribute("current_user");
 
+        root.put("error", request.getParameter("error"));
+        root.put("password_error", request.getParameter("password_error"));
         root.put("current_user", userService.getUser(login));
         render(response, request, "profile_setting.ftl", root);
     }

@@ -113,6 +113,7 @@
         width: 100%;
         background: #7e7e7e;
         color: #dbdbdb;
+        margin-left: -20px;
         font-size: 11px;
     }
 

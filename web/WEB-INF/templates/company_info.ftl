@@ -82,6 +82,7 @@
         position: absolute;
         width: 100%;
         background: #7e7e7e;
+        margin-left: -20px;
         color: #dbdbdb;
         font-size: 11px;
     }

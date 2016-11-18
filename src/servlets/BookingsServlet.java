@@ -2,9 +2,9 @@ package servlets;
 
 import models.User;
 import services.BookingService;
-import services.BookingServiceImpl;
+import services.impl.BookingServiceImpl;
 import services.UserService;
-import services.UserServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

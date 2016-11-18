@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.Booking;
+import repository.BookingRepository;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -13,7 +14,7 @@ import java.util.List;
  * Group: 11-501
  * Task: semester project
  */
-public class BookingRepositoryImpl implements  BookingRepository {
+public class BookingRepositoryImpl implements BookingRepository {
     private Connection con = DBSingleton.getConnection();
 
     @Override

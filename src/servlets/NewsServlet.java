@@ -4,7 +4,9 @@ import models.Comment;
 import models.News;
 import models.User;
 import services.*;
-import singletons.DBSingleton;
+import services.impl.CommentServiceImpl;
+import services.impl.NewsServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static helpers.Helper.render;
 
@@ -39,13 +38,18 @@ public class NewsServlet extends HttpServlet {
 
             String login = (String) request.getSession().getAttribute("current_user");
             String text = request.getParameter("comment");
-            Integer news_id = new Integer(request.getParameter("id"));
+            Integer newsId = new Integer(request.getParameter("id"));
 
-            User user = userService.getUser(login);
-            Comment comment = new Comment(user.getId(), news_id, text);
-            commentService.addComment(comment);
-
-            response.sendRedirect("/news?id=" + news_id);
+            if (request.getParameter("commentId") != null){
+                Integer commentId = new Integer(request.getParameter("commentId"));
+                commentService.removeComment(commentId);
+            }
+            else {
+                User user = userService.getUser(login);
+                Comment comment = new Comment(user.getId(), newsId, text);
+                commentService.addComment(comment);
+            }
+            response.sendRedirect("/news?id=" + newsId);
         }
     }
 
@@ -72,8 +76,15 @@ public class NewsServlet extends HttpServlet {
         }
 
         else {
-
-            root.put("news_list", newsService.getNewsList());
+            Integer page = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam == null || new Integer(pageParam) < 1)
+                response.sendRedirect("/news?page=1");
+            else
+                page = new Integer(pageParam);
+            root.put("page", page);
+            root.put("limit", NewsServiceImpl.getNewsLimit());
+            root.put("news_list", newsService.getNewsList(page));
             render(response, request, "news_list.ftl", root);
         }
 

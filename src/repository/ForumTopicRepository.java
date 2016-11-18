@@ -11,11 +11,10 @@ import java.util.List;
  * Task: semester project
  */
 public interface ForumTopicRepository {
-    void addForumTopic(ForumTopic forumTopic);
+    int addForumTopic(ForumTopic forumTopic);
     void removeForumTopic(int id);
     void updateForumTopic(ForumTopic forumTopic);
 
     List<ForumTopic> getForumTopicsListByBlock(boolean isTechnical);
     ForumTopic getForumTopicById(int id);
-    ForumTopic getForumTopicByName(String name);
 }

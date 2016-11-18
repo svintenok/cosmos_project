@@ -14,7 +14,11 @@
     <div class="row" style="margin-top: 80px">
 
         <div class="col-md-4">
-            <img src="http://localhost:8080/files/users_photo/${user.login}.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
+            <#if user.photo>
+                <img src="http://localhost:8080/files/users_photo/${user.id}.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
+            <#else>
+                <img src="http://localhost:8080/files/users_photo/default.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
+            </#if>
             <ul style="margin-top: 10px; margin-bottom: 40px">
                 <#if user.name??><li class="list-group-item"><p><b>Имя: </b>${user.name}</p></li></#if>
                 <li class="list-group-item"><p><b>Почта: </b>${user.email}</p></li>

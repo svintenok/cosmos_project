@@ -52,6 +52,7 @@
         width: 100%;
         bottom: 0;
         background: #7e7e7e;
+        margin-left: -20px;
         color: #dbdbdb;
         font-size: 11px;
     }

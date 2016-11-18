@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.DepartureDate;
+import repository.DepartureDateRepository;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -28,11 +29,6 @@ public class DepartureDateRepositoryImpl implements DepartureDateRepository {
     @Override
     public void updateDepartureDate(DepartureDate departureDate) {
 
-    }
-
-    @Override
-    public List<DepartureDate> getDepartureDatesListByTour(int tourId, int limit, int offset) {
-        return null;
     }
 
     @Override

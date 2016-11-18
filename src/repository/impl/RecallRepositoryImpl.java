@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.Recall;
+import repository.RecallRepository;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -51,7 +52,7 @@ public class RecallRepositoryImpl implements RecallRepository {
     public List<Recall> getRecallListByTour(int tourId) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from recall " +
-                    "join departure_date on departure_date.id=recall.departure_date_id where tour_id=?");
+                    "join departure_date on departure_date.id=recall.departure_date_id where tour_id=? ORDER BY \"date\" desc");
 
             psmt.setInt(1, tourId);
             ResultSet rs = psmt.executeQuery();

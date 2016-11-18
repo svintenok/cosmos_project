@@ -2,25 +2,18 @@ package filters;
 
 import models.Token;
 import models.User;
-import repository.TokenRepository;
 import services.TokenService;
-import services.TokenServiceImpl;
+import services.impl.TokenServiceImpl;
 import services.UserService;
-import services.UserServiceImpl;
-import singletons.DBSingleton;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Author: Svintenok Kate
@@ -44,7 +37,7 @@ public class CookieFilter implements javax.servlet.Filter {
                     Token token = tokenService.getToken(cookie.getValue());
 
                     if (token != null) {
-                        User user = userService.getUser(token.getUser_id());
+                        User user = userService.getUser(token.getUserId());
                         HttpSession session = request.getSession();
                         session.setAttribute("current_user", user.getLogin());
                     }

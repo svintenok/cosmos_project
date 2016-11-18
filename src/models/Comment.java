@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Author: Svintenok Kate
- * Date: ${DATE}
+ * Date: 03.11.2016
  * Group: 11-501
  * Task: semester project
  */

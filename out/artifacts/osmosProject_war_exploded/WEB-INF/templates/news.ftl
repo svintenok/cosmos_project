@@ -5,6 +5,7 @@
 <div class="container">
 
     <div class="row">
+        <div class="col-md-12">
 
         <div class="row" style="padding-top: 20px">
             <div class="col-md-12" style="padding-top: 20px; margin-bottom: 40px">
@@ -15,7 +16,8 @@
         </div>
 
         <form action="/news?id=${news.id}" method="POST">
-            <div class="col-md-12"  style="margin-bottom: 40px">
+
+            <div class="row" style="margin-bottom: 40px">
                 <div class="col-md-4">
                     <p class="gg" style="text-align: center">Дата публикации: ${news.date}</p>
                 </div>
@@ -34,18 +36,30 @@
             </div>
         </form>
 
-        <div class="col-md-12">
+
             <ul class ="list-group">
             <#list comments as comment>
                 <li class ="list-group-item">
-                    <p><b> ${comment.user.login}:</b></p>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p><b> ${comment.user.login}:</b></p>
+                        </div>
+                        <div class="col-md-2">
+                            <#if  current_user??><#if current_user.role.role='admin' || current_user.id=comment.user.id>
+                                <form action="/news?id=${news.id}" method="POST">
+                                    <input type="hidden" name="commentId" class="form-control" value="${comment.id}"></input>
+                                    <button type="submit" class="btn btn-close btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+                                </form>
+                            </#if></#if>
+                        </div>
+                    </div>
                     <h>${comment.text}</h>
                     <p style="color: #737373" align="right">${comment.date}</p>
                 </li>
             </#list>
             </ul>
-        </div>
 
+        </div>
     </div>
 
 </div>
@@ -106,6 +120,7 @@
         width: 100%;
         background: #7e7e7e;
         color: #dbdbdb;
+        margin-left: -20px;
         font-size: 11px;
     }
 
@@ -120,6 +135,12 @@
         margin-top: 20px;
         font-size: 12px;
         text-align: right;
+    }
+    .btn-close{
+        border: none;
+        color:grey;
+        background-color: white;
+        float: right;
     }
 
 </style>

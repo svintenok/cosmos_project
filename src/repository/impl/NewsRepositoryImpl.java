@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.News;
+import repository.NewsRepository;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -49,11 +50,12 @@ public class NewsRepositoryImpl implements NewsRepository {
     }
 
     @Override
-    public List<News> getNewsList() {
+    public List<News> getNewsList(int page, int limit) {
 
         try {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from news ORDER BY \"date\"");
+            ResultSet rs = st.executeQuery(
+                    "select * from news ORDER BY \"date\" desc limit " + limit + " offset " + (page-1)*limit);
             List<News> news_list = new ArrayList<>();
 
             while (rs.next()) {
@@ -79,6 +81,7 @@ public class NewsRepositoryImpl implements NewsRepository {
             PreparedStatement psmt = con.prepareStatement("select * from news where id=?");
             psmt.setInt(1, id);
             ResultSet rs = psmt.executeQuery();
+
 
             if (rs.next()) {
                 News news = new News(

@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.User;
+import repository.UserRepository;
 import singletons.DBSingleton;
 
 import java.sql.Connection;
@@ -21,9 +22,9 @@ public class UserRepositoryImpl implements UserRepository {
     public UserRepositoryImpl() {}
 
     @Override
-    public void addUser(User user) {
+    public int addUser(User user) {
         try {
-            PreparedStatement psmt = con.prepareStatement("insert into \"user\"(login, password, email, \"name\", country, photo) values(?,?,?,?,?,?)");
+            PreparedStatement psmt = con.prepareStatement("insert into \"user\"(login, password, email, \"name\", country, photo) values(?,?,?,?,?,?) returning id");
             psmt.setString(1, user.getLogin());
             psmt.setString(2, user.getPassword());
             psmt.setString(3, user.getEmail());
@@ -31,11 +32,16 @@ public class UserRepositoryImpl implements UserRepository {
             psmt.setString(5, user.getCountry());
             psmt.setBoolean(6, user.getPhoto());
 
-            psmt.executeUpdate();
+            psmt.execute();
+            ResultSet resultSet = psmt.getResultSet();
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     @Override

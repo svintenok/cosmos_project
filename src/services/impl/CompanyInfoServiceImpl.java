@@ -1,8 +1,9 @@
-package services;
+package services.impl;
 
 import models.CompanyInfo;
 import repository.CompanyInfoRepository;
-import repository.CompanyInfoRepositoryImpl;
+import repository.impl.CompanyInfoRepositoryImpl;
+import services.CompanyInfoService;
 
 /**
  * Author: Svintenok Kate

@@ -84,6 +84,7 @@ public class Tour {
 
     public int getCost() { return cost; }
 
+
     public DepartureDate getDepartureDate() {
         return departureDate;
     }

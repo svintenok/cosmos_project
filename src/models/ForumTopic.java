@@ -19,7 +19,8 @@ public class ForumTopic {
 
     private int messagesCount;
     private TopicMessage lastMessage;
-    private List<TopicMessage> topicMessages;
+    private List<TopicMessage> messages;
+    private int pagesCount;
 
     public ForumTopic(int id, String name, int user_id, boolean is_tehnical, Timestamp date) {
         this.id = id;
@@ -75,11 +76,19 @@ public class ForumTopic {
         this.lastMessage = lastMessage;
     }
 
-    public List<TopicMessage> getTopicMessages() {
-        return topicMessages;
+    public List<TopicMessage> getMessages() {
+        return messages;
     }
 
-    public void setTopicMessages(List<TopicMessage> topicMessages) {
-        this.topicMessages = topicMessages;
+    public void setMessages(List<TopicMessage> topicMessages) {
+        this.messages = topicMessages;
+    }
+
+    public int getPagesCount() {
+        return pagesCount;
+    }
+
+    public void setPagesCount(int pagesCount) {
+        this.pagesCount = pagesCount;
     }
 }

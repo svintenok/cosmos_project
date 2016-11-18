@@ -1,8 +1,9 @@
-package services;
+package services.impl;
 
 import models.Comment;
 import repository.CommentRepository;
-import repository.CommentRepositoryImpl;
+import repository.impl.CommentRepositoryImpl;
+import services.CommentService;
 
 import java.util.List;
 
@@ -12,13 +13,18 @@ import java.util.List;
  * Group: 11-501
  * Task: semester project
  */
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
     CommentRepository commentRepository = new CommentRepositoryImpl();
 
 
     @Override
     public void addComment(Comment comment) {
         commentRepository.addComment(comment);
+    }
+
+    @Override
+    public void removeComment(int id) {
+        commentRepository.removeComment(id);
     }
 
     @Override

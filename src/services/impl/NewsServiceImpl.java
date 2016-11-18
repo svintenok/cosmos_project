@@ -1,8 +1,9 @@
-package services;
+package services.impl;
 
 import models.News;
 import repository.NewsRepository;
-import repository.NewsRepositoryImpl;
+import repository.impl.NewsRepositoryImpl;
+import services.NewsService;
 
 import java.util.List;
 
@@ -12,7 +13,8 @@ import java.util.List;
  * Group: 11-501
  * Task: semester project
  */
-public class NewsServiceImpl implements NewsService{
+public class NewsServiceImpl implements NewsService {
+    final static int newsLimit = 8;
     private NewsRepository newsRepository = new NewsRepositoryImpl();
 
     @Override
@@ -26,7 +28,11 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public List<News> getNewsList() {
-        return newsRepository.getNewsList();
+    public List<News> getNewsList(int page) {
+        return newsRepository.getNewsList(page, newsLimit);
+    }
+
+    public static int getNewsLimit() {
+        return newsLimit;
     }
 }

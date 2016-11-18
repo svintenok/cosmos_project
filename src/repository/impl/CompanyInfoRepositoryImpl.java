@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.CompanyInfo;
+import repository.CompanyInfoRepository;
 import singletons.DBSingleton;
 
 import java.sql.Connection;

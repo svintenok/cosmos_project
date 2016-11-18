@@ -1,10 +1,11 @@
-package services;
+package services.impl;
 
 import models.Token;
 import models.User;
 import repository.TokenRepository;
-import repository.TokenRepositoryImpl;
-import repository.UserRepositoryImpl;
+import repository.impl.TokenRepositoryImpl;
+import repository.impl.UserRepositoryImpl;
+import services.TokenService;
 
 /**
  * Author: Svintenok Kate

@@ -13,5 +13,6 @@ import java.util.List;
 public interface CommentService {
 
     void addComment(Comment comment);
+    void removeComment(int id);
     List<Comment>  getCommentList(int news_id);
 }

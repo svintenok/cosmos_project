@@ -14,8 +14,12 @@
         </div>
         <div class="col-md-6">
             <ul class="pager" style="float: right;">
-                <li><a href="#" style="font-size: 18px; color: black">&larr; Предыдущая</a></li>
-                <li><a href="#" style="font-size: 18px; color: black">Следующая &rarr;</a></li>
+                <li <#if (!page?? || page=1)>class="disabled" </#if> >
+                    <a  <#if page?? && (page>1)><a href="/forum?id=${topic.id}&page=${page - 1}"</#if> style="font-size: 18px;">&larr; Предыдущая</a>
+                </li>
+                <li <#if (topic.messages?size<limit)>class="disabled"</#if> >
+                    <a <#if (topic.messages?size=limit) > <a href="/forum?id=${topic.id}&page=${page + 1}"</#if> style="font-size: 18px;">Следующая &rarr;</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -23,13 +27,25 @@
     <div class="row">
         <div class="col-md-12">
             <ul class ="list-group">
-                <#list messages as message>
+                <#list topic.messages as message>
                 <li class ="list-group-item">
-                    <#if message.user.role.role='admin'>
-                        <a style="font-size: 20px; color:red;">администратор</a>
-                    <#else>
-                        <a href="/profile?id=${message.userId}" style="font-size: 20px">${message.user.login}</a>
-                    </#if>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <#if message.user.role.role='admin'>
+                                <a style="font-size: 20px; color:red;">администратор</a>
+                            <#else>
+                                <a href="/profile?id=${message.userId}" style="font-size: 20px">${message.user.login}</a>
+                            </#if>
+                        </div>
+                        <div class="col-md-4">
+                            <#if current_user??><#if current_user.role.role='admin' || current_user.id=message.userId>
+                            <form action="/forum?id=${topic.id}" method="POST">
+                                <input type="hidden" name="messageId" class="form-control" value="${message.id}"></input>
+                                <button type="submit" class="btn btn-close btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+                            </form>
+                            </#if></#if>
+                        </div>
+                    </div>
                     <br/>
                     <h>${message.text}</h>
                     <p align="right">${message.date}</p>
@@ -85,12 +101,12 @@
     footer {
         position: absolute;
         width: 100%;
-        bottom: 0;
-        margin-left: -20px;
         background: #7e7e7e;
         color: #dbdbdb;
+        margin-left: -20px;
         font-size: 11px;
     }
+
 
     #footer {
         max-width: 960px;
@@ -135,6 +151,12 @@
 
     .gg{
         font-size: 20px;
+    }
+    .btn-close{
+        border: none;
+        color:grey;
+        background-color: white;
+        float: right;
     }
 
 </style>

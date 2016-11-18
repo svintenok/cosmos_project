@@ -30,9 +30,9 @@
                     <li><a href="/profile?id=${current_user.id}"><h5>Профиль</h5></a></li>
                     <li><br><h5>|</h5></li>
                 </#if>
-                    <li><a href="/tours"><h5>Туры</h5></a></li>
+                    <li><a href="/tours?page=1"><h5>Туры</h5></a></li>
                     <li><br><h5>|</h5></li>
-                    <li><a href="/news"><h5>Новости</h5></a></li>
+                    <li><a href="/news?page=1"><h5>Новости</h5></a></li>
                     <li><br><h5>|</h5></li>
                     <li><a href="/forum"><h5>Форум</h5></a></li>
                     <li><br><h5>|</h5></li>
@@ -51,6 +51,7 @@
 </header>
 
 <@content/>
+
 
 <footer>
     <div id="footer">

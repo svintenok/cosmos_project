@@ -9,18 +9,25 @@
 
 
 
-<div class="row">
+<div class="row" style="margin-bottom: 30px;">
     <div class="col-md-3 col-xs-1 col-sm-2" ></div>
     <div class="col-md-6 col-xs-10 col-sm-8">
 
         <form action="/settings" id="f1" method="post" enctype="multipart/form-data">
             <h3 align="center">Мой профиль</h3>
+
+            <#if error??>
+                <div class="alert alert-danger">
+                    <#if error='wrong_email'>
+                        <p>Некорректный e-mail!</p>
+                    </#if>
+                </div>
+            </#if>
+
             <h3>Изменить имя</h3>
             <input type="text" name="name" id="name" class="form-control" <#if current_user.name??>value="${current_user.name}"</#if> style="color: black"/>
-            <h3>Изменить логин</h3>
-            <input type="text" name="login"  id="login" class="form-control" value="${current_user.login}"  style="color: black"/>
             <h3>Изменить почту</h3>
-            <input type="text" name="email" id="mail" class="form-control" value="${current_user.email}" style="color: black"/>
+            <input type="text" name="email" id="mail" class="form-control" required="" value="${current_user.email}" style="color: black"/>
             <h3>Изменить страну</h3>
             <input type="text" name="country" id="country" class="form-control" <#if current_user.country??>value="${current_user.country}"</#if>  style="color: black"/>
 
@@ -51,19 +58,30 @@
                     reader.readAsDataURL(inputFile);
                 }
             </script>
-            <button type="submit" name="reg" id="reg" class="btn btn-primary custom-btn-primary">Сохранить</button>
+            <button type="submit" style="margin-left: 0px;" class="btn btn-primary custom-btn-primary">Сохранить</button>
         </form>
 
         <form action="/settings?password_change=true" id="f1" method="post" >
         <h3 align="center">Изменение пароля</h3>
+            <#if password_error??>
+                <div class="alert alert-danger">
+                    <#if password_error='wrong_old_password'>
+                        <p>Неправильный старый пароль!</p>
+                    <#elseif password_error='wrong_password'>
+                        <p>Некорректный пароль! Пароль должен состоять только из латинских букв, цифр и быть не короче шести символов</p>
+                    <#elseif password_error='wrong_conf_password'>
+                        <p>Пароли не совпадают!</p>
+                    </#if>
+                </div>
+            </#if>
             <h3>Cтарый пароль</h3>
-            <input type="password" name="old_password" id="password" class="form-control" style="color: black"/>
+            <input type="password" name="old_password" required="" id="password" class="form-control" style="color: black"/>
             <h3>Новый пароль</h3>
-            <input type="password" name="new_password" id="password" class="form-control" style="color: black"/>
+            <input type="password" name="password" required="" id="password" class="form-control" style="color: black"/>
             <h3>Подтвердите новый пароль</h3>
-            <input type="password" name="new_password_conf"  id="password_conf" class="form-control" style="color: black"/>
+            <input type="password" name="password_conf" required="" id="password_conf" class="form-control" style="color: black"/>
 
-            <button type="submit" name="reg" id="reg" class="btn btn-primary custom-btn-primary"/>Сохранить</button>
+            <button type="submit"  style="margin-left: 0px;" class="btn btn-primary custom-btn-primary"/>Изменить пароль</button>
         </form>
 
         <p id="out"></p>
@@ -136,10 +154,6 @@
         text-align: right;
     }
 
-    p{
-        padding-top: 30px;
-        margin-top: 50px;
-    }
     #f1{
         margin-top: 80px;
     }
@@ -150,6 +164,7 @@
         font: 17px Tahoma, sans-serif;
         border-color: #8f8f8f;
         background: #8f8f8f;
+        margin-left: -20px;
         margin-top: 20px;
     }
     .custom-btn-primary:hover{

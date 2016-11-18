@@ -61,6 +61,7 @@ public class Recall {
         return date.toLocalDateTime().format(formatter);
     }
 
+
     public User getUser() {
         return user;
     }

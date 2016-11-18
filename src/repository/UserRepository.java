@@ -12,7 +12,7 @@ import java.util.List;
  * Task: semester project
  */
 public interface UserRepository {
-    void addUser(User user);
+    int addUser(User user);
     void removeUser(int id);
     void updateUser(User user);
 

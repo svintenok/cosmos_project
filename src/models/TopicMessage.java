@@ -53,6 +53,7 @@ public class TopicMessage {
         return forumTopicId;
     }
 
+
     public User getUser() {
         return user;
     }

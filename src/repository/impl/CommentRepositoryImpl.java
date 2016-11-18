@@ -1,7 +1,8 @@
-package repository;
+package repository.impl;
 
 import models.Comment;
 import models.User;
+import repository.CommentRepository;
 import singletons.DBSingleton;
 
 import java.sql.*;
@@ -35,7 +36,15 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     @Override
     public void removeComment(int id) {
+        try {
 
+            PreparedStatement psmt = con.prepareStatement("delete from comment where id=?");
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,7 +55,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public List<Comment> getCommentsListByNews(int newsId) {
         try {
-            PreparedStatement psmt = con.prepareStatement("select * from comment where news_id=?");
+            PreparedStatement psmt = con.prepareStatement("select * from comment where news_id=? ORDER BY \"date\"");
 
             List<Comment> comments = new ArrayList<>();
             psmt.setInt(1, newsId);

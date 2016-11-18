@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.UpdateDate;
+import repository.UpdateDateRepository;
 import singletons.DBSingleton;
 
 import java.sql.Connection;

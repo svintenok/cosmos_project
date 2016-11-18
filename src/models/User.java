@@ -29,13 +29,12 @@ public class User {
         this.roleId = roleId;
     }
 
-    public User(String login, String password, String email, String name, String country, boolean photo) {
+    public User(String login, String password, String email, String name, String country) {
         this.login = login.toLowerCase();
         this.password = password;
         this.email = email;
         this.name = name;
         this.country = country;
-        this.photo = photo;
     }
 
     public User() {}
@@ -74,6 +73,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setPhoto(boolean photo) {
+        this.photo = photo;
     }
 
     public Role getRole() {

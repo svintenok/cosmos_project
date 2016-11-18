@@ -7,7 +7,7 @@
         <li data-target="#myCarousel" data-slide-to="3"></li>
 
     </ol>
-    <div class="carousel-inner">
+    <div class="carousel-inner" style="height: 250px">
         <div class="active item">
             <img src="http://localhost:8080/files/space1.jpg">
         </div>

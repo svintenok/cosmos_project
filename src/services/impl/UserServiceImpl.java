@@ -1,13 +1,18 @@
-package services;
+package services.impl;
 
 import models.Role;
 import models.User;
 import repository.RoleRepository;
-import repository.RoleRepositoryImpl;
+import repository.impl.RoleRepositoryImpl;
 import repository.UserRepository;
-import repository.UserRepositoryImpl;
+import repository.impl.UserRepositoryImpl;
+import services.UserService;
 
-import java.sql.SQLException;
+import javax.servlet.http.Part;
+
+import java.io.IOException;
+
+import static helpers.Helper.downloadPhoto;
 
 /**
  * Author: Svintenok Kate
@@ -21,12 +26,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void addUser(User user) {
-        userRepository.addUser(user);
+    public void addUser(User user, Part photo){
+        if (photo.getSize() !=  0) {
+            user.setPhoto(true);
+            int id = userRepository.addUser(user);
+            downloadPhoto(photo, "users_photo/" + id);
+        }
+        else
+            user.setPhoto(false);
+            userRepository.addUser(user);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(User user, Part photo) {
+        if (photo.getSize() !=  0) {
+            user.setPhoto(true);
+            downloadPhoto(photo, "users_photo/" + user.getId());
+        }
         userRepository.updateUser(user);
     }
 

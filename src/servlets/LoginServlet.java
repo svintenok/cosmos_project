@@ -3,19 +3,14 @@ package servlets;
 import models.Token;
 import models.User;
 import services.TokenService;
-import services.TokenServiceImpl;
+import services.impl.TokenServiceImpl;
 import services.UserService;
-import services.UserServiceImpl;
-import singletons.DBSingleton;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 

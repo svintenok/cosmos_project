@@ -4,6 +4,9 @@ import models.Booking;
 import models.Tour;
 import models.User;
 import services.*;
+import services.impl.BookingServiceImpl;
+import services.impl.TourServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,18 +69,27 @@ public class ToursServlet extends HttpServlet {
         }
 
         else {
+            Integer page = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam == null || new Integer(pageParam) < 1)
+                response.sendRedirect("/tours?page=1");
+             else
+                page = new Integer(pageParam);
+            root.put("page", page);
+
             String sorting = request.getParameter("sorting");
             String backOrder = request.getParameter("back_order");
             String search = request.getParameter("search");
             root.put("sorting", sorting);
+            root.put("limit", TourServiceImpl.getToursLimit());
             root.put("back_order", backOrder);
             root.put("search", search);
             if (sorting == null)
                 sorting = "date";
             if (backOrder != null)
-                root.put("tours", tourService.getToursList(sorting, true, search));
+                root.put("tours", tourService.getToursList(sorting, true, search, page));
             else
-                root.put("tours", tourService.getToursList(sorting, false, search));
+                root.put("tours", tourService.getToursList(sorting, false, search, page));
             render(response, request, "tours.ftl", root);
         }
     }

@@ -1,6 +1,7 @@
-package repository;
+package repository.impl;
 
 import models.Role;
+import repository.RoleRepository;
 import singletons.DBSingleton;
 
 import java.sql.Connection;

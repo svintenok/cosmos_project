@@ -2,19 +2,17 @@ package servlets;
 
 import models.User;
 import services.UserService;
-import services.UserServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLEncoder;
-import java.sql.*;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static helpers.Helper.downloadPhoto;
 import static helpers.Helper.getHash;
@@ -33,32 +31,42 @@ public class RegistrationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Pattern passwordRegexp = Pattern.compile("[a-zA-Z0-9]{6,30}");
+        Pattern loginRegexp = Pattern.compile("[\\w-]{1,30}");
+        Pattern emailRegexp = Pattern.compile("[\\w-]+@[a-z0-9-]+\\.[a-z]{2,6}");
+
         request.setCharacterEncoding("utf-8");
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        String passwordConf = request.getParameter("password_conf");
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String country = request.getParameter("country");
-        Part filePart = request.getPart("profile_photo");
-        boolean hasPhoto = false;
+        Part photo = request.getPart("profile_photo");
 
-        if(userService.getUser(login) == null) {
+        String error = null;
 
-            if (filePart != null) {
+        if(userService.getUser(login) != null)
+            error = "existing_login";
+        else if(!loginRegexp.matcher(login).matches())
+            error = "wrong_login";
+        else if (!emailRegexp.matcher(email).matches())
+            error = "wrong_email";
+        else if(!passwordRegexp.matcher(password).matches())
+            error = "wrong_password";
+        else if (!password.equals(passwordConf))
+            error = "wrong_conf_password";
 
-                hasPhoto = true;
-                downloadPhoto(filePart, "users_photo/" + login);
-            }
 
-            userService.addUser(new User(login, getHash(password), email, name, country, hasPhoto));
+
+        if(error == null) {
+            userService.addUser(new User(login, getHash(password), email, name, country), photo);
             response.sendRedirect("/login");
-
         }
         else {
-
             response.encodeRedirectURL("utf-8");
-            response.sendRedirect("/registration?err=existing_login&login=" + login + "&email=" + email +
+            response.sendRedirect("/registration?error=" + error + "&login=" + login + "&email=" + email +
                     "&name=" + URLEncoder.encode(name, "utf-8")+ "&country=" + URLEncoder.encode(country, "utf-8"));
         }
 
@@ -66,10 +74,8 @@ public class RegistrationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("utf-8");
-
         HashMap<String, Object> root = new HashMap<>();
-        root.put("err", request.getParameter("err"));
+        root.put("error", request.getParameter("error"));
         root.put("login", request.getParameter("login"));
         root.put("name", request.getParameter("name"));
         root.put("email", request.getParameter("email"));

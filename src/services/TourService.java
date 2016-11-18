@@ -15,5 +15,5 @@ public interface TourService {
 
     int addTour(Tour tour, String date);
     Tour getTourById(int id);
-    List<Tour> getToursList(String sorting, boolean reverse, String search);
+    List<Tour> getToursList(String sorting, boolean reverse, String search, int page);
 }

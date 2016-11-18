@@ -9,12 +9,14 @@
     <div class="row" style="padding-top: 20px">
         <div class="col-md-12">
 
+            <#if current_user??>
             <div class="btn-group">
                 <button type="button" style="margin-right: 25px" class="btn btn-primary" data-toggle="modal"  data-target="#TopicCreatingModal">
                     <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>
                     Создать тему
                 </button>
             </div>
+            </#if>
 
             <!-- Modal -->
             <div class="modal fade" id="TopicCreatingModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -29,15 +31,8 @@
 
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-12">
-
-
-                                        <div class="row">
-                                            <div  class="col-md-12" style="margin-top: 20px">
-                                                <input type="text" name="name" class="form-control" placeholder="Введите название темы" required></input>
-                                            </div>
-                                        </div>
-
+                                    <div class="col-md-12" style="margin-top: 20px">
+                                         <input type="text" name="name" class="form-control" placeholder="Введите название темы" required></input>
                                     </div>
 
                                 </div>
@@ -59,8 +54,8 @@
                     <#list admin_forum_topics as topic>
                     <li class ="list-group-item">
                         <div class="row">
-                            <div class="col-md-12">
-                                 <h3><a href="/forum?id=${topic.id}" style="color: black;">${topic.name}</a></h3>
+                            <div class="col-md-11">
+                                 <h3><a href="/forum?id=${topic.id}&page=${topic.pagesCount}" style="color: black;">${topic.name}</a></h3>
                                 <p>Cообщений: ${topic.messagesCount}
                                     <#if topic.lastMessage??>
                                         , последнее сообщение: ${topic.lastMessage.date} от
@@ -70,6 +65,14 @@
                                             <a href="/profile?id=${topic.lastMessage.userId}">${topic.lastMessage.user.login}</a>
                                         </#if>
                                     </#if></p>
+                            </div>
+                            <div class="col-md-1">
+                                <#if current_user?? && current_user.role.role='admin'>
+                                    <form action="/forum" method="POST">
+                                        <input type="hidden" name="topicId" class="form-control" value="${topic.id}"></input>
+                                        <button type="submit" class="btn btn-close btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+                                    </form>
+                                </#if>
                             </div>
                         </div>
                     </li>
@@ -85,8 +88,8 @@
                     <#list users_forum_topics as topic>
                         <li class ="list-group-item">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <h3><a href="/forum?id=${topic.id}" style="color: black;">${topic.name}</a></h3>
+                                <div class="col-md-10">
+                                    <h3><a href="/forum?id=${topic.id}&page=${topic.pagesCount}" style="color: black;">${topic.name}</a></h3>
                                     <p>Cообщений: ${topic.messagesCount}
                                         <#if topic.lastMessage??>
                                             , последнее сообщение: ${topic.lastMessage.date} от
@@ -96,6 +99,14 @@
                                                 <a href="/profile?id=${topic.lastMessage.userId}">${topic.lastMessage.user.login}</a>
                                             </#if>
                                         </#if></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <#if current_user??><#if current_user.role.role='admin'>
+                                        <form action="/forum" method="POST">
+                                            <input type="hidden" name="topicId" class="form-control" value="${topic.id}"></input>
+                                            <button type="submit" class="btn btn-close btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+                                        </form>
+                                    </#if></#if>
                                 </div>
                             </div>
                         </li>
@@ -161,6 +172,7 @@
             width: 100%;
             background: #7e7e7e;
             color: #dbdbdb;
+            margin-left: -20px;
             font-size: 11px;
         }
 
@@ -188,5 +200,11 @@
             font-family: "Batang";
         }
 
+        .btn-close{
+            border: none;
+            color:grey;
+            background-color: white;
+            float: right;
+        }
     </style>
 </#macro>

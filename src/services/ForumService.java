@@ -12,10 +12,11 @@ import java.util.List;
  * Task: semester project
  */
 public interface ForumService {
-    void addForumTopic(ForumTopic forumTopic);
     void addTopicMessage(TopicMessage topicMessage);
+    void removeTopicMessage(int id);
+
+    void removeForumTopic(int id);
+    int addForumTopic(ForumTopic forumTopic);
     List<ForumTopic> getForumTopicsList(boolean isTechical);
-    ForumTopic getForumTopic(int id);
-    ForumTopic getForumTopic(String name);
-    List<TopicMessage> getForumTopicMessages(int forumTopicId);
+    ForumTopic getForumTopic(int id, int page);
 }

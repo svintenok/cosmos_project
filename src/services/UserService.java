@@ -3,6 +3,8 @@ package services;
 
 import models.User;
 
+import javax.servlet.http.Part;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -13,8 +15,8 @@ import java.sql.SQLException;
  */
 public interface UserService {
 
-    void addUser(User user);
-    void updateUser(User user);
+    void addUser(User user, Part photo);
+    void updateUser(User user, Part photo);
     void updatePassword(int userId, String password);
     User getUser(int id);
     User getUser(String login, String password);

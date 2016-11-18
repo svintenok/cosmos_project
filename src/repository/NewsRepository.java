@@ -16,6 +16,6 @@ public interface NewsRepository {
     void removeNews(int id);
     void updateNews(News news);
 
-    List<News> getNewsList();
+    List<News> getNewsList(int page, int limit);
     News getNewsById(int id);
 }

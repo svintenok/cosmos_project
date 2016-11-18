@@ -1,12 +1,15 @@
-package services;
+package services.impl;
 
-import models.DepartureDate;
-import models.Recall;
 import models.Tour;
-import models.UpdateDate;
 import repository.*;
+import repository.impl.DepartureDateRepositoryImpl;
+import repository.impl.RecallRepositoryImpl;
+import repository.impl.TourRepositoryImpl;
+import repository.impl.UpdateDateRepositoryImpl;
+import services.BookingService;
+import services.RecallService;
+import services.TourService;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -15,7 +18,8 @@ import java.util.List;
  * Group: 11-501
  * Task: semester project
  */
-public class TourServiceImpl implements TourService{
+public class TourServiceImpl implements TourService {
+    final static int toursLimit = 8;
     TourRepository tourRepository = new TourRepositoryImpl();
     DepartureDateRepository departureDateRepository = new DepartureDateRepositoryImpl();
     RecallRepository recallRepository = new RecallRepositoryImpl();
@@ -39,9 +43,9 @@ public class TourServiceImpl implements TourService{
     }
 
     @Override
-    public List<Tour> getToursList(String sorting, boolean reverse, String search) {
+    public List<Tour> getToursList(String sorting, boolean reverse, String search, int page) {
         updateTours();
-        List<Tour> tours = tourRepository.getToursList(sorting, reverse, search);
+        List<Tour> tours = tourRepository.getToursList(sorting, reverse, search, page, toursLimit);
         for (Tour tour : tours){
             setTourAdditionalInfo(tour);
         }
@@ -61,5 +65,9 @@ public class TourServiceImpl implements TourService{
         double rating = recallRepository.getRatingByTour(tour.getId());
         if (rating != -1)
             tour.setRating(rating);
+    }
+
+    public static int getToursLimit() {
+        return toursLimit;
     }
 }

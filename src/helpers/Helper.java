@@ -62,21 +62,26 @@ public class Helper {
         return passwordHash;
     }
 
-    public static void downloadPhoto(Part filePart, String fileName) throws IOException {
-        File file = new File("D:/repositories/cosmos_project_files/" + fileName + ".jpg");
-        file.createNewFile();
-        FileOutputStream out = new FileOutputStream(file);
-        InputStream filecontent = filePart.getInputStream();
+    public static void downloadPhoto(Part filePart, String fileName) {
+        try {
+            File file = new File("D:/repositories/cosmos_project_files/" + fileName + ".jpg");
+            file.createNewFile();
+            FileOutputStream out = new FileOutputStream(file);
+            InputStream filecontent = filePart.getInputStream();
 
-        int read = 0;
-        final byte[] bytes = new byte[1024];
+            int read = 0;
+            final byte[] bytes = new byte[1024];
 
-        while ((read = filecontent.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+
+            out.close();
+            filecontent.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        out.close();
-        filecontent.close();
     }
 
 }
