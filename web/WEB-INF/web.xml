@@ -164,6 +164,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>LoginSearch</servlet-name>
+        <servlet-class>kfu.group11501.svintenok.servlets.LoginSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginSearch</servlet-name>
+        <url-pattern>/login_search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Files</servlet-name>
         <servlet-class>kfu.group11501.svintenok.servlets.FileServlet</servlet-class>
     </servlet>

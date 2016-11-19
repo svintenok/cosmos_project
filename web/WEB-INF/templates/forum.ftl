@@ -5,14 +5,16 @@
 <div class="container">
 
     <div class="row" style="padding-top: 40px">
+        <div class="col-md-1">
+            <a href="/forum" class="btn btn-exit btn-md"><span class="glyphicon glyphicon-arrow-left"></span></a>
+        </div>
         <div class="col-md-6">
-
             <div>
                 <h3 style="text-align: center">${topic.name}</h3>
             </div>
             <br/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <ul class="pager" style="float: right;">
                 <li <#if (!page?? || page=1)>class="disabled" </#if> >
                     <a  <#if page?? && (page>1)><a href="/forum?id=${topic.id}&page=${page - 1}"</#if> style="font-size: 18px;">&larr; Предыдущая</a>
@@ -157,6 +159,14 @@
         color:grey;
         background-color: white;
         float: right;
+    }
+
+    .btn-exit{
+        border-width: 0.5px;
+        border-color: silver;
+        color:black;
+        background-color: white;
+        margin-top: 20px;
     }
 
 </style>

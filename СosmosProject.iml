@@ -22,5 +22,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.0.37" level="application_server_libraries" />
     <orderEntry type="library" name="postgresql-9.4.1210" level="project" />
     <orderEntry type="library" name="freemarker" level="project" />
+    <orderEntry type="library" name="java-json" level="project" />
   </component>
 </module>

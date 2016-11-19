@@ -33,17 +33,42 @@
             </#if>
             <h3>Имя</h3>
             <input type="text" name="name" id="name" class="form-control" placeholder="Ваше имя" style="color: black" <#if name??> value="${name}"</#if>/>
+            <div class="form-group has-feedback">
             <h3>Логин&nbsp;*</h3>
-            <input type="text" name="login" required="" id="login" class="form-control" placeholder="Ваш логин" style="color: black" <#if login??> value="${login}"</#if>/>
-        <#if err??><#if err=="existing_login">
-            <p style="color: red; margin: 0px; padding: 0px;">Данный логин уже существует</p>
-        </#if></#if>
+            <input type="text" name="login" required="" id="login" class="form-control" placeholder="Ваш логин" style="color: black" <#if login??> value="${login}"</#if> oninput="loginCheck()"/>
+            </div>
+            <div id="result" class="hidden" style="margin: 0px; padding: 0px;">
+                <p style="color: red; margin: 0px; padding: 0px;">Пользователь с данным логином уже существует</p>
+            </div>
+
+            <script type="application/javascript">
+                var loginCheck = function () {
+                    $.ajax({
+                        'url': 'login_search',
+                        'data': {
+                            'jsonLogin' : $("#login").val()
+                        },
+                        'method': 'get',
+                        'success': function (obj) {
+                            if (obj.result != null) {
+                                $("#login").parents(".form-group").addClass("has-error");
+                                $("#result").removeClass("hidden");
+                            }
+                            else{
+                                $("#login").parents(".form-group").removeClass('has-error');
+                                $("#result").addClass("hidden");
+                            }
+                        }
+                    });
+                }
+            </script>
+
             <h3>Пароль&nbsp;*</h3>
-            <input type="password" name="password" required="" id="password" class="form-control"  style="color: black"/>
+            <input type="password" name="password" required="" id="password" class="form-control" placeholder="Ваш пароль" style="color: black"/>
             <h3>Подтвердите пароль&nbsp;*</h3>
-            <input type="password" name="password_conf" required="" id="password_conf" class="form-control" style="color: black"/>
+            <input type="password" name="password_conf" required="" id="password_conf" class="form-control"  placeholder="Подтвердите пароль" style="color: black"/>
             <h3>Mail&nbsp;*</h3>
-            <input type="text" name="email" id="mail" required="" class="form-control" placeholder="Ваша электронная почта" style="color: black" <#if email??> value="${email}"</#if>/>
+            <input type="email" name="email" id="mail" required="" class="form-control" placeholder="Ваша электронная почта" style="color: black" <#if email??> value="${email}"</#if>/>
             <h3>Страна</h3>
             <input type="text" name="country" id="country" class="form-control" placeholder="Ваша страна" style="color: black" <#if country??> value="${country}"</#if>/>
             <h3>Фотография</h3>
