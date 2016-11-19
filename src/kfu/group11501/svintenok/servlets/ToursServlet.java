@@ -5,6 +5,7 @@ import kfu.group11501.svintenok.models.Tour;
 import kfu.group11501.svintenok.models.User;
 import kfu.group11501.svintenok.services.*;
 import kfu.group11501.svintenok.services.impl.BookingServiceImpl;
+import kfu.group11501.svintenok.services.impl.RecallServiceImpl;
 import kfu.group11501.svintenok.services.impl.TourServiceImpl;
 import kfu.group11501.svintenok.services.impl.UserServiceImpl;
 
@@ -29,18 +30,25 @@ public class ToursServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
     TourService tourService = new TourServiceImpl();
     BookingService bookingService = new BookingServiceImpl();
+    RecallService recallService = new RecallServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login =  (String) request.getSession().getAttribute("current_user");
         User user = userService.getUser(login);
-        Integer tourId = new Integer(request.getParameter("tour"));
-        Booking booking = bookingService.getBoookingByUserAndTour(user.getId(), tourId);
-        if (booking == null)
-            bookingService.addBooking(user.getId(), tourId);
-        else
-            bookingService.removeBooking(booking);
-        response.sendRedirect("/bookings");
-
+        Integer tourId = new Integer(request.getParameter("id"));
+        if (request.getParameter("recall_id") != null){
+            Integer recallId = new Integer(request.getParameter("recall_id"));
+            recallService.removeRecall(recallId);
+            response.sendRedirect("/tours?id=" + tourId);
+        }
+        else {
+            Booking booking = bookingService.getBoookingByUserAndTour(user.getId(), tourId);
+            if (booking == null)
+                bookingService.addBooking(user.getId(), tourId);
+            else
+                bookingService.removeBooking(booking);
+            response.sendRedirect("/bookings");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

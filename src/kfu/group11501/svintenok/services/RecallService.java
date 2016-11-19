@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface RecallService {
     void addRecall(Recall recall);
+    void removeRecall(int id);
     List<Recall> getRecallListByTour(int tour_id);
 }

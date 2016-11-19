@@ -34,6 +34,18 @@ public class RecallRepositoryImpl implements RecallRepository {
     }
 
     @Override
+    public void removeRecall(int id) {
+        try {
+            PreparedStatement psmt = con.prepareStatement("delete from recall where id=?");
+            psmt.setInt(1, id);
+            psmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Recall> getRecallListByTour(int tourId) {
         try {
             PreparedStatement psmt = con.prepareStatement("select * from recall " +

@@ -79,8 +79,7 @@
                     </#if>
                 </div>
                 <div class="modal-footer">
-                    <form action="/tours" method="POST">
-                        <input type="hidden" name="tour" value="${tour.id}">
+                    <form action="/tours?id=${tour.id}" method="POST">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                     <#if current_user??>
                         <button type="submit" class="btn btn-primary" >ДА</button>
@@ -117,7 +116,19 @@
         <ul class ="list-group">
             <#list tour.recallList as recall>
             <li class ="list-group-item">
-                <h><a href="/profile?id=${recall.userId}">${recall.user.login}</a></h>
+                <div class="row">
+                    <div class="col-md-10">
+                        <h><a href="/profile?id=${recall.userId}">${recall.user.login}</a></h>
+                    </div>
+                    <div class="col-md-2" style="float: right">
+                        <#if  current_user??><#if current_user.role.role='admin' || current_user.id=recall.userId>
+                            <form action="/tours?id=${tour.id}" method="POST">
+                                <input type="hidden" name="recall_id" class="form-control" value="${recall.id}"></input>
+                                <button type="submit" class="btn btn-close btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+                            </form>
+                        </#if></#if>
+                    </div>
+                </div>
                 <hr/>
                 <p><b>Оценка: </b>${recall.estimate}</p>
                 <p><b>Отзыв: </b>${recall.text}</p>
@@ -192,6 +203,13 @@
         margin-top: 20px;
         font-size: 12px;
         text-align: right;
+    }
+
+    .btn-close{
+        border: none;
+        color:grey;
+        background-color: white;
+        float: right;
     }
 
 

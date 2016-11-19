@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface RecallRepository {
     void addRecall(Recall recall);
-
+    void removeRecall(int id);
     List<Recall> getRecallListByTour(int tourId);
     double getRatingByTour(int tourId);
     Recall getRecallByUserAndDepartureDate(int userId, int departureDateId);

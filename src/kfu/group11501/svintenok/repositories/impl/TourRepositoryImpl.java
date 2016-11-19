@@ -95,7 +95,7 @@ public class TourRepositoryImpl implements TourRepository {
             String SQL = "select * from tour where departure_date_id notnull";
 
             if (search != null) {
-                SQL = SQL + " and title like ? or place like ?";
+                SQL = SQL + " and title ilike ? or place ilike ?";
                 SQL = setOrder(SQL, sorting, reverse);
                 SQL = SQL + " limit " + limit + " offset " + (page-1)*limit;
                 psmt = con.prepareStatement(SQL);

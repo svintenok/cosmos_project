@@ -25,6 +25,11 @@ public class RecallServiceImpl implements RecallService {
     }
 
     @Override
+    public void removeRecall(int id) {
+        recallRepository.removeRecall(id);
+    }
+
+    @Override
     public List<Recall> getRecallListByTour(int tourId) {
         List<Recall> recallList = recallRepository.getRecallListByTour(tourId);
         for (Recall recall: recallList)

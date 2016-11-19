@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="row" style="margin-top: 40px">
 
         <div class="col-md-8 col-md-offset-2">
 

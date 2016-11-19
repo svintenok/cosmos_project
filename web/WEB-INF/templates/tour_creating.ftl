@@ -22,7 +22,7 @@
             <h3>Ракета</h3>
             <input type="text" name="rocket" required="" class="form-control" <#if tour??>value="${tour.rocket}"</#if>/>
             <h3>Стоимость</h3>
-            <input type="text" name="cost" required="" class="form-control" <#if tour??>value="${tour.cost}"</#if>/>
+            <input type="text" name="cost" required="" class="form-control" <#if tour??>value="${tour.cost?c}"</#if>/>
             <#if !tour??>
             <h3>Дата вылета</h3>
             <input type="date" name="date" required="" class="form-control"/>
@@ -72,7 +72,7 @@
                 });
             </script>
             <h3>Количество мест</h3>
-            <input type="text" name="seats_number" required="" class="form-control" <#if tour??>value="${tour.seatsNumber}"</#if>/>
+            <input type="text" name="seats_number" required="" class="form-control" <#if tour??>value="${tour.seatsNumber?c}"</#if>/>
 
             <#if tour??>
                 <h3>Изменить фотографию</h3>
