@@ -29,7 +29,7 @@
                     <h3>Название</h3>
                     <input type="text" name="title" id="name" required="" class="form-control" <#if news??>value="${news.title}"</#if>/>
                     <h3>Краткое описание</h3>
-                    <textarea name="description" required="" class="form-control input-contrast comment-form-textarea field" <#if news??>value="${news.description}" </#if> style="max-height: 233px; height: 160px;">${news.description}</textarea>
+                    <textarea name="description" required="" class="form-control input-contrast comment-form-textarea field" <#if news??>value="${news.description}" </#if> style="max-height: 233px; height: 160px;"><#if news??>${news.description}</#if></textarea>
                 </div>
 
                 <div class="col-md-1"></div>
@@ -76,7 +76,7 @@
 
                 <div class="col-md-12">
                     <h3>Текст</h3>
-                    <textarea name="text" id="aboutevery" required="" class="form-control input-contrast comment-form-textarea field" <#if news??>value="${news.text}"</#if>style="max-height: 400px; height: 400px;">${news.text}</textarea>
+                    <textarea name="text" id="aboutevery" required="" class="form-control input-contrast comment-form-textarea field" <#if news??>value="${news.text}"</#if>style="max-height: 400px; height: 400px;"><#if news??>${news.text}</#if></textarea>
                 </div>
 
             </div>

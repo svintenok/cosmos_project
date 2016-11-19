@@ -208,10 +208,12 @@ public class TourRepositoryImpl implements TourRepository {
             SQL = SQL + "(select avg(estimate) as rating from recall \n" +
                     "join departure_date on departure_date.id=recall.departure_date_id where tour_id=tour.id)";
         else
-            SQL = SQL + "(select date from departure_date where departure_date.id=tour.departure_date_id)";
+            SQL = SQL + "(select date from departure_date where departure_date.id=tour.departure_date_id) ";
 
         if (reverse)
             SQL = SQL + " desc";
+
+        SQL = SQL + " NULLS LAST";
 
         return SQL;
     }

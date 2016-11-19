@@ -19,7 +19,7 @@
     </div>
 
     <div class="row" style="margin-bottom: 40px">
-        <div class="col-md-7" >
+        <div class="col-md-6" >
             <h5 style="color: black;"><b>Место: </b>${tour.place}</h5>
             <h5 style="color: black;"><b>Ракета: </b>${tour.rocket}</h5>
             <h5 style="color: black;"><b>Стоимость: </b>${tour.cost}</h5>
@@ -31,7 +31,7 @@
             <p style="font-size: 20px">${tour.description}</p>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5 col-md-offset-1">
             <img src="http://localhost:8080/files/tours_photo/${tour.id}.jpg" width="100%" style="float: right; margin: 20px; margin-top: 0px" class = "ff">
         </div>
     </div>
@@ -150,9 +150,6 @@
         font-size: 21px;
     }
 
-    a{
-        font-family: "Chiller";
-    }
     h5{
         font-size: 20px;
         color: rgba(255,255,255,1);

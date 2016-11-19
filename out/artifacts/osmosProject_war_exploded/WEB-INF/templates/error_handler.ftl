@@ -5,7 +5,8 @@
     <div class="container" style="margin-top: 40px;">
         <div class="row">
         <div class="col-md-12">
-            <h1 align="center">404 страницы не существует:(</h1>
+            <h1 align="center">404</h1>
+            <h1 align="center">страницы не существует:(</h1>
         </div>
         </div>
     </div>

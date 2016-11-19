@@ -43,12 +43,12 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="/tours?=id=${travel.departureDate.tourId}">${travel.departureDate.tour.title}</a>
+                                <a href="/tours?id=${travel.departureDate.tourId}">${travel.departureDate.tour.title}</a>
                             </div>
                             <div class="col-md-3">
-                                <#if !travel.recall??>
+                    <#if current_user??><#if current_user.login == user.login><#if !travel.recall??>
                                 <button class="btn btn-default btn-md" data-toggle="modal"  data-target="#RecallModal${travel.departureDateId}">Оставить отзыв</button>
-                                </#if>
+                    </#if></#if></#if>
                             </div>
                             <div class="col-md-3">
                                 <p align="right">${travel.departureDate.date}</p>
@@ -56,6 +56,7 @@
                         </div>
                     </li>
 
+                    <#if current_user??><#if current_user.login == user.login><#if !travel.recall??>
                     <!-- Modal -->
                     <div class="modal fade" id="RecallModal${travel.departureDateId}" tabindex="-1" role="dialog" aria-labelledby="RecallModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -74,21 +75,21 @@
 
                                         <div class="form-group">
                                             <p class="hh">Поставьте оценку: </p>
-                                            <div id="reviewStars-input">
-                                                <input id="star-4" type="radio" name="estimate" value="5"/>
-                                                <label title="gorgeous" for="star-4"></label>
+                                            <div class="reviewStars-input">
+                                                <input class="star-4" id="star-4-${travel.departureDateId}" type="radio" name="estimate" value="5"/>
+                                                <label title="gorgeous" for="star-4-${travel.departureDateId}"></label>
 
-                                                <input id="star-3" type="radio" name="estimate" value="4"/>
-                                                <label title="good" for="star-3"></label>
+                                                <input class="star-3" id="star-3-${travel.departureDateId}" type="radio" name="estimate" value="4"/>
+                                                <label  title="good" for="star-3-${travel.departureDateId}"></label>
 
-                                                <input id="star-2" type="radio" name="estimate" value="3"/>
-                                                <label title="regular" for="star-2"></label>
+                                                <input class="star-2" id="star-2-${travel.departureDateId}" type="radio" name="estimate" value="3"/>
+                                                <label  title="regular" for="star-2-${travel.departureDateId}"></label>
 
-                                                <input id="star-1" type="radio" name="estimate" value="2"/>
-                                                <label title="poor" for="star-1"></label>
+                                                <input class="star-1" id="star-1-${travel.departureDateId}" type="radio" name="estimate" value="2"/>
+                                                <label  title="poor" for="star-1-${travel.departureDateId}"></label>
 
-                                                <input id="star-0" type="radio" name="estimate" value="1"/>
-                                                <label title="bad" for="star-0"></label>
+                                                <input class="star-0" id="star-0-${travel.departureDateId}" type="radio" name="estimate" value="1"/>
+                                                <label  title="bad" for="star-0-${travel.departureDateId}"></label>
                                             </div>
                                         </div>
 
@@ -115,6 +116,7 @@
                             </div>
                         </div>
                     </div>
+                    </#if></#if></#if>
                 </#list>
                 <#else>
                     <p> Путешествий еще нет</p>
@@ -225,11 +227,11 @@
         color:grey;
     }
 
-    #reviewStars-input input:checked ~ label, #reviewStars-input label, #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+    .reviewStars-input input:checked ~ label, .reviewStars-input label, .reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
         background: url('http://positivecrash.com/wp-content/uploads/ico-s71a7fdede6.png') no-repeat;
     }
 
-    #reviewStars-input {
+    .reviewStars-input {
 
         overflow: hidden;
         *zoom: 1;
@@ -238,7 +240,7 @@
         float: left;
     }
 
-    #reviewStars-input input {
+    .reviewStars-input input {
         filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
         opacity: 0;
 
@@ -250,13 +252,13 @@
         z-index: 0;
     }
 
-    #reviewStars-input input:checked ~ label {
+    .reviewStars-input input:checked ~ label {
         background-position: 0 -40px;
         height: 40px;
         width: 43px;
     }
 
-    #reviewStars-input label {
+    .reviewStars-input label {
         background-position: 0 0;
         height: 40px;
         width: 43px;
@@ -268,29 +270,27 @@
         z-index: 1;
     }
 
-    #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+    .reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
         background-position: 0 -40px;
         height: 40px;
         width: 43px;
     }
 
-    #reviewStars-input #star-0 {
+    .reviewStars-input .star-0 {
         left: 0px;
     }
-    #reviewStars-input #star-1 {
+    .reviewStars-input .star-1 {
         left: 53px;
     }
-    #reviewStars-input #star-2 {
+    .reviewStars-input .star-2 {
         left: 106px;
     }
-    #reviewStars-input #star-3 {
+    .reviewStars-input .star-3 {
         left: 159px;
     }
-    #reviewStars-input #star-4 {
+    .reviewStars-input .star-4 {
         left: 212px;
     }
-    #reviewStars-input #star-5 {
-        left: 265px;
-    }
+
 </style>
 </#macro>
