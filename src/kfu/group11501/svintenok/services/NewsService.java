@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface NewsService {
 
-    int addNews(News news);
+    int addNews(News news, Part photo);
     void removeNews(int id);
     void updateNews(News news, Part photo);
 

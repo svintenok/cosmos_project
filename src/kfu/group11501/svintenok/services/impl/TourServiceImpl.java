@@ -32,14 +32,18 @@ public class TourServiceImpl implements TourService {
 
 
     @Override
-    public int addTour(Tour tour, String date) {
-        return tourRepository.addTour(tour, date);
+    public int addTour(Tour tour, String date,  Part tourPhoto) {
+        int id = tourRepository.addTour(tour, date);
+        if (tourPhoto.getSize() !=  0)
+        downloadPhoto(tourPhoto, "tours_photo/" + id);
+
+        return id;
     }
 
     @Override
     public void updateTour(Tour tour, Part tourPhoto) {
         if (tourPhoto.getSize() !=  0)
-            downloadPhoto(tourPhoto, "tour_photo/" + tour.getId());
+            downloadPhoto(tourPhoto, "tours_photo/" + tour.getId());
 
         tourRepository.updateTour(tour);
     }

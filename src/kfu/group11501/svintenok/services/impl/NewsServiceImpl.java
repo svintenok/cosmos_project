@@ -21,8 +21,11 @@ public class NewsServiceImpl implements NewsService {
     private NewsRepository newsRepository = new NewsRepositoryImpl();
 
     @Override
-    public int addNews(News news) {
-        return newsRepository.addNews(news);
+    public int addNews(News news, Part newsPhoto) {
+        int id = newsRepository.addNews(news);
+        if (newsPhoto.getSize() !=  0)
+            downloadPhoto(newsPhoto, "news_photo/" + id);
+        return id;
     }
 
     @Override

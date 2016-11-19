@@ -1,5 +1,6 @@
 package kfu.group11501.svintenok.servlets;
 
+import kfu.group11501.svintenok.models.Booking;
 import kfu.group11501.svintenok.models.User;
 import kfu.group11501.svintenok.services.BookingService;
 import kfu.group11501.svintenok.services.impl.BookingServiceImpl;
@@ -28,7 +29,18 @@ public class BookingsServlet extends HttpServlet {
     BookingService bookingService = new BookingServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String login =  (String) request.getSession().getAttribute("current_user");
+        User user = userService.getUser(login);
+        Integer tourId = new Integer(request.getParameter("tourId"));
 
+        Booking booking = bookingService.getBoookingByUserAndTour(user.getId(), tourId);
+
+        if (booking == null)
+            bookingService.addBooking(user.getId(), tourId);
+        else
+            bookingService.removeBooking(booking.getId());
+
+        response.sendRedirect("/bookings");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

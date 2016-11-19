@@ -1,6 +1,7 @@
 package kfu.group11501.svintenok.servlets;
 
 import kfu.group11501.svintenok.models.Booking;
+import kfu.group11501.svintenok.models.Recall;
 import kfu.group11501.svintenok.models.Tour;
 import kfu.group11501.svintenok.models.User;
 import kfu.group11501.svintenok.services.*;
@@ -36,19 +37,21 @@ public class ToursServlet extends HttpServlet {
         String login =  (String) request.getSession().getAttribute("current_user");
         User user = userService.getUser(login);
         Integer tourId = new Integer(request.getParameter("id"));
-        if (request.getParameter("recall_id") != null){
+
+        if (request.getParameter("recall_id") != null) {
             Integer recallId = new Integer(request.getParameter("recall_id"));
             recallService.removeRecall(recallId);
-            response.sendRedirect("/tours?id=" + tourId);
         }
         else {
-            Booking booking = bookingService.getBoookingByUserAndTour(user.getId(), tourId);
-            if (booking == null)
-                bookingService.addBooking(user.getId(), tourId);
-            else
-                bookingService.removeBooking(booking);
-            response.sendRedirect("/bookings");
+            Recall recall = new Recall(
+                    new Integer(request.getParameter("estimate")),
+                    request.getParameter("recall"),
+                    user.getId(),
+                    new Integer(request.getParameter("departure_date")));
+            recallService.addRecall(recall);
         }
+
+        response.sendRedirect("/tours?id=" + tourId);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

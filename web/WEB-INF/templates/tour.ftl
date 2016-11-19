@@ -79,7 +79,7 @@
                     </#if>
                 </div>
                 <div class="modal-footer">
-                    <form action="/tours?id=${tour.id}" method="POST">
+                    <form action="/bookings?tourId=${tour.id}" method="POST">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                     <#if current_user??>
                         <button type="submit" class="btn btn-primary" >ДА</button>

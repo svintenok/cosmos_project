@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface BookingService {
 
-    void removeBooking(Booking booking);
+    void removeBooking(int id);
     void addBooking(int userId, int tourId);
     Booking getBoookingByUserAndTour(int userId, int tourId);
 

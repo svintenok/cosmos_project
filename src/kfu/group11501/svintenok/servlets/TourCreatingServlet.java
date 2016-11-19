@@ -40,22 +40,18 @@ public class TourCreatingServlet extends HttpServlet {
             interval = new Interval(new Integer(request.getParameter("years_interval")),
                     new Integer(request.getParameter("months_interval")));
 
+        Part tourPhoto = request.getPart("tour_photo");
 
-        int id = tourService.addTour(new Tour(
+        Tour tour = new Tour(
                 request.getParameter("title"),
                 request.getParameter("place"),
                 request.getParameter("rocket"),
                 request.getParameter("description"),
                 interval,
                 new Integer(request.getParameter("seats_number")),
-                new Integer(request.getParameter("cost"))
-        ),
-                request.getParameter("date"));
+                new Integer(request.getParameter("cost")));
 
-
-
-        Part filePart = request.getPart("tour_photo");
-        downloadPhoto(filePart, "tours_photo/" + id);
+        int id = tourService.addTour(tour, request.getParameter("date"), tourPhoto);
 
         response.sendRedirect("/tours?id=" + id);
 

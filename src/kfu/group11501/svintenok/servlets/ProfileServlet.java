@@ -29,23 +29,8 @@ import static kfu.group11501.svintenok.helpers.Helper.render;
 public class ProfileServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
     BookingService bookingService = new BookingServiceImpl();
-    RecallService recallService = new RecallServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-
-        String login = (String) request.getSession().getAttribute("current_user");
-        User user = userService.getUser(login);
-
-        Recall recall = new Recall(
-                new Integer(request.getParameter("estimate")),
-                request.getParameter("recall"),
-                user.getId(),
-                new Integer(request.getParameter("departure_date")));
-
-        recallService.addRecall(recall);
-        response.sendRedirect("/profile?id=" + user.getId());
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

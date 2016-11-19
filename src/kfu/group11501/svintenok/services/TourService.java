@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface TourService {
 
-    int addTour(Tour tour, String date);
+    int addTour(Tour tour, String date, Part tourPhoto);
     void updateTour(Tour tour, Part tourPhoto);
     Tour getTourById(int id);
     List<Tour> getToursList(String sorting, boolean reverse, String search, int page);

@@ -45,8 +45,8 @@
                                         <p>Вы действительно хотите отменить бронирование билета на ${booking.departureDate.date}?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="/tours" method="POST">
-                                            <input type="hidden" name="tour" value="${booking.departureDate.tourId}">
+                                        <form action="/bookings" method="POST">
+                                            <input type="hidden" name="tourId" value="${booking.departureDate.tourId}">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                                             <button type="submit" class="btn btn-primary" >ДА</button>
                                         </form>

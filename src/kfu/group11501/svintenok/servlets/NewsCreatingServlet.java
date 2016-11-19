@@ -30,14 +30,13 @@ public class NewsCreatingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("utf-8");
+        Part newsPhoto = request.getPart("news_photo");
 
-        int id = newsService.addNews(new News(
+        News news = new News(
                     request.getParameter("title"),
                     request.getParameter("description"),
-                    request.getParameter("text")));
-
-        Part filePart = request.getPart("news_photo");
-        downloadPhoto(filePart, "news_photo/" + id);
+                    request.getParameter("text"));
+        int id = newsService.addNews(news, newsPhoto);
 
         response.sendRedirect("/news?id=" + id);
     }

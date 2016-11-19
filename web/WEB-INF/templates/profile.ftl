@@ -66,7 +66,7 @@
                                     <h4 class="modal-title" id="RecallModalLabel">Отзыв</h4>
                                 </div>
 
-                                <form action="/profile" method="POST">
+                                <form action="/tours?id=${travel.departureDate.tourId}" method="POST">
 
                                 <div class="modal-body">
                                     <div class="row">

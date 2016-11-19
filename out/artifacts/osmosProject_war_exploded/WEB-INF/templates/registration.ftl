@@ -37,7 +37,7 @@
             <h3>Логин&nbsp;*</h3>
             <input type="text" name="login" required="" id="login" class="form-control" placeholder="Ваш логин" style="color: black" <#if login??> value="${login}"</#if> oninput="loginCheck()"/>
             </div>
-            <div id="result" class="hidden" style="margin: 0px; padding: 0px;">
+            <div id="result" class="hidden">
                 <p style="color: red; margin: 0px; padding: 0px;">Пользователь с данным логином уже существует</p>
             </div>
 

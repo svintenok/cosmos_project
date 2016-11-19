@@ -33,11 +33,11 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public void removeBooking(Booking booking) {
+    public void removeBooking(int id) {
         try {
             PreparedStatement psmt = con.prepareStatement("delete from booking where id=?");
 
-            psmt.setInt(1, booking.getId());
+            psmt.setInt(1, id);
             psmt.executeUpdate();
 
         } catch (SQLException e) {
