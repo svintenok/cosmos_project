@@ -28,7 +28,7 @@
             </#if></#if></#if>
             <hr/>
 
-            <p style="font-size: 20px">${tour.description}</p>
+            <p class="desc" style="font-size: 20px">${tour.description}</p>
         </div>
 
         <div class="col-md-5 col-md-offset-1">
@@ -71,8 +71,10 @@
                     <#if current_user??>
                         <#if user_booking??>
                             <p>Вы действительно хотите отменить бронирование билета на ${tour.departureDate.date}?</p>
-                        <#else>
+                        <#elseif ((tour.seatsNumber - tour.bookingCount)>0) >
                             <p>Вы потверждаете бронирование билета на ${tour.departureDate.date}?</p>
+                        <#else>
+                            <p>Извините, мест на ${tour.departureDate.date} больше нет.</p>
                         </#if>
                     <#else>
                         <p><a href="/login">Войдите</a>, чтобы забронировать </p>
@@ -132,7 +134,7 @@
                 <hr/>
                 <p><b>Оценка: </b>${recall.estimate}</p>
                 <p><b>Отзыв: </b>${recall.text}</p>
-                <p align="right">${recall.date}</p>
+                <p align="right" style="color: gray">${recall.date}</p>
             </li>
             </#list>
         </ul>
@@ -210,6 +212,11 @@
         color:grey;
         background-color: white;
         float: right;
+    }
+
+    .desc {
+        margin: 0 0 1em;
+        white-space: pre-wrap;
     }
 
 

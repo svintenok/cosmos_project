@@ -8,9 +8,9 @@
 
     <#if current_user??><#if current_user.role.role="admin">
         <div style="padding-top: 10px">
-            <button type="button" class="btn btn-primary" style="margin-top: 30px;">
-                <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>
-                <a href="/tour_creating" style="color: white; font-size: 20px">Добавить тур</a></button>
+            <form action="/tour_creating">
+                <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 30px;"> <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span> Добавить тур</button>
+            </form>
         </div>
     </#if></#if>
 
@@ -203,7 +203,6 @@
     a{
         font-size: 40px;
         color: black;
-        font-family: "Chiller";
     }
     a:hover{
         color:grey;

@@ -11,17 +11,17 @@
             <form action="/about_editing" id="f1" method="post">
 
                 <h3>Телефон</h3>
-                <input type="text" name="title" required="" class="form-control" value="${company_info.phone}"/>
+                <input type="text" name="phone" required="" class="form-control" value="${company_info.phone}"/>
                 <h3>Адрес офиса</h3>
-                <input type="text" name="place" required="" class="form-control" value="${company_info.address}"/>
+                <input type="text" name="address" required="" class="form-control" value="${company_info.address}"/>
                 <h3>Почта</h3>
-                <input type="text" name="rocket" required="" class="form-control" value="${company_info.email}"/>
+                <input type="text" name="email" required="" class="form-control" value="${company_info.email}"/>
 
 
                 <div class="row">
                     <div class="col-md-12">
                         <h3>О компании</h3>
-                        <textarea name="description" required="" class="form-control input-contrast comment-form-textarea field" value="${company_info.text}" style="max-height: 400px; height: 400px;">${company_info.text}</textarea>
+                        <textarea name="about" required="" class="form-control input-contrast comment-form-textarea field" value="${company_info.text}" style="max-height: 400px; height: 400px;">${company_info.text}</textarea>
                     </div>
                 </div>
 

@@ -6,7 +6,9 @@
 
     <div class="row" style="padding-top: 40px">
         <div class="col-md-1">
-            <a href="/forum" class="btn btn-exit btn-md"><span class="glyphicon glyphicon-arrow-left"></span></a>
+            <form action="/forum">
+                <button type="submit" class="btn btn-exit "><span class="glyphicon glyphicon-arrow-left"></span></button>
+            </form>
         </div>
         <div class="col-md-6">
             <div>
@@ -49,8 +51,8 @@
                         </div>
                     </div>
                     <br/>
-                    <h>${message.text}</h>
-                    <p align="right">${message.date}</p>
+                    <h style="white-space: pre-wrap;">${message.text}</h>
+                    <p align="right" style="color: gray">${message.date}</p>
                 </li>
                 </#list>
             </ul>
@@ -60,7 +62,12 @@
 
     <div class="row">
         <div class="col-md-12">
+
+            <#if current_user??>
             <form action="/forum?id=${topic.id}" method="POST">
+            <#else>
+            <form action="/login" method="GET">
+            </#if>
 
              <div class="row">
 

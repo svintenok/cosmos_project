@@ -34,6 +34,9 @@ public class ToursServlet extends HttpServlet {
     RecallService recallService = new RecallServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("utf-8");
+
         String login =  (String) request.getSession().getAttribute("current_user");
         User user = userService.getUser(login);
         Integer tourId = new Integer(request.getParameter("id"));

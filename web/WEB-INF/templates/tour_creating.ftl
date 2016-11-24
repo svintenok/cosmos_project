@@ -22,16 +22,16 @@
             <h3>Ракета</h3>
             <input type="text" name="rocket" required="" class="form-control" <#if tour??>value="${tour.rocket}"</#if>/>
             <h3>Стоимость</h3>
-            <input type="number" name="cost" required="" class="form-control" <#if tour??>value="${tour.cost?c}"</#if>/>
+            <input type="number" name="cost" required="" class="form-control"  min="0" step="1" size="5" <#if tour??>value="${tour.cost?c}"</#if>/>
             <#if !tour??>
             <h3>Дата вылета</h3>
-            <input type="date" name="date" required="" class="form-control"/>
+            <input type="date" name="date" required="" class="form-control" min="${current_date}"/>
             </#if>
             <h3>Интервал</h3>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="not-repeat" name="not-repeat" value="true"> не повторять рейс
+                    <input type="checkbox" id="not-repeat" name="not-repeat" value="true" <#if tour??><#if !tour.interval??>checked="checked"</#if></#if>> не повторять рейс
                 </label>
             </div>
             <div class="row" style="margin: 20px;" id="interval">
@@ -72,7 +72,7 @@
                 });
             </script>
             <h3>Количество мест</h3>
-            <input type="number" name="seats_number" required="" class="form-control" <#if tour??>value="${tour.seatsNumber?c}"</#if>/>
+            <input type="number" name="seats_number" required="" class="form-control" min="0" step="1"  size="5" <#if tour??>value="${tour.seatsNumber?c}"</#if>/>
 
             <#if tour??>
                 <h3>Изменить фотографию</h3>

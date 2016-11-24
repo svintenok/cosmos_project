@@ -34,23 +34,23 @@ public class NewsServlet extends HttpServlet {
 
         request.setCharacterEncoding("utf-8");
 
-        if (request.getParameter("id") != null) {
+        Integer newsId = new Integer(request.getParameter("id"));
+        String login = (String) request.getSession().getAttribute("current_user");
 
-            String login = (String) request.getSession().getAttribute("current_user");
+        if (request.getParameter("commentId") != null){
+            Integer commentId = new Integer(request.getParameter("commentId"));
+            commentService.removeComment(commentId);
+        }
+        else {
             String text = request.getParameter("comment");
-            Integer newsId = new Integer(request.getParameter("id"));
-
-            if (request.getParameter("commentId") != null){
-                Integer commentId = new Integer(request.getParameter("commentId"));
-                commentService.removeComment(commentId);
-            }
-            else {
+            if (!text.equals("")) {
                 User user = userService.getUser(login);
                 Comment comment = new Comment(user.getId(), newsId, text);
                 commentService.addComment(comment);
             }
-            response.sendRedirect("/news?id=" + newsId);
         }
+        response.sendRedirect("/news?id=" + newsId);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

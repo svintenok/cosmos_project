@@ -41,11 +41,14 @@ public class ForumServlet extends HttpServlet {
                 forumService.removeTopicMessage(messageId);
             }
             else {
-                forumService.addTopicMessage(new TopicMessage(
-                        topicId,
-                        userService.getUser(login).getId(),
-                        request.getParameter("message")
-                ));
+                String message = request.getParameter("message");
+
+                if (!message.equals(""))
+                    forumService.addTopicMessage(new TopicMessage(
+                            topicId,
+                            userService.getUser(login).getId(),
+                            message
+                    ));
             }
             response.sendRedirect("/forum?id=" + topicId +"&page=" + forumService.getForumTopic(topicId, 1).getPagesCount());
         }
@@ -56,14 +59,17 @@ public class ForumServlet extends HttpServlet {
         }
         else {
             String name = request.getParameter("name");
-            System.out.println(name);
 
-            int id = forumService.addForumTopic(new ForumTopic(
-                    name,
-                    userService.getUser(login).getId()
-            ));
+            if (!name.equals("")) {
+                int id = forumService.addForumTopic(new ForumTopic(
+                        name,
+                        userService.getUser(login).getId()
+                ));
 
-            response.sendRedirect("/forum?id=" + id + "&page=1");
+                response.sendRedirect("/forum?id=" + id + "&page=1");
+            }
+            else
+                response.sendRedirect("/forum?");
         }
     }
 

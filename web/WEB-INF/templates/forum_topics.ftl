@@ -11,7 +11,7 @@
 
             <#if current_user??>
             <div class="btn-group">
-                <button type="button" style="margin-right: 25px" class="btn btn-primary" data-toggle="modal"  data-target="#TopicCreatingModal">
+                <button type="button" style="margin-right: 25px" class="btn btn-primary btn-lg" data-toggle="modal"  data-target="#TopicCreatingModal">
                     <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>
                     Создать тему
                 </button>
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-md-11">
                                  <h3><a href="/forum?id=${topic.id}&page=${topic.pagesCount}" style="color: black;">${topic.name}</a></h3>
-                                <p>Cообщений: ${topic.messagesCount}
+                                <p style="color: gray">Cообщений: ${topic.messagesCount}
                                     <#if topic.lastMessage??>
                                         , последнее сообщение: ${topic.lastMessage.date} от
                                         <#if topic.lastMessage.user.role.role='admin'>
@@ -192,7 +192,6 @@
 
         a:hover{
             color:grey;
-            font-family: "Chiller";
         }
 
         h3{

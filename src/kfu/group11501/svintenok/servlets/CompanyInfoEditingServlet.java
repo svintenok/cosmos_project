@@ -31,7 +31,7 @@ public class CompanyInfoEditingServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         companyInfoService.updateCompanyInfo(new CompanyInfo(
-                    request.getParameter("text"),
+                    request.getParameter("about"),
                     request.getParameter("phone"),
                     request.getParameter("address"),
                     request.getParameter("email")));

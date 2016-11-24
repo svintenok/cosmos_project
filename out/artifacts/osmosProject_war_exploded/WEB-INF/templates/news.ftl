@@ -18,12 +18,16 @@
         <div class="row">
             <div class="col-md-12" style="padding-top: 20px; margin-bottom: 40px">
                 <p><h1>${news.title}</h1></p>
-                <p style="font-size: 20px"><img src="http://localhost:8080/files/news_photo/${news.id}.jpg" width="45%" style="float: right; margin: 20px;">${news.text}</p>
+                <p class="news" style="font-size: 20px"><img src="http://localhost:8080/files/news_photo/${news.id}.jpg" width="50%" style="float: right; margin: 20px;">${news.text}</p>
             </div>
 
         </div>
 
+        <#if current_user??>
         <form action="/news?id=${news.id}" method="POST">
+        <#else>
+        <form action="/login" method="GET">
+        </#if>
 
             <div class="row" style="margin-bottom: 40px">
                 <div class="col-md-4">
@@ -39,7 +43,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-success">Прокомментировать</button>
+                     <button type="submit" class="btn btn-success">Прокомментировать</button>
                 </div>
             </div>
         </form>
@@ -50,7 +54,7 @@
                 <li class ="list-group-item">
                     <div class="row">
                         <div class="col-md-10">
-                            <p><b> ${comment.user.login}:</b></p>
+                            <b><a href="/profile?id=${comment.user.id}">${comment.user.login}:</a></b>
                         </div>
                         <div class="col-md-2">
                             <#if  current_user??><#if current_user.role.role='admin' || current_user.id=comment.user.id>
@@ -62,7 +66,7 @@
                         </div>
                     </div>
                     <h>${comment.text}</h>
-                    <p style="color: #737373" align="right">${comment.date}</p>
+                    <p style="color: gray" align="right">${comment.date}</p>
                 </li>
             </#list>
             </ul>
@@ -98,6 +102,7 @@
 <style>
 
     .gg{
+        margin-left: 0px;
         font-size: 30px;
     }
 
@@ -131,9 +136,6 @@
         margin-left: -20px;
         font-size: 11px;
     }
-    a{
-        font-family: "Chiller";
-    }
 
     #footer {
         max-width: 960px;
@@ -152,6 +154,11 @@
         color:grey;
         background-color: white;
         float: right;
+    }
+
+    .news {
+        margin: 0 0 1em;
+        white-space: pre-wrap;
     }
 
 </style>

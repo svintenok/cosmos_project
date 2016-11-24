@@ -11,7 +11,9 @@
         <#if current_user??><#if current_user.role.role="admin">
             <div class="row">
                 <div class="col-md-6"">
-                    <a href="/about_editing" class="btn btn-primary" style="margin-top: 30px; color: white; font-size: 20px"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>Редактировать</a>
+                <form action="/about_editing">
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 30px; color: white;><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>Редактировать</button>
+                </form>
                 </div>
             </div>
         </#if></#if>

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -82,6 +85,18 @@ public class Helper {
             e.printStackTrace();
         }
 
+    }
+
+    public static boolean currentDate(String stringDate){
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date departuredate= format.parse(stringDate);
+            Date currentDate = new Date();
+                return departuredate.after(currentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

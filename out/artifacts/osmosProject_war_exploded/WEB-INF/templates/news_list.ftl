@@ -8,15 +8,15 @@
 
         <div class="row"  style="margin-top: 30px;">
 
-            <div class="col-md-8">
+            <div class="col-md-6">
             <#if current_user??><#if current_user.role.role = "admin">
-                <button type="button" class="btn btn-primary" style="margin-top: 15px;">
-                    <span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>
-                    <a href="/news_creating" style="color: white; font-size: 20px">Добавить новость</a></button>
+                <form action="/news_creating">
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 13px;"><span class="glyphicon glyphicon-pencil" style="margin-right: 7px"></span>Добавить новость</button>
+                </form>
             </#if></#if>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <ul class="pager" style="float: right;">
                     <li <#if (!page?? || page=1) >class="disabled" </#if> >
                         <a  <#if page?? && (page>1)><a href="/news?page=${page - 1}"</#if> style="font-size: 20px;">&larr; Предыдущая</a>
@@ -42,11 +42,13 @@
                     <li class ="list-group-item" style="margin-bottom: 30px">
                         <div class="row">
                             <div class="col-md-7">
-                                <p> <a href="/news?id=${news.id}" class="col-md-8">${news.title}</a></p>
+                                <p> <a href="/news?id=${news.id}">${news.title}</a></p>
                                 <#if news.description??>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p>${news.description}</p>
+                                        <br/>
+                                        <p style="color: gray;"> ${news.date}</p>
                                     </div>
                                 </div>
                                 </#if>
@@ -140,9 +142,8 @@
     }
 
     a{
-        font-size: 40px;
+        font-size: 30px;
         color: black;
-        font-family: "Chiller";
     }
     a:hover{
         color:grey;

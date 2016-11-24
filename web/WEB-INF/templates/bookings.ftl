@@ -57,7 +57,7 @@
                     </#list>
                 </ul>
             <#else>
-            <p>Бронирований нет</p>
+            <p>Бронирований нет. Можете забронировать билет в один из <a href="/tours" style="color: blue">туров</a> прямо сейчас!</p>
             </#if>
 
         </div>
@@ -111,7 +111,6 @@
     footer {
         position: absolute;
         width: 100%;
-        bottom: 0;
         margin-left: -20px;
         background: #7e7e7e;
         color: #dbdbdb;

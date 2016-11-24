@@ -19,17 +19,16 @@
             <#else>
                 <img src="http://localhost:8080/files/users_photo/default.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
             </#if>
-            <ul style="margin-top: 10px; margin-bottom: 40px">
+            <ul style="margin-top: 10px; margin-bottom: 30px">
                 <#if user.name!=""><li class="list-group-item"><p><b>Имя: </b>${user.name}</p></li></#if>
                 <li class="list-group-item"><p><b>Почта: </b>${user.email}</p></li>
                 <#if user.country!=""><li class="list-group-item"><p><b>Страна: </b>${user.country}</p></li></#if>
                 <li class="list-group-item"><p><b>Путешествий: </b> ${travels_number}</p></li>
             </ul>
         <#if current_user??><#if current_user.login == user.login>
-            <button type="button" class="btn" style="margin-left: 41px; margin-bottom: 30px">
-                <span class="glyphicon glyphicon-cog" style="margin-right: 5px"></span>
-                <a href="/settings">Настройки</a>
-            </button>
+            <form action="/settings">
+                <button type="submit" class="btn btn-lg" style="margin-left: 41px; margin-bottom: 30px"><span class="glyphicon glyphicon-cog" style="margin-right: 5px"></span>Настройки</button>
+            </form>
         </#if></#if>
         </div>
 
@@ -123,8 +122,9 @@
                 </#if>
             </ul>
             <#if current_user??><#if current_user.login == user.login>
-            <a href="/bookings" class="btn btn-primary btn-lg" style="margin-top: 30px; margin-left: 41px; color:white;">
-                <span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>Мои бронирования</a>
+                <form action="/bookings">
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 30px; margin-left: 41px; color:white;"><span class="glyphicon glyphicon-plane" style="margin-right: 7px"></span>Мои бронирования</button>
+                </form>
             </#if></#if>
 
         </div>
