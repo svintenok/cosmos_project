@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12" style="padding-top: 20px; margin-bottom: 40px">
                 <p><h1>${news.title}</h1></p>
-                <p class="news" style="font-size: 20px"><img src="http://localhost:8080/files/news_photo/${news.id}.jpg" width="50%" style="float: right; margin: 20px;">${news.text}</p>
+                <p class="news" style="font-size: 20px"><img src="files/news_photo/${news.id}.jpg" width="50%" style="float: right; margin: 20px;">${news.text}</p>
             </div>
 
         </div>

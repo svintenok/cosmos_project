@@ -15,9 +15,9 @@
 
         <div class="col-md-4">
             <#if user.photo>
-                <img src="http://localhost:8080/files/users_photo/${user.id}.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
+                <img src="files/users_photo/${user.id}.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
             <#else>
-                <img src="http://localhost:8080/files/users_photo/default.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
+                <img src="files/users_photo/default.jpg" style="max-height: 500px; max-width: 317px; margin-bottom: 20px; margin-left: 41px">
             </#if>
             <ul style="margin-top: 10px; margin-bottom: 30px">
                 <#if user.name!=""><li class="list-group-item"><p><b>Имя: </b>${user.name}</p></li></#if>

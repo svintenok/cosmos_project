@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-md-5 col-md-offset-1">
-            <img src="http://localhost:8080/files/tours_photo/${tour.id}.jpg" width="100%" style="float: right; margin: 20px; margin-top: 0px" class = "ff">
+            <img src="files/tours_photo/${tour.id}.jpg" width="100%" style="float: right; margin: 20px; margin-top: 0px" class = "ff">
         </div>
     </div>
 

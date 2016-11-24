@@ -9,16 +9,16 @@
     </ol>
     <div class="carousel-inner" style="height: 250px">
         <div class="active item">
-            <img src="http://localhost:8080/files/space1.jpg">
+            <img src="files/space1.jpg">
         </div>
         <div class="item">
-            <img src="http://localhost:8080/files/space2.jpg">
+            <img src="files/space2.jpg">
         </div>
         <div class="item">
-            <img src="http://localhost:8080/files/space3.jpg">
+            <img src="files/space3.jpg">
         </div>
         <div class="item">
-            <img src="http://localhost:8080/files/space4.jpg">
+            <img src="files/space4.jpg">
         </div>
     </div>
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">

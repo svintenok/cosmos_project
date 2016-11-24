@@ -113,7 +113,7 @@
                              </div>
                         </div>
                         <div class="col-md-3">
-                            <img src="http://localhost:8080/files/tours_photo/${tour.id}.jpg" width="100%">
+                            <img src="files/tours_photo/${tour.id}.jpg" width="100%">
                         </div>
                     </div>
                 </li>
