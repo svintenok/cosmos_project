@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <title>Редактировать тур</title>
+
+    <style type="text/css">
+        .preview{
+            max-height: 350px;
+            max-width: 600px;
+        }
+        .min {
+            width: 45px;
+        }
+
+    </style>
+    <style>
+
+        h5{
+            font-size: 20px;
+            color: rgba(255,255,255,1);
+            font-style: normal;
+            font-family: "Dotum";
+        }
+        h5:hover{
+            color: rgba(158, 152, 152, 1);
+            text-shadow: 0 0 10px rgba(255,255,255,1);
+        }
+
+        html,
+        body {
+            height: 100%;
+            background:rgba(245, 245, 245, 1);
+            padding: 10px;
+            font-family: 'Dotum';
+        }
+        header {
+            padding: 20px 0;
+        }
+        footer {
+            position: absolute;
+            width: 100%;
+            background: #7e7e7e;
+            color: #dbdbdb;
+            font-size: 11px;
+        }
+
+
+        #footer {
+            max-width: 960px;
+            margin: auto;
+            padding: 10px 0;
+            height: 90px;
+        }
+        #footer-logo {
+            float: right;
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: right;
+        }
+        .gg{
+            font-size: 22px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#"><h5>На данной странице вы подтверждаете, что являетесь Администратором</h5></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><h5>Вернуться</h5></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="row">
+
+        <form action="" id="f1" method="post" >
+
+            <div class="col-md-12" style="margin-top: 80px; margin-bottom: 40px">
+                <input type="text" name="name" id="name" required="" class="form-control" value="Путешествие на Марс"/>
+            </div>
+
+            <div clas="row">
+
+                <div class="col-md-5" style="margin-right: 50px; margin-bottom: 40px">
+                    <textarea type="text" name="shortdescription" id="shortdescription" required="" class="form-control input-contrast comment-form-textarea field"  style="max-height: 400px; height: 250px;">
+                        Испытайте это невереятное путешествие на планету Марс! Рискните побывать первым на кратере G145M! Вас ждет комфортный перелет на нашей лучшей ракете 250GTO и незабываемый отдых. SpaceX в понедельник, 30 декабря заявила о том, что уже набрано 1058 добровольцев, желающих отправиться в космос, в путешествие на Красную Планету Оганизация, расположенная в США, желает приступить к отправлению групп по четыре человека на Марс в 2023 году.
+                    </textarea>
+                </div>
+
+                <div clas="col-md-6">
+                    <h3>Изменить фото к туру</h3>
+                    <input type="file"  name="my-pic" id="file-field" multiple="" class="image" style="margin-left: 100px"/>
+                    <div id="photo_copy" style="margin-left: 100px"></div>
+
+                    <script>
+                        $(function(){
+                            $(".image").change(showPreviewImage_click);
+                        })
+                        function showPreviewImage_click(e) {
+                            var $input = $(this);
+                            var inputFiles = this.files;
+                            if(inputFiles == undefined || inputFiles.length == 0) return;
+                            var inputFile = inputFiles[0];
+                            var img = $('<img/>',{'class':'preview'});
+                            $('#photo_copy img').remove();
+                            img.appendTo($('#photo_copy'));
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                img.attr("src", event.target.result);
+                            };
+                            reader.onerror = function(event) {
+                                alert("I AM ERROR: " + event.target.error.code);
+                            };
+                            reader.readAsDataURL(inputFile);
+                        }
+                    </script>
+                </div>
+
+            </div>
+
+            <div class="col-md-12" style="margin-bottom: 40px">
+                 <textarea type="text" name="description" id="description" required="" class="form-control input-contrast comment-form-textarea field"  style="max-height: 400px; height: 250px;">
+                        Расчёты по экспедиции с облётом Красной планеты, которые спустя 12 лет после полёта Гагарина предложил руководству Михаил Бурдаев, тогда - кандидат в космонавты, вовсе не предполагали такой жестокой необходимости. Рассказы о советском космонавте-камикадзе - были не более чем слухами, основанными на недоразумении. А вот сегодня о «смертниках», похоже, заговорили всерьёз. С сообщением такого содержания выступил недавно Journal of Cosmology. За то, чтобы поглядеть на марсианский Олимп, человеку придётся заплатить самую высокую цену - жизнь. Так всерьёз полагают американские космологи Дирк Шульце-Макуш и Пол Дэвис, авторы статьи «Широко шагая: полёт на Марс в один конец»
+                 </textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3" style="margin-bottom: 40px">
+                    <input type="text" name="data" id="data" required="" class="form-control" value="Дата вылета: 01.01.2023"/>
+                </div>
+                <div class="col-md-3" style="margin-bottom: 40px">
+                    <input type="text" name="places" id="places" required="" class="form-control" value="20 мест"/>
+                </div>
+            </div>
+
+            <div class="col-md-12" style="margin-bottom: 20px">
+                <button type="button"  class="btn gg">Сохранить</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div id="footer-logo">Copyright © 2016 Cosmos project creation</div>
+    </div>
+</footer>
+
+</body>
+
+</html>

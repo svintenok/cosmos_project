@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Создание новости</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <style>
+
+        h5{
+            font-size: 20px;
+            color: rgba(255,255,255,1);
+            font-style: normal;
+            font-family: "Dotum";
+        }
+        h5:hover{
+            color: rgba(158, 152, 152, 1);
+            text-shadow: 0 0 10px rgba(255,255,255,1);
+        }
+
+        html,
+        body {
+            height: 100%;
+            background:rgba(245, 245, 245, 1);
+            padding: 10px;
+            font-family: 'Dotum';
+        }
+        header {
+            padding: 20px 0;
+        }
+        footer {
+            position: absolute;
+            width: 100%;
+            background: #7e7e7e;
+            color: #dbdbdb;
+            font-size: 11px;
+        }
+
+
+        #footer {
+            max-width: 960px;
+            margin: auto;
+            padding: 10px 0;
+            height: 90px;
+        }
+        #footer-logo {
+            float: right;
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: right;
+        }
+
+    </style>
+
+
+    <style type="text/css">*{
+        margin:0;
+        padding:0;
+    }
+
+    .slider{
+        width:600px;
+        position:relative;
+        padding-top:400px;
+        box-shadow:0 10px 20px -5px rgba(0,0,0,0.75);
+        overflow:hidden;
+        padding-bottom:20px;
+    }
+
+    .sp img{
+        position:absolute;
+        left:0;
+        top:0;
+    }
+
+    .slider input[name='slide_switch']{
+        display:none;
+    }
+
+    .slider label{
+        margin:18px 0 0 18px;
+        border:3px solid #999;
+        float:left;
+        cursor:pointer;
+        transition:all 0.5s;
+        opacity:0.6;
+    }
+
+    .slider label img{
+        display:block;
+        height:45px;
+    }
+
+    .slider input[name='slide_switch']:checked+label{
+        border-color:#666;
+        opacity:1;
+    }
+
+    .slider input[name='slide_switch']~span{
+        opacity:0;
+        -moz-transform:scale(1.1);
+        -ms-transform:scale(1.1);
+        -webkit-transform:scale(1.1);
+        -o-transform:scale(1.1);
+        transform:scale(1.1);
+    }
+
+    .slider input[name='slide_switch']:checked+label+span{
+        opacity:1;
+        -moz-transform:scale(1);
+        -ms-transform:scale(1);
+        -webkit-transform:scale(1);
+        -o-transform:scale(1);
+        transform:scale(1);
+    }
+
+    span{
+        width:500px;
+        position:absolute;
+        left:50px;
+        top:20px;
+        height:370px;
+        overflow:hidden;
+        transition:all 0.5s;
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#"><h5>На данной странице вы подтверждаете, что являетесь Администратором</h5></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><h5>Вернуться</h5></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="row">
+
+        <form action="" id="f1" method="post" >
+
+            <h1 style="margin-top: 40px">Создание новости</h1>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <h3>Название</h3>
+                    <input type="text" name="name" id="name" required="" class="form-control"  value=""/>
+                    <h3>Краткое описание</h3>
+                    <textarea name="about" id="about" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 233px; height: 160px;"></textarea>
+                </div>
+
+                <div class="col-md-1"></div>
+
+                <div class="col-md-7">
+
+                    <h3>Фотографии к новостям</h3>
+                    <input type="file" name="my-pic" id="file-field" class="image" multiple=""/><br>
+                    <div class="slider" ></div>
+                    <script>
+                        $(function () {
+                            $(".image").change(showPreviewImage_click);
+                        })
+                        var num = 0;
+
+                        function showPreviewImage_click(e) {
+                            var $input = $(this);
+                            var inputFiles = this.files;
+                            if (inputFiles == undefined || inputFiles.length == 0) return;
+                            for (var i = 0; i < inputFiles.length; i++) {
+                                var id = 'id' + ++num;
+                                var input = $('<input/>', {
+                                    'type': "radio",
+                                    'name': "slide_switch",
+                                    'id': id
+                                });
+                                input.appendTo($('.slider'));
+                                var label = $('<label/>', {
+                                    'for': id
+                                });
+                                var img_min = $('<img/>', {
+                                    'class': 'min'
+                                });
+                                img_min.appendTo(label);
+                                label.appendTo($('.slider'));
+                                var inputFile = inputFiles[i];
+                                var img = $('<img/>', {
+                                    'class': 'slide'
+                                });
+                                var span = $('<span/>', {
+                                    'class': 'sp'
+                                })
+                                img.appendTo(span)
+                                span.appendTo($('.slider'))
+                                var reader = new FileReader();
+                                reader.onload = (function (img1, img2) {
+                                    return function (event) {
+                                        img1.attr("src", event.target.result);
+                                        img2.load(function () {
+                                            var w = this.width;
+                                            var h = this.height;
+                                            w > h ? (this.height = 370, w = 500 * w / h, this.width = w, h = 370) : (this.width = 500, h = 370 * h / w, this.height = h, w = 500);
+                                            img2.css({
+                                                left: -(w - 500) / 2,
+                                                top: -(h - 370) / 2
+                                            })
+                                        });
+                                        img2.attr("src", event.target.result);
+                                    };
+                                })(img_min, img)
+                                reader.onerror = function (event) {
+                                    alert("I AM ERROR: " + event.target.error.code);
+                                };
+                                reader.readAsDataURL(inputFile);
+                            }
+                            input.prop({
+                                'checked': true
+                            });
+                        }
+                    </script>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h3>Подробное описание</h3>
+                    <textarea name="aboutevery" id="aboutevery" required="" class="form-control input-contrast comment-form-textarea field" style="max-height: 400px; height: 400px;"></textarea>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-1" style="margin-bottom: 30px; margin-top: 40px">
+                    <input type="submit" name="reg" id="reg" value="Создать новость" class="btn btn-primary custom-btn-primary" value=""/>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <div id="footer">
+        <div id="footer-logo">Copyright © 2016 Cosmos project creation</div>
+    </div>
+</footer>
+
+</body>
+
+</html>
